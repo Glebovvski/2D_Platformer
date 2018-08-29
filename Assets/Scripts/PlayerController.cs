@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour {
     
     public bool isFighting = false;
     bool grounded;
-    private int clicks = 0;
+    public int clicks = 0;
 
 	// Use this for initialization
 	void Start () {

@@ -8,9 +8,9 @@ public class PlayerIdleWithSwordBehaviour : StateMachineBehaviour {
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         var player = GameObject.FindGameObjectWithTag("Player");
         var controller = player.GetComponent<PlayerController>();
-        //var animator = player.GetComponent<Animator>();
         animator.SetBool("Fight", false);
         controller.isFighting = false;
+        controller.clicks = 0;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
