@@ -6,13 +6,16 @@ public class PlayerController : MonoBehaviour {
 
     private float speed = 150.0f;
     private Vector2 jumpSpeed = new Vector2(0,4.0f);
-    private float gravity = 20f;
     private Rigidbody2D rigidbody2d;
     bool facingRight = true;
-
+    [SerializeField]
+    private Transform positionAfterHit;
     Animator animator;
     bool isJumping = false;
+    
+    public bool isFighting = false;
     bool grounded;
+    private int clicks = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +38,12 @@ public class PlayerController : MonoBehaviour {
             isJumping = true;
             animator.SetBool("Jump", isJumping);
             rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            isFighting = true;
+            Hit();
         }
 	}
 
@@ -68,5 +77,26 @@ public class PlayerController : MonoBehaviour {
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void Hit()
+    {
+        if (isFighting)
+        {
+            clicks++;
+            if (clicks == 1)
+                animator.SetBool("Fight", true);
+            if (clicks == 2)
+            {
+                animator.SetTrigger("secondAttack");
+            }
+            if (clicks == 3)
+            {
+                animator.SetTrigger("thirdAttack");
+                clicks = 0;
+            }
+            //animator.SetBool("Fight", false);
+            //isFighting = false;
+        }
     }
 }
