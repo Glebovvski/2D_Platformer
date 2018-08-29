@@ -12,7 +12,10 @@ public class PlayerController : MonoBehaviour {
     private Transform positionAfterHit;
     Animator animator;
     bool isJumping = false;
-    
+
+    [SerializeField]
+    Player player;
+
     public bool isFighting = false;
     bool grounded;
     public int clicks = 0;
@@ -28,7 +31,8 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
-        rigidbody2d.velocity = new Vector2(move * speed*Time.deltaTime, rigidbody2d.velocity.y);
+        if (!isFighting)
+            rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
@@ -44,6 +48,12 @@ public class PlayerController : MonoBehaviour {
         {
             isFighting = true;
             Hit();
+        }
+
+        if (!isFighting)
+        {
+            if (player.curStamina < player.stamina)
+                player.curStamina += 1;
         }
 	}
 
@@ -85,13 +95,20 @@ public class PlayerController : MonoBehaviour {
         {
             clicks++;
             if (clicks == 1)
+            {
+                player.curStamina -= 10;
                 animator.SetBool("Fight", true);
+            }
             if (clicks == 2)
             {
+                player.curStamina -= 10;
                 animator.SetTrigger("secondAttack");
+                Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
+                rigidbody2d.velocity = forward * speed*Time.deltaTime;
             }
             if (clicks == 3)
             {
+                player.curStamina -= 10;
                 animator.SetTrigger("thirdAttack");
                 clicks = 0;
             }

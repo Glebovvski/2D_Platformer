@@ -8,12 +8,12 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Slider healthSlider;
     private int health;
-    private int curHealth;
+    public int curHealth;
 
     [SerializeField]
     private Slider staminaSlider;
-    private int stamina;
-    private int curStamina;
+    public int stamina;
+    public int curStamina;
 
 	// Use this for initialization
 	void Start () {
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        staminaSlider.value = curStamina;
 	}
 
     public void TakeDamage(int amount)
