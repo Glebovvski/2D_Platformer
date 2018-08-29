@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     private float speed = 4.0f;
-    private float jumpSpeed = 8.0f;
+    private Vector2 jumpSpeed = new Vector2(0,4.0f);
     private float gravity = 20f;
     private Rigidbody2D rigidbody2d;
     bool facingRight = true;
 
     Animator animator;
+    bool isJumping = false;
+    bool grounded;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +30,37 @@ public class PlayerController : MonoBehaviour {
             Flip();
         else if (move < 0 && facingRight)
             Flip();
+
+        if (Input.GetButtonDown("MyJump") && !isJumping) {
+            isJumping = true;
+            animator.SetBool("Jump", isJumping);
+            rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
+        }
 	}
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isJumping = true;
+        animator.SetBool("Jump", isJumping);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isJumping)
+        {
+            isJumping = false;
+            animator.SetBool("Jump", isJumping);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground" && isJumping)
+        {
+            isJumping = false;
+            animator.SetBool("Jump", isJumping);
+        }
+    }
 
     void Flip()
     {
