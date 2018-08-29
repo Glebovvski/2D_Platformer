@@ -46,8 +46,11 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
         {
-            isFighting = true;
-            Hit();
+            if (player.curStamina > 10)
+            {
+                isFighting = true;
+                Hit();
+            }
         }
 
         if (!isFighting)
