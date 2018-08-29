@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private float speed = 4.0f;
+    private float speed = 150.0f;
     private Vector2 jumpSpeed = new Vector2(0,4.0f);
     private float gravity = 20f;
     private Rigidbody2D rigidbody2d;
@@ -22,10 +22,10 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
-        rigidbody2d.velocity = new Vector2(move * speed, rigidbody2d.velocity.y);
+        rigidbody2d.velocity = new Vector2(move * speed*Time.deltaTime, rigidbody2d.velocity.y);
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
