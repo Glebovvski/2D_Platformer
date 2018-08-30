@@ -19,8 +19,8 @@ public class EnemyController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (maxHealth <= 0)
+	void FixedUpdate () {
+        if (curHealth <= 0)
         {
             animator.SetBool("Dead", true);
         }

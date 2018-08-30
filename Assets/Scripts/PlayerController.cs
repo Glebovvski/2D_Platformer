@@ -98,8 +98,14 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        GetComponent<BoxCollider2D>().transform.localScale = theScale;
     }
-    
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        animator.ResetTrigger("inFight");
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
