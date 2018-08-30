@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             player.curStamina -= 10;
             //animator.SetBool("Fight", true);
-            Attack();
+            //Attack();
         }
         if (clicks == 2)
         {
@@ -138,18 +138,18 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("secondAttack");
             Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
             rigidbody2d.velocity = forward * speed * Time.deltaTime;
-            Attack();
+            //Attack();
         }
         if (clicks == 3)
         {
             player.curStamina -= 10;
             animator.SetTrigger("thirdAttack");
-            Attack();
+            //Attack();
             clicks = 0;
         }
     }
 
-    void Attack()
+    public void Attack()
     {
         foreach (GameObject enemy in enemies)
         {
