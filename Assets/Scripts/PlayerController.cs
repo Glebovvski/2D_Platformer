@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour {
     bool grounded;
     public int clicks = 0;
     public LayerMask groundLayer;
+
 	// Use this for initialization
 	void Start () {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -38,11 +39,9 @@ public class PlayerController : MonoBehaviour {
             Flip();
         else if (move < 0 && facingRight)
             Flip();
-        //isJumping = animator.GetBool("Jump");
+        
         if (Input.GetButtonDown("MyJump") && !isJumping) {
             Jump();
-            //isJumping = false;
-            //animator.SetBool("Jump", false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -66,7 +65,6 @@ public class PlayerController : MonoBehaviour {
         if (isGrounded())
         {
             animator.SetBool("Jump", true);
-            //isJumping = animator.GetBool("Jump");
             rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
         }
     }
@@ -86,30 +84,6 @@ public class PlayerController : MonoBehaviour {
         
         return false;
     }
-
-    //private void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    isJumping = true;
-    //    animator.SetBool("Jump", isJumping);
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground" && isJumping)
-    //    {
-    //        isJumping = false;
-    //        animator.SetBool("Jump", isJumping);
-    //    }
-    //}
-
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground" && isJumping)
-    //    {
-    //        isJumping = false;
-    //        animator.SetBool("Jump", isJumping);
-    //    }
-    //}
 
     void Flip()
     {
@@ -142,8 +116,6 @@ public class PlayerController : MonoBehaviour {
                 animator.SetTrigger("thirdAttack");
                 clicks = 0;
             }
-            //animator.SetBool("Fight", false);
-            //isFighting = false;
         }
     }
 }
