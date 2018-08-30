@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
     public int stamina;
     public int curStamina;
 
+    public int damage = 1;
+
 	// Use this for initialization
 	void Start () {
         health = 100;
