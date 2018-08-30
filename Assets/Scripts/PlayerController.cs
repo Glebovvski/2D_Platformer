@@ -51,18 +51,18 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
-
-        if (enemies.Count == 0)
-            animator.SetBool("Fight", false);
+        
         if (Input.GetMouseButtonDown(0))
         {
             if (player.curStamina > 10)
             {
+                animator.SetTrigger("Clicked");
+                animator.SetBool("Fight", true);
                 Hit();
             }
         }
 
-        if (!isFighting)
+        if (!animator.GetBool("Fight"))
         {
             if (player.curStamina < player.stamina)
                 player.curStamina += 1;
@@ -110,7 +110,6 @@ public class PlayerController : MonoBehaviour
         {
             enemies.Remove(collision.gameObject);
         }
-        animator.ResetTrigger("inFight");
         animator.SetBool("Fight", false);
     }
 
@@ -118,7 +117,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            animator.SetTrigger("inFight");
+            animator.SetBool("Fight", true);
             if (!enemies.Contains(collision.gameObject))
                 enemies.Add(collision.gameObject);
         }
@@ -126,12 +125,11 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        //isFighting = true;
         clicks++;
         if (clicks == 1)
         {
             player.curStamina -= 10;
-            animator.SetBool("Fight", true);
+            //animator.SetBool("Fight", true);
             Attack();
         }
         if (clicks == 2)
