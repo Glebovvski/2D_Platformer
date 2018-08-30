@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
     public bool isFighting = false;
     bool grounded;
     public int clicks = 0;
-
+    public LayerMask groundLayer;
 	// Use this for initialization
 	void Start () {
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        isJumping = !isGrounded();
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
         if (!isFighting)
@@ -37,11 +38,11 @@ public class PlayerController : MonoBehaviour {
             Flip();
         else if (move < 0 && facingRight)
             Flip();
-
+        //isJumping = animator.GetBool("Jump");
         if (Input.GetButtonDown("MyJump") && !isJumping) {
-            isJumping = true;
-            animator.SetBool("Jump", isJumping);
-            rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
+            Jump();
+            //isJumping = false;
+            //animator.SetBool("Jump", false);
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -60,29 +61,55 @@ public class PlayerController : MonoBehaviour {
         }
 	}
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void Jump()
     {
-        isJumping = true;
-        animator.SetBool("Jump", isJumping);
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground" && isJumping)
+        if (isGrounded())
         {
-            isJumping = false;
-            animator.SetBool("Jump", isJumping);
+            animator.SetBool("Jump", true);
+            //isJumping = animator.GetBool("Jump");
+            rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private bool isGrounded()
     {
-        if (collision.gameObject.tag == "Ground" && isJumping)
+        Vector2 position = transform.position;
+        Vector2 direction = Vector2.down;
+        float distance = 0.5f;
+
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
+        if (hit.collider != null)
         {
-            isJumping = false;
-            animator.SetBool("Jump", isJumping);
+            animator.SetBool("Jump", false);
+            return true;
         }
+        
+        return false;
     }
+
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    isJumping = true;
+    //    animator.SetBool("Jump", isJumping);
+    //}
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground" && isJumping)
+    //    {
+    //        isJumping = false;
+    //        animator.SetBool("Jump", isJumping);
+    //    }
+    //}
+
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Ground" && isJumping)
+    //    {
+    //        isJumping = false;
+    //        animator.SetBool("Jump", isJumping);
+    //    }
+    //}
 
     void Flip()
     {

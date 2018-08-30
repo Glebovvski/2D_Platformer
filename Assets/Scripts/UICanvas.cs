@@ -9,7 +9,7 @@ public class UICanvas : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         if (Instance == null)
-            Instance = new UICanvas();
+            Instance = this;
         DontDestroyOnLoad(this.gameObject);
 	}
 	
