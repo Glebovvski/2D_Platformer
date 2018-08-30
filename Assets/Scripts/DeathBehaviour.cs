@@ -9,14 +9,13 @@ public class DeathBehaviour : StateMachineBehaviour {
 	//
 	//}
 
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	//override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-	//
-	//}
+	
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         var enemy = GameObject.FindGameObjectWithTag("Enemy");
+        Destroy(enemy.gameObject.GetComponent<BoxCollider2D>());
+        Destroy(enemy.gameObject.GetComponent<Rigidbody2D>());
         Destroy(enemy);
 	}
 

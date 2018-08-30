@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour {
 
     public Image healthBar;
 
+    [SerializeField]
+    private PlayerController player;
+
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -22,6 +25,7 @@ public class EnemyController : MonoBehaviour {
 	void FixedUpdate () {
         if (curHealth <= 0)
         {
+            player.enemies.Remove(this.gameObject);
             animator.SetBool("Dead", true);
         }
         healthBar.fillAmount = curHealth / maxHealth;

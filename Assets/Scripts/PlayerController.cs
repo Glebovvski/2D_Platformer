@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     bool isJumping = false;
 
-    private List<GameObject> enemies;
+    public List<GameObject> enemies;
 
     [SerializeField]
     public Player player;
@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
             Jump();
         }
 
+        if (enemies.Count == 0)
+            animator.SetBool("Fight", false);
         if (Input.GetMouseButtonDown(0))
         {
             if (player.curStamina > 10)
@@ -104,7 +106,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            enemies.Remove(collision.gameObject);
+        }
         animator.ResetTrigger("inFight");
+        animator.SetBool("Fight", false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
