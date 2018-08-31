@@ -67,6 +67,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18870e13914b59f47b79ade6dacf209d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114930024791811346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a796f1741d510044bb4f99ac20aa19c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114996716294173360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,6 +123,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: PlayerSpotted
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Distance
+    m_EventTreshold: 0.2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102493304860584136}
   m_Solo: 0
@@ -156,10 +170,7 @@ AnimatorStateTransition:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: PlayerSpotted
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102000049772723758}
   m_Solo: 0
@@ -444,7 +455,8 @@ AnimatorState:
   - {fileID: 1101693955252760112}
   - {fileID: 1101692984708111940}
   - {fileID: 1101363063786377868}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114930024791811346}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

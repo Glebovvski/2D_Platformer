@@ -32,6 +32,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         staminaSlider.value = curStamina;
+        healthSlider.value = curHealth;
 	}
 
     public void TakeDamage(int amount)

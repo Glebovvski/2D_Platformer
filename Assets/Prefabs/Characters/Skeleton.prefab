@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 50243774697113000}
   - component: {fileID: 95606498949677010}
   - component: {fileID: 114349149323858880}
+  - component: {fileID: 58928125255398190}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -117,6 +118,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58928125255398190
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1903557169055830}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.48
 --- !u!61 &61496403928947790
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -174,6 +190,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 114717175456707904}
   player: {fileID: 0}
+  canvas: {fileID: 223859457747269482}
 --- !u!114 &114361951145567260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,7 +359,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -120368497
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224048992002222062
