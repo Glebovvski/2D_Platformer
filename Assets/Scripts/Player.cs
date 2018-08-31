@@ -42,6 +42,11 @@ public class Player : MonoBehaviour {
         if (curHealth <= 0)
         {
             GetComponent<Animator>().SetBool("Dead", true);
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (var enemy in enemies)
+            {
+                enemy.GetComponent<Animator>().SetBool("PlayerSpotted", false);
+            }
         }
 
     }
