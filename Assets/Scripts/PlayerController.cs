@@ -122,24 +122,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //if(collision.gameObject.CompareTag("Enemy"))
-        //{
-        //    if (enemy != collision.GetComponent<EnemyController>().gameObject)
-        //        enemy = collision.GetComponent<EnemyController>().gameObject;
-        //}
-    }
-
-
     private void Hit()
     {
         clicks++;
         if (clicks == 1)
         {
             player.curStamina -= 10;
-            //animator.SetBool("Fight", true);
-            //Attack();
         }
         if (clicks == 2)
         {
@@ -147,13 +135,11 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("secondAttack");
             Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
             rigidbody2d.velocity = forward * speed * Time.deltaTime;
-            //Attack();
         }
         if (clicks == 3)
         {
             player.curStamina -= 10;
             animator.SetTrigger("thirdAttack");
-            //Attack();
             clicks = 0;
         }
     }

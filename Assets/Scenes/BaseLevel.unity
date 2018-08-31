@@ -836,7 +836,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.113
       objectReference: {fileID: 0}
     - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
       propertyPath: m_LocalPosition.y
@@ -871,26 +871,6 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 435746758}
-    - target: {fileID: 61496403928947790, guid: 544bf3d8cb4db13448970d35574d1c89,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: -0.031875324
-      objectReference: {fileID: 0}
-    - target: {fileID: 61496403928947790, guid: 544bf3d8cb4db13448970d35574d1c89,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.09035847
-      objectReference: {fileID: 0}
-    - target: {fileID: 61496403928947790, guid: 544bf3d8cb4db13448970d35574d1c89,
-        type: 2}
-      propertyPath: m_Offset.y
-      value: -0.04143049
-      objectReference: {fileID: 0}
-    - target: {fileID: 61496403928947790, guid: 544bf3d8cb4db13448970d35574d1c89,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 0.23713902
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
   m_IsPrefabAsset: 0
@@ -1754,16 +1734,6 @@ Prefab:
       propertyPath: staminaSlider
       value: 
       objectReference: {fileID: 382049019}
-    - target: {fileID: 61345382339979074, guid: 106697f9d651dc8419f897b1c83f71b9,
-        type: 2}
-      propertyPath: m_Offset.x
-      value: 0.023357213
-      objectReference: {fileID: 0}
-    - target: {fileID: 61345382339979074, guid: 106697f9d651dc8419f897b1c83f71b9,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.10033357
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 106697f9d651dc8419f897b1c83f71b9, type: 2}
   m_IsPrefabAsset: 0
@@ -2166,6 +2136,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1995834712
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.449
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.658
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208256962602690, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114349149323858880, guid: 544bf3d8cb4db13448970d35574d1c89,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 435746758}
+    - target: {fileID: 1903557169055830, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+      propertyPath: m_Name
+      value: Skeleton (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 544bf3d8cb4db13448970d35574d1c89, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!4 &2067623374 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4534174709366106, guid: 2606d39f0014c9845a5f7d94627a48b5,

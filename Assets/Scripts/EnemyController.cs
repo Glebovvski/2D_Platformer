@@ -58,7 +58,7 @@ public class EnemyController : MonoBehaviour {
 
     public void Attack()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) < 0.3)
+        if (Vector2.Distance(player.transform.position, transform.position) < 0.2)
             player.player.TakeDamage(damage);
     }
 

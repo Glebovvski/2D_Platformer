@@ -41,7 +41,7 @@ public class Player : MonoBehaviour {
         healthSlider.value = curHealth;
         if (curHealth <= 0)
         {
-
+            GetComponent<Animator>().SetBool("Dead", true);
         }
 
     }
