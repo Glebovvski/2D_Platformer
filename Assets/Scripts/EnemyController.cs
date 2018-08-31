@@ -17,6 +17,9 @@ public class EnemyController : MonoBehaviour {
     [SerializeField]
     private PlayerController player;
 
+    [SerializeField]
+    private Canvas canvas;
+
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
@@ -54,7 +57,6 @@ public class EnemyController : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            //player = collision.GetComponent<PlayerController>();
             animator.SetBool("PlayerSpotted", true);
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
@@ -65,7 +67,6 @@ public class EnemyController : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            //player = collision.GetComponent<PlayerController>();
             animator.SetBool("PlayerSpotted", true);
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
@@ -76,7 +77,6 @@ public class EnemyController : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            //player = collision.GetComponent<PlayerController>();
             animator.SetBool("PlayerSpotted", false);
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
