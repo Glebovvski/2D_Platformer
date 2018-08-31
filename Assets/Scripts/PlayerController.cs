@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping = false;
 
     
-    public GameObject enemy;
+    public List<GameObject> enemies;
 
     [SerializeField]
     public Player player;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        enemy = null;
+        enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            enemy = null;
+            enemies.Remove(collision.gameObject);
         }
         animator.SetBool("Fight", false);
     }
@@ -117,8 +117,8 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Enemy")
         {
             animator.SetBool("Fight", true);
-            if (enemy == null)
-                enemy = collision.GetComponent<EnemyController>().gameObject;
+            if (!enemies.Contains(collision.GetComponent<EnemyController>().gameObject))
+                enemies.Add(collision.GetComponent<EnemyController>().gameObject);
         }
     }
 
@@ -160,13 +160,9 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, 1f);
-        //if(hit.collider!=null)
-        //{
-        //    if (hit.collider.tag=="Enemy")
-        //        hit.collider.GetComponent<EnemyController>().TakeDamage(player.damage);
-        //}
-        if (enemy != null)
+        foreach (var enemy in enemies)
+        {
             enemy.GetComponent<EnemyController>().TakeDamage(player.damage);
+        }
     }
 }

@@ -32,7 +32,6 @@ public class EnemyController : MonoBehaviour {
     void FixedUpdate() {
         if (curHealth <= 0)
         {
-            player.enemy = null;
             animator.SetBool("PlayerSpotted", false);
             animator.SetBool("Dead", true);
         }
@@ -88,7 +87,7 @@ public class EnemyController : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             animator.SetBool("PlayerSpotted", false);
-            player.enemy = null;
+            player.enemies.Remove(this.gameObject);
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
         }
