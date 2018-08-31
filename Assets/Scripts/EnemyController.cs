@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour {
     public float maxHealth = 100f;
     private float curHealth;
 
+    private float speed = 2;
+
     public Image healthBar;
 
     [SerializeField]
@@ -20,15 +22,22 @@ public class EnemyController : MonoBehaviour {
         animator = GetComponent<Animator>();
         curHealth = maxHealth;
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate() {
         if (curHealth <= 0)
         {
             player.enemies.Remove(this.gameObject);
             animator.SetBool("Dead", true);
         }
         healthBar.fillAmount = curHealth / maxHealth;
+
+        if (animator.GetBool("PlayerSpotted") && Vector2.Distance(player.transform.position, transform.position)>0.4)
+        {
+            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+            transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        }
     }
 
     public void TakeDamage(int amount)
@@ -36,5 +45,16 @@ public class EnemyController : MonoBehaviour {
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;
         healthBar.fillAmount = curHealth / maxHealth;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            //player = collision.GetComponent<PlayerController>();
+            animator.SetBool("PlayerSpotted", true);
+            float distance = Vector2.Distance(collision.transform.position, transform.position);
+            animator.SetFloat("Distance", distance);
+        }
     }
 }
