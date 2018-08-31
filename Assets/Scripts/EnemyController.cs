@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour {
 
     private float speed = 1;
 
+    private int damage = 5;
+
     public Image healthBar;
 
     [SerializeField]
@@ -30,7 +32,8 @@ public class EnemyController : MonoBehaviour {
     void FixedUpdate() {
         if (curHealth <= 0)
         {
-            player.enemies.Remove(this.gameObject);
+            player.enemy = null;
+            animator.SetBool("PlayerSpotted", false);
             animator.SetBool("Dead", true);
         }
         healthBar.fillAmount = curHealth / maxHealth;
@@ -38,11 +41,12 @@ public class EnemyController : MonoBehaviour {
         if (Vector2.Distance(player.transform.position, transform.position) > 0.4 && player.transform.position.y*2 > transform.position.y)
             animator.SetBool("PlayerSpotted", false);
 
-        if (animator.GetBool("PlayerSpotted") && Vector2.Distance(player.transform.position, transform.position)>0.4)
+        if (animator.GetBool("PlayerSpotted"))
         {
             transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
             transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-            transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            if (Vector2.Distance(player.transform.position, transform.position) > 0.2)
+                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
     }
 
@@ -51,6 +55,12 @@ public class EnemyController : MonoBehaviour {
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;
         healthBar.fillAmount = curHealth / maxHealth;
+    }
+
+    public void Attack()
+    {
+        if (Vector2.Distance(player.transform.position, transform.position) < 0.3)
+            player.player.TakeDamage(damage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,6 +88,7 @@ public class EnemyController : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             animator.SetBool("PlayerSpotted", false);
+            player.enemy = null;
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
         }

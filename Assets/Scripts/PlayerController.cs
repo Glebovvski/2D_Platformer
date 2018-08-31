@@ -9,12 +9,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 jumpSpeed = new Vector2(0, 4.0f);
     private Rigidbody2D rigidbody2d;
     bool facingRight = true;
-    [SerializeField]
-    private Transform positionAfterHit;
-    Animator animator;
+    [HideInInspector]
+    public Animator animator;
     bool isJumping = false;
 
-    public List<GameObject> enemies;
+    
+    public GameObject enemy;
 
     [SerializeField]
     public Player player;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        enemies = new List<GameObject>();
+        enemy = null;
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
@@ -103,25 +103,34 @@ public class PlayerController : MonoBehaviour
         GetComponent<BoxCollider2D>().transform.localScale = theScale;
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            enemies.Remove(collision.gameObject);
+            enemy = null;
         }
         animator.SetBool("Fight", false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.tag == "Enemy")
         {
             animator.SetBool("Fight", true);
-            if (!enemies.Contains(collision.gameObject))
-                enemies.Add(collision.gameObject);
+            if (enemy == null)
+                enemy = collision.GetComponent<EnemyController>().gameObject;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //if(collision.gameObject.CompareTag("Enemy"))
+        //{
+        //    if (enemy != collision.GetComponent<EnemyController>().gameObject)
+        //        enemy = collision.GetComponent<EnemyController>().gameObject;
+        //}
+    }
+
 
     private void Hit()
     {
@@ -151,9 +160,13 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        foreach (GameObject enemy in enemies)
-        {
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.forward, 1f);
+        //if(hit.collider!=null)
+        //{
+        //    if (hit.collider.tag=="Enemy")
+        //        hit.collider.GetComponent<EnemyController>().TakeDamage(player.damage);
+        //}
+        if (enemy != null)
             enemy.GetComponent<EnemyController>().TakeDamage(player.damage);
-        }
     }
 }
