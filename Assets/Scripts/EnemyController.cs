@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour {
     public float maxHealth = 100f;
     private float curHealth;
 
-    private float speed = 2;
+    private float speed = 1;
 
     public Image healthBar;
 
@@ -31,6 +31,9 @@ public class EnemyController : MonoBehaviour {
             animator.SetBool("Dead", true);
         }
         healthBar.fillAmount = curHealth / maxHealth;
+
+        if (Vector2.Distance(player.transform.position, transform.position) > 0.4 && player.transform.position.y*2 > transform.position.y)
+            animator.SetBool("PlayerSpotted", false);
 
         if (animator.GetBool("PlayerSpotted") && Vector2.Distance(player.transform.position, transform.position)>0.4)
         {
@@ -53,6 +56,28 @@ public class EnemyController : MonoBehaviour {
         {
             //player = collision.GetComponent<PlayerController>();
             animator.SetBool("PlayerSpotted", true);
+            float distance = Vector2.Distance(collision.transform.position, transform.position);
+            animator.SetFloat("Distance", distance);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            //player = collision.GetComponent<PlayerController>();
+            animator.SetBool("PlayerSpotted", true);
+            float distance = Vector2.Distance(collision.transform.position, transform.position);
+            animator.SetFloat("Distance", distance);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            //player = collision.GetComponent<PlayerController>();
+            animator.SetBool("PlayerSpotted", false);
             float distance = Vector2.Distance(collision.transform.position, transform.position);
             animator.SetFloat("Distance", distance);
         }
