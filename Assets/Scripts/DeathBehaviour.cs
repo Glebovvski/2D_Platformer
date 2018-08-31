@@ -13,10 +13,10 @@ public class DeathBehaviour : StateMachineBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        var enemy = GameObject.FindGameObjectWithTag("Enemy");
-        Destroy(enemy.gameObject.GetComponent<BoxCollider2D>());
-        Destroy(enemy.gameObject.GetComponent<Rigidbody2D>());
-        Destroy(enemy);
+        var enemy = animator.GetComponent<EnemyController>();
+        Destroy(enemy.GetComponent<BoxCollider2D>());
+        Destroy(enemy.GetComponent<Rigidbody2D>());
+        Destroy(enemy.gameObject);
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
