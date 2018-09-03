@@ -37,6 +37,7 @@ public class Player : MonoBehaviour {
 
     public void TakeDamage(int amount)
     {
+        GetComponent<Animator>().SetBool("GotHit", true);
         curHealth -= amount;
         healthSlider.value = curHealth;
         if (curHealth <= 0)
