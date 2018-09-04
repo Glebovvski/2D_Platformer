@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  enemy: {fileID: 0}
+  enemies: []
   player: {fileID: 114169171326129808}
   isFighting: 0
   clicks: 0
