@@ -8,11 +8,14 @@ public class Player : MonoBehaviour {
     [SerializeField]
     private Slider healthSlider;
     private int health;
+    [HideInInspector]
     public int curHealth;
 
     [SerializeField]
     private Slider staminaSlider;
+    [HideInInspector]
     public int stamina;
+    [HideInInspector]
     public int curStamina;
 
     public int damage = 1;

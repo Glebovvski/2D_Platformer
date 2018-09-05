@@ -218,7 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   healthBar: {fileID: 114717175456707904}
-  player: {fileID: 0}
+  player: {fileID: 114083999497778202, guid: 106697f9d651dc8419f897b1c83f71b9, type: 2}
   canvas: {fileID: 223859457747269482}
 --- !u!114 &114361951145567260
 MonoBehaviour:
