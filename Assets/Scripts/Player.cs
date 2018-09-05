@@ -24,8 +24,8 @@ public class Player : MonoBehaviour {
     public List<InventoryItem> inventoryList;
 
     [SerializeField]
-    private GameObject Inventory;
-    private bool inventoryDisplayed;
+    public GameObject Inventory;
+    public bool inventoryDisplayed;
 
 	// Use this for initialization
 	void Start () {

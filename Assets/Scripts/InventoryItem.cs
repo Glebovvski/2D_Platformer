@@ -8,7 +8,7 @@ public class InventoryItem : MonoBehaviour {
     [SerializeField]
     private string itemName;
     [SerializeField]
-    private InventoryType itemType;
+    public InventoryType itemType;
     [SerializeField]
     private float duration;
 
@@ -22,7 +22,7 @@ public class InventoryItem : MonoBehaviour {
 	}
 }
 
-enum InventoryType
+public enum InventoryType
 {
     HealthPotion,
     Shield,
