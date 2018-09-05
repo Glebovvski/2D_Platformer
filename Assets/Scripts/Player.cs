@@ -20,8 +20,17 @@ public class Player : MonoBehaviour {
 
     public int damage = 1;
 
+    [HideInInspector]
+    public List<InventoryItem> inventoryList;
+
+    [SerializeField]
+    private GameObject Inventory;
+    private bool inventoryDisplayed;
+
 	// Use this for initialization
 	void Start () {
+        inventoryDisplayed = false;
+        Inventory.SetActive(inventoryDisplayed);
         health = 100;
         stamina = 100;
         curHealth = health;
@@ -36,7 +45,12 @@ public class Player : MonoBehaviour {
 	void Update () {
         staminaSlider.value = curStamina;
         healthSlider.value = curHealth;
-	}
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventoryDisplayed = !inventoryDisplayed;
+            Inventory.SetActive(inventoryDisplayed);
+        }
+    }
 
     public void TakeDamage(int amount)
     {

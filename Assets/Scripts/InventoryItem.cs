@@ -10,13 +10,10 @@ public class InventoryItem : MonoBehaviour {
     [SerializeField]
     private InventoryType itemType;
     [SerializeField]
-    private Sprite itemSprite;
-    [SerializeField]
     private float duration;
 
-	// Use this for initialization
-	void Start () {
-		
+    // Use this for initialization
+    void Start() {
 	}
 	
 	// Update is called once per frame
