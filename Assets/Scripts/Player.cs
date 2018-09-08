@@ -21,14 +21,16 @@ public class Player : MonoBehaviour {
     public int damage = 1;
 
     [HideInInspector]
-    public List<InventoryItem> inventoryList;
+    public Dictionary<InventoryType, int> inventoryList;
 
     [SerializeField]
     public GameObject Inventory;
     public bool inventoryDisplayed;
+    
 
 	// Use this for initialization
 	void Start () {
+        inventoryList = new Dictionary<InventoryType, int>();
         inventoryDisplayed = false;
         Inventory.SetActive(inventoryDisplayed);
         health = 100;

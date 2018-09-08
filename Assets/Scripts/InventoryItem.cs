@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour {
 
-    [SerializeField]
-    private string itemName;
+    //[SerializeField]
+    //private string itemName;
     [SerializeField]
     public InventoryType itemType;
     [SerializeField]
     private float duration;
+    [SerializeField]
+    private Text itemCount;
 
     // Use this for initialization
     void Start() {

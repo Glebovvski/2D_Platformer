@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
 
     [SerializeField]
     private Player player;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +27,7 @@ public class InventoryManager : MonoBehaviour {
                 player.curHealth += 30;
                 player.inventoryDisplayed = !player.inventoryDisplayed;
                 player.Inventory.SetActive(player.inventoryDisplayed);
+                player.inventoryList[item.itemType]--;
                 break;
             case InventoryType.Shield:
                 break;
@@ -32,6 +35,25 @@ public class InventoryManager : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    public void AddItem(InventoryType item)
+    {
+        if (player.inventoryList.ContainsKey(item))
+        {
+            player.inventoryList[item]++;
+        }
+        else player.inventoryList[item] = 1;
+    }
+
+    void DisplayItems()
+    {
+        var content = GameObject.Find("Content");
+        InventoryItem item;
+        for (int i = 0; i < player.inventoryList.Keys.Count; i++)
+        {
+            item = Instantiate(Resources.Load("HealthPotion")) as InventoryItem;
         }
     }
 
