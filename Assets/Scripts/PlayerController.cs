@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
         if (hit.collider != null)
         {
-            if (hit.collider.tag == "Ground")
+            //if (hit.collider.tag == "Ground")
             {
                 animator.SetBool("Jump", false);
                 return true;

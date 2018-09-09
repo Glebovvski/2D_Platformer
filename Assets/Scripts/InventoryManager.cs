@@ -7,7 +7,9 @@ public class InventoryManager : MonoBehaviour {
 
     [SerializeField]
     private Player player;
-    
+
+    [SerializeField]
+    private Transform content;
 
 	// Use this for initialization
 	void Start () {
@@ -47,13 +49,21 @@ public class InventoryManager : MonoBehaviour {
         else player.inventoryList[item] = 1;
     }
 
-    void DisplayItems()
+    public void DisplayItems()
     {
-        var content = GameObject.Find("Content");
-        InventoryItem item;
-        for (int i = 0; i < player.inventoryList.Keys.Count; i++)
+        //var content = GameObject.Find("Content").GetComponent<Transform>();
+        if (content.transform.childCount == 0)
         {
-            item = Instantiate(Resources.Load("HealthPotion")) as InventoryItem;
+            for (int i = 0; i < player.inventoryList.Keys.Count; i++)
+            {
+                InventoryType type = (InventoryType)i;
+                string typeString = type.ToString();
+                //InventoryItem item;// = new InventoryItem();
+
+                var item = (GameObject)Instantiate(Resources.Load(typeString));
+                item.GetComponent<Transform>().parent = content;
+                //item.itemCount.text = player.inventoryList[type].ToString();
+            }
         }
     }
 

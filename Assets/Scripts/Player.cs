@@ -51,6 +51,7 @@ public class Player : MonoBehaviour {
         {
             inventoryDisplayed = !inventoryDisplayed;
             Inventory.SetActive(inventoryDisplayed);
+            Inventory.GetComponent<InventoryManager>().DisplayItems();
         }
     }
 

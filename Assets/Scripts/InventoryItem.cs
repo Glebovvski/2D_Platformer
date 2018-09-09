@@ -12,7 +12,7 @@ public class InventoryItem : MonoBehaviour {
     [SerializeField]
     private float duration;
     [SerializeField]
-    private Text itemCount;
+    public Text itemCount;
 
     // Use this for initialization
     void Start() {
@@ -26,7 +26,7 @@ public class InventoryItem : MonoBehaviour {
 
 public enum InventoryType
 {
-    HealthPotion,
+    HealthPotion=0,
     Shield,
     StrengthPotion
 }
