@@ -33,6 +33,12 @@ public class InventoryItem : MonoBehaviour {
                 player.inventoryDisplayed = !player.inventoryDisplayed;
                 player.Inventory.SetActive(player.inventoryDisplayed);
                 player.inventoryList[itemType]--;
+                itemCount.text = player.inventoryList[itemType].ToString();
+                if (player.inventoryList[itemType] == 0)
+                {
+                    player.inventoryList.Remove(itemType);
+                    Destroy(this.gameObject);
+                }
                 break;
             case InventoryType.Shield:
                 break;
