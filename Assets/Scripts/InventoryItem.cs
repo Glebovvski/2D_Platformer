@@ -22,6 +22,26 @@ public class InventoryItem : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void UseItem()
+    {
+        Player player = GameObject.Find("Player").GetComponent<Player>();
+        switch (this.itemType)
+        {
+            case InventoryType.HealthPotion:
+                player.curHealth += 30;
+                player.inventoryDisplayed = !player.inventoryDisplayed;
+                player.Inventory.SetActive(player.inventoryDisplayed);
+                player.inventoryList[itemType]--;
+                break;
+            case InventoryType.Shield:
+                break;
+            case InventoryType.StrengthPotion:
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 public enum InventoryType

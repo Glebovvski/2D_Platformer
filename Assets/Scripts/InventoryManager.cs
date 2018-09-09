@@ -21,38 +21,29 @@ public class InventoryManager : MonoBehaviour {
         
 	}
 
-    public void UseItem(InventoryItem item)
-    {
-        switch (item.itemType)
-        {
-            case InventoryType.HealthPotion:
-                player.curHealth += 30;
-                player.inventoryDisplayed = !player.inventoryDisplayed;
-                player.Inventory.SetActive(player.inventoryDisplayed);
-                player.inventoryList[item.itemType]--;
-                break;
-            case InventoryType.Shield:
-                break;
-            case InventoryType.StrengthPotion:
-                break;
-            default:
-                break;
-        }
-    }
-
     public void AddItem(InventoryType item)
     {
+        GameObject invItem;
         if (player.inventoryList.ContainsKey(item))
         {
             player.inventoryList[item]++;
+            //var invItem = player.inventoryList[item];//.GetComponent<InventoryItem>().itemCount.text = player.inventoryList[item].ToString();
+            InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>()[0];
+            inventoryItem.itemCount.text = player.inventoryList[item].ToString();
         }
-        else player.inventoryList[item] = 1;
+        else
+        {
+            player.inventoryList[item] = 1;
+            invItem = (GameObject)Instantiate(Resources.Load(item.ToString()));
+            invItem.GetComponent<InventoryItem>().itemCount.text = player.inventoryList[item].ToString();
+            invItem.GetComponent<Transform>().SetParent(content);
+        }
     }
 
     public void DisplayItems()
     {
         //var content = GameObject.Find("Content").GetComponent<Transform>();
-        if (content.transform.childCount == 0)
+        if (content.transform.childCount != player.inventoryList.Count)
         {
             for (int i = 0; i < player.inventoryList.Keys.Count; i++)
             {
@@ -60,9 +51,9 @@ public class InventoryManager : MonoBehaviour {
                 string typeString = type.ToString();
                 //InventoryItem item;// = new InventoryItem();
 
-                var item = (GameObject)Instantiate(Resources.Load(typeString));
-                item.GetComponent<InventoryItem>().itemCount.text = player.inventoryList[type].ToString();
-                item.GetComponent<Transform>().parent = content;
+                //var item = (GameObject)Instantiate(Resources.Load(typeString));
+                //item.GetComponent<InventoryItem>().itemCount.text = player.inventoryList[type].ToString();
+                //item.GetComponent<Transform>().SetParent(content);
             }
         }
     }
