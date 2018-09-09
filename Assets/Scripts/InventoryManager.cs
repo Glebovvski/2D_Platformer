@@ -61,8 +61,8 @@ public class InventoryManager : MonoBehaviour {
                 //InventoryItem item;// = new InventoryItem();
 
                 var item = (GameObject)Instantiate(Resources.Load(typeString));
+                item.GetComponent<InventoryItem>().itemCount.text = player.inventoryList[type].ToString();
                 item.GetComponent<Transform>().parent = content;
-                //item.itemCount.text = player.inventoryList[type].ToString();
             }
         }
     }
