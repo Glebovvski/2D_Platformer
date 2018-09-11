@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour {
             }
 
         }
-        else //if (player.inventoryList[item] == null || player.inventoryList[item] == 0)
+        else
         {
             player.inventoryList[item] = 1;
             invItem = (GameObject)Instantiate(Resources.Load(item.ToString()));

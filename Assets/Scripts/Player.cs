@@ -28,6 +28,8 @@ public class Player : MonoBehaviour {
     public bool inventoryDisplayed;
     
 
+    public GameObject Shield;
+
 	// Use this for initialization
 	void Start () {
         inventoryList = new Dictionary<InventoryType, int>();
@@ -50,8 +52,12 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.I))
         {
             inventoryDisplayed = !inventoryDisplayed;
+            if (inventoryDisplayed)
+                Time.timeScale = 0;
             Inventory.SetActive(inventoryDisplayed);
         }
+        if (!inventoryDisplayed)
+            Time.timeScale = 1;
     }
 
     public void TakeDamage(int amount)

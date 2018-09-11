@@ -13,6 +13,8 @@ public class InventoryItem : MonoBehaviour {
     private float duration;
     [SerializeField]
     public Text itemCount;
+    
+    
 
     // Use this for initialization
     void Start() {
@@ -41,6 +43,12 @@ public class InventoryItem : MonoBehaviour {
                 }
                 break;
             case InventoryType.Shield:
+                while (duration > 0)
+                {
+                    player.Shield.SetActive(true);
+                    duration -= Time.deltaTime;
+                }
+                player.Shield.SetActive(false);
                 break;
             case InventoryType.StrengthPotion:
                 break;
