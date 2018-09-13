@@ -59,7 +59,12 @@ public class EnemyController : MonoBehaviour {
     public void Attack()
     {
         if (Vector2.Distance(player.transform.position, transform.position) < 0.2)
-            player.player.TakeDamage(damage);
+        {
+            if (player.player.isShielded)
+                player.player.TakeDamage(0);
+            else
+                player.player.TakeDamage(damage);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

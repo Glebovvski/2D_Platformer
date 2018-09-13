@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public int curHealth;
 
+    public bool isShielded;
+
     [SerializeField]
     private Slider staminaSlider;
     [HideInInspector]
@@ -25,13 +27,17 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     public GameObject Inventory;
+
+    
+    public InventoryManager InventoryManager;
     public bool inventoryDisplayed;
     
 
-    public GameObject Shield;
+    public ParticleSystem Shield;
 
 	// Use this for initialization
 	void Start () {
+        isShielded = false;
         inventoryList = new Dictionary<InventoryType, int>();
         inventoryDisplayed = false;
         Inventory.SetActive(inventoryDisplayed);
@@ -59,6 +65,8 @@ public class Player : MonoBehaviour {
         if (!inventoryDisplayed)
             Time.timeScale = 1;
     }
+
+    
 
     public void TakeDamage(int amount)
     {

@@ -11,7 +11,7 @@ public class CollectibleItem : MonoBehaviour {
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<Player>().Inventory.GetComponent<InventoryManager>().AddItem(item);
+            collision.GetComponent<Player>().InventoryManager.AddItem(item);
             Destroy(this.gameObject);
         }
     }
