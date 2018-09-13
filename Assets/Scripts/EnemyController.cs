@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;

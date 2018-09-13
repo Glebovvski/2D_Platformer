@@ -14,8 +14,11 @@ public class InventoryManager : MonoBehaviour {
 
     private float currCountdownValue;
 
+    float damage;
+
     // Use this for initialization
     void Start () {
+        damage = player.damage;
 	}
 	
 	// Update is called once per frame
@@ -55,10 +58,13 @@ public class InventoryManager : MonoBehaviour {
             case InventoryType.Shield:
                 player.isShielded = true;
                 player.Shield.Play();
-                StartCoroutine(StartCountdown(item.duration));
+                StartCoroutine(StartCountdown(item, item.duration));
                 ManageItem(item);
                 break;
             case InventoryType.StrengthPotion:
+                player.damage *= 1.5f;
+                StartCoroutine(StartCountdown(item, item.duration));
+                ManageItem(item);
                 break;
             default:
                 break;
@@ -78,7 +84,7 @@ public class InventoryManager : MonoBehaviour {
         }
     }
 
-    public IEnumerator StartCountdown(float countdownValue = 10)
+    public IEnumerator StartCountdown(InventoryItem item, float countdownValue = 10)
     {
         currCountdownValue = countdownValue;
         while (currCountdownValue >= 0)
@@ -87,8 +93,21 @@ public class InventoryManager : MonoBehaviour {
             currCountdownValue--;
             if (currCountdownValue == 0)
             {
-                player.Shield.Stop();
-                player.isShielded = false;
+                switch (item.itemType)
+                {
+                    case InventoryType.HealthPotion:
+                        break;
+                    case InventoryType.Shield:
+                        player.Shield.Stop();
+                        player.isShielded = false;
+                        break;
+                    case InventoryType.StrengthPotion:
+                        player.damage = damage;
+                        break;
+                    default:
+                        break;
+                }
+                
             }
         }
     }

@@ -20,7 +20,7 @@ public class Player : MonoBehaviour {
     [HideInInspector]
     public int curStamina;
 
-    public int damage = 1;
+    public float damage = 1;
 
     [HideInInspector]
     public Dictionary<InventoryType, int> inventoryList;
