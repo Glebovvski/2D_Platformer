@@ -129,30 +129,33 @@ public class PlayerController : MonoBehaviour
 
     private void Hit()
     {
-        clicks++;
-        if (clicks == 1)
+        if (!player.inventoryDisplayed)
         {
-            player.curStamina -= 10;
-            audio.clip = Resources.Load("Sword1") as AudioClip;
-            audio.PlayOneShot(audio.clip);
+            clicks++;
+            if (clicks == 1)
+            {
+                player.curStamina -= 10;
+                audio.clip = Resources.Load("Sword1") as AudioClip;
+                audio.PlayOneShot(audio.clip);
 
-        }
-        if (clicks == 2)
-        {
-            player.curStamina -= 10;
-            animator.SetTrigger("secondAttack");
-            Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
-            rigidbody2d.velocity = forward * speed * Time.deltaTime;
-            audio.clip = Resources.Load("Sword2") as AudioClip;
-            audio.PlayOneShot(audio.clip);
-        }
-        if (clicks == 3)
-        {
-            player.curStamina -= 10;
-            animator.SetTrigger("thirdAttack");
-            audio.clip = Resources.Load("Sword1") as AudioClip;
-            audio.PlayOneShot(audio.clip);
-            clicks = 0;
+            }
+            if (clicks == 2)
+            {
+                player.curStamina -= 10;
+                animator.SetTrigger("secondAttack");
+                Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
+                rigidbody2d.velocity = forward * speed * Time.deltaTime;
+                audio.clip = Resources.Load("Sword2") as AudioClip;
+                audio.PlayOneShot(audio.clip);
+            }
+            if (clicks == 3)
+            {
+                player.curStamina -= 10;
+                animator.SetTrigger("thirdAttack");
+                audio.clip = Resources.Load("Sword1") as AudioClip;
+                audio.PlayOneShot(audio.clip);
+                clicks = 0;
+            }
         }
     }
 
