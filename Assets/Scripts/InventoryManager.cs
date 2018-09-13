@@ -11,6 +11,8 @@ public class InventoryManager : MonoBehaviour {
 
     [SerializeField]
     private Transform content;
+    
+    public Text InventoryDescription;
 
     private float currCountdownValue;
 
@@ -71,10 +73,28 @@ public class InventoryManager : MonoBehaviour {
         }
     }
     
+    public void ItemDescription(InventoryItem item)
+    {
+        switch (item.itemType)
+        {
+            case InventoryType.HealthPotion:
+                InventoryDescription.text = "Immideately restores 30 points of Player's health";
+                break;
+            case InventoryType.Shield:
+                InventoryDescription.text = "Activates shield around Player which blocks all the enemies attack for 10 seconds";
+                break;
+            case InventoryType.StrengthPotion:
+                InventoryDescription.text = "Increases attack power of the Player for 10 seconds";
+                break;
+            default:
+                break;
+        }
+    }
+
     void ManageItem(InventoryItem item)
     {
-        player.inventoryDisplayed = !player.inventoryDisplayed;
-        player.Inventory.SetActive(player.inventoryDisplayed);
+        //player.inventoryDisplayed = !player.inventoryDisplayed;
+        //player.Inventory.SetActive(player.inventoryDisplayed);
         player.inventoryList[item.itemType]--;
         item.itemCount.text = player.inventoryList[item.itemType].ToString();
         if (player.inventoryList[item.itemType] == 0)

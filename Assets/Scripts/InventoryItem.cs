@@ -29,6 +29,18 @@ public class InventoryItem : MonoBehaviour {
         inventory.UseItem(this);
     }
 
+    public void OnMouseEnter()
+    {
+        var inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        inventory.ItemDescription(this);
+    }
+
+
+    public void OnMouseExit()
+    {
+        var inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
+        inventory.InventoryDescription.text = string.Empty;
+    }
     // Update is called once per frame
     void Update () {
 		
