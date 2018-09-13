@@ -13,12 +13,13 @@ public class InventoryItem : MonoBehaviour {
     private float duration;
     [SerializeField]
     public Text itemCount;
-    
-    
+
+    private Player player;
 
     // Use this for initialization
     void Start() {
-	}
+        player = GameObject.Find("Player").GetComponent<Player>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,22 +28,14 @@ public class InventoryItem : MonoBehaviour {
 
     public void UseItem()
     {
-        Player player = GameObject.Find("Player").GetComponent<Player>();
         switch (this.itemType)
         {
             case InventoryType.HealthPotion:
                 player.curHealth += 30;
-                player.inventoryDisplayed = !player.inventoryDisplayed;
-                player.Inventory.SetActive(player.inventoryDisplayed);
-                player.inventoryList[itemType]--;
-                itemCount.text = player.inventoryList[itemType].ToString();
-                if (player.inventoryList[itemType] == 0)
-                {
-                    player.inventoryList.Remove(itemType);
-                    Destroy(this.gameObject);
-                }
+                ManageItem();
                 break;
             case InventoryType.Shield:
+                ManageItem();
                 while (duration > 0)
                 {
                     player.Shield.SetActive(true);
@@ -54,6 +47,19 @@ public class InventoryItem : MonoBehaviour {
                 break;
             default:
                 break;
+        }
+    }
+
+    void ManageItem()
+    {
+        player.inventoryDisplayed = !player.inventoryDisplayed;
+        player.Inventory.SetActive(player.inventoryDisplayed);
+        player.inventoryList[itemType]--;
+        itemCount.text = player.inventoryList[itemType].ToString();
+        if (player.inventoryList[itemType] == 0)
+        {
+            player.inventoryList.Remove(itemType);
+            Destroy(this.gameObject);
         }
     }
 }

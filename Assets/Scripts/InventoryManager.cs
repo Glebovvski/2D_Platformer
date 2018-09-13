@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +29,7 @@ public class InventoryManager : MonoBehaviour {
             if (player.inventoryList[item] != 0)
             {
                 player.inventoryList[item]++;
-                InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>()[0];
+                InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>().Where(x=>x.itemType==item).First();
                 inventoryItem.itemCount.text = player.inventoryList[item].ToString();
             }
 
