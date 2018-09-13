@@ -4,29 +4,40 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryManager : MonoBehaviour {
+public class InventoryManager : MonoBehaviour
+{
 
     [SerializeField]
     private Player player;
 
     [SerializeField]
     private Transform content;
-    
+
     public Text InventoryDescription;
 
-    private float currCountdownValue;
+    private float currCountdownValueForShield;
+    private float currCountdownValueForStrength;
+
+    [SerializeField]
+    private GameObject StrengthDisplay;
+    [SerializeField]
+    private GameObject ShieldDisplay;
 
     float damage;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         damage = player.damage;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
+        StrengthDisplay.SetActive(false);
+        ShieldDisplay.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void AddItem(InventoryType item)
     {
@@ -36,7 +47,7 @@ public class InventoryManager : MonoBehaviour {
             if (player.inventoryList[item] != 0)
             {
                 player.inventoryList[item]++;
-                InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>().Where(x=>x.itemType==item).First();
+                InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>().Where(x => x.itemType == item).First();
                 inventoryItem.itemCount.text = player.inventoryList[item].ToString();
             }
         }
@@ -58,12 +69,14 @@ public class InventoryManager : MonoBehaviour {
                 ManageItem(item);
                 break;
             case InventoryType.Shield:
+                ShieldDisplay.SetActive(true);
                 player.isShielded = true;
                 player.Shield.Play();
                 StartCoroutine(StartCountdown(item, item.duration));
                 ManageItem(item);
                 break;
             case InventoryType.StrengthPotion:
+                StrengthDisplay.SetActive(true);
                 player.damage *= 1.5f;
                 StartCoroutine(StartCountdown(item, item.duration));
                 ManageItem(item);
@@ -72,7 +85,7 @@ public class InventoryManager : MonoBehaviour {
                 break;
         }
     }
-    
+
     public void ItemDescription(InventoryItem item)
     {
         switch (item.itemType)
@@ -106,29 +119,45 @@ public class InventoryManager : MonoBehaviour {
 
     public IEnumerator StartCountdown(InventoryItem item, float countdownValue = 10)
     {
-        currCountdownValue = countdownValue;
-        while (currCountdownValue >= 0)
+        Image durStrenght = StrengthDisplay.transform.Find("Duration").GetComponent<Image>();
+        Image durShield = ShieldDisplay.transform.Find("Duration").GetComponent<Image>();
+        if (item.itemType == InventoryType.Shield)
         {
-            yield return new WaitForSeconds(1.0f);
-            currCountdownValue--;
-            if (currCountdownValue == 0)
+            currCountdownValueForShield = countdownValue;
+            while (currCountdownValueForShield >= 0)
             {
-                switch (item.itemType)
+                if (item.itemType == InventoryType.Shield)
+                    durShield.fillAmount = currCountdownValueForShield / countdownValue;
+                yield return new WaitForSeconds(1.0f);
+                currCountdownValueForShield--;
+
+                if (currCountdownValueForShield == 0)
                 {
-                    case InventoryType.HealthPotion:
-                        break;
-                    case InventoryType.Shield:
-                        player.Shield.Stop();
-                        player.isShielded = false;
-                        break;
-                    case InventoryType.StrengthPotion:
-                        player.damage = damage;
-                        break;
-                    default:
-                        break;
+                    player.Shield.Stop();
+                    player.isShielded = false;
+                    ShieldDisplay.SetActive(false);
                 }
-                
             }
         }
+
+        if (item.itemType == InventoryType.StrengthPotion)
+        {
+            currCountdownValueForStrength = countdownValue;
+            while (currCountdownValueForStrength >= 0)
+            {
+                if (item.itemType == InventoryType.StrengthPotion)
+                    durStrenght.fillAmount = currCountdownValueForStrength / countdownValue;
+                yield return new WaitForSeconds(1.0f);
+                currCountdownValueForStrength--;
+
+                if (currCountdownValueForStrength == 0)
+                {
+                    player.damage = damage;
+                    StrengthDisplay.SetActive(false);
+                }
+            }
+        }
+
+
     }
 }
