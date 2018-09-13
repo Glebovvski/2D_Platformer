@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     bool isJumping = false;
 
-    
+    private AudioSource audio;
+
     public List<GameObject> enemies;
 
     [SerializeField]
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        audio = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
@@ -131,6 +133,9 @@ public class PlayerController : MonoBehaviour
         if (clicks == 1)
         {
             player.curStamina -= 10;
+            audio.clip = Resources.Load("Sword1") as AudioClip;
+            audio.PlayOneShot(audio.clip);
+
         }
         if (clicks == 2)
         {
@@ -138,11 +143,15 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("secondAttack");
             Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
             rigidbody2d.velocity = forward * speed * Time.deltaTime;
+            audio.clip = Resources.Load("Sword2") as AudioClip;
+            audio.PlayOneShot(audio.clip);
         }
         if (clicks == 3)
         {
             player.curStamina -= 10;
             animator.SetTrigger("thirdAttack");
+            audio.clip = Resources.Load("Sword1") as AudioClip;
+            audio.PlayOneShot(audio.clip);
             clicks = 0;
         }
     }
