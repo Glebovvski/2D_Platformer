@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Barier
   - HealthPotion
+  - Platform
   layers:
   - Default
   - TransparentFX
