@@ -6,11 +6,7 @@ public class PlayerIdleWithSwordBehaviour : StateMachineBehaviour {
 
 	 // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        var player = GameObject.FindGameObjectWithTag("Player");
-        var controller = player.GetComponent<PlayerController>();
         animator.SetBool("Fight", false);
-        controller.isFighting = false;
-        controller.clicks = 0;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

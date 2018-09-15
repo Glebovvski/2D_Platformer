@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         isJumping = !isGrounded();
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
-        if (!isFighting)
+        //if (!isFighting)
             rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
         if (move > 0 && !facingRight)
             Flip();
@@ -155,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 audio.clip = Resources.Load("Sword1") as AudioClip;
                 audio.PlayOneShot(audio.clip);
                 clicks = 0;
+                //animator.ResetTrigger("Clicked");
             }
         }
     }
