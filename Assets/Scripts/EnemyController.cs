@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour {
         }
         healthBar.fillAmount = curHealth / maxHealth;
 
-        if (Vector2.Distance(player.transform.position, transform.position) > 0.4 && player.transform.position.y*2 > transform.position.y)
+        if (Vector2.Distance(player.transform.position, transform.position) > 0.4 && player.transform.position.y > transform.position.y && player.transform.position.y < transform.position.y)
             animator.SetBool("PlayerSpotted", false);
 
         if (animator.GetBool("PlayerSpotted"))

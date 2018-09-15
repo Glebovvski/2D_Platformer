@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MovingObject : MonoBehaviour {
 
-    private float moveTime = 0.5f;
+    public bool horizontal;
 
+    private float moveTime = 0.5f;
+   
     private float direction = 1;
     
     //Protected, virtual functions can be overridden by inheriting classes.
@@ -16,7 +18,10 @@ public class MovingObject : MonoBehaviour {
 
     private void Update()
     {
-        transform.position = new Vector3(transform.position.x + moveTime *Time.smoothDeltaTime * direction, transform.position.y);
+        if (horizontal)
+            transform.position = new Vector3(transform.position.x + moveTime * Time.smoothDeltaTime * direction, transform.position.y);
+        else
+            transform.position = new Vector3(transform.position.x , transform.position.y + moveTime * Time.smoothDeltaTime * direction);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
