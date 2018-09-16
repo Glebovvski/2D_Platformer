@@ -26,8 +26,16 @@ public class MovingObject : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+            collision.gameObject.transform.parent = transform;
         if (collision.gameObject.layer == LayerMask.NameToLayer("Foreground"))
             direction *= -1;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            collision.gameObject.transform.parent = null;
     }
 
 }

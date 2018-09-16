@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
         if (hit.collider != null)
         {
-            if (hit.collider.tag == "Ground")
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Foreground"))
             {
                 animator.SetBool("Jump", false);
                 return true;
@@ -110,10 +110,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Platform")
-        {
-            transform.parent = null;
-        }
+        //if (collision.tag == "Platform")
+        //{
+        //    transform.parent = null;
+        //}
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemies.Remove(collision.gameObject);
@@ -123,10 +123,10 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Platform")
-        {
-            transform.parent = collision.transform;
-        }
+        //if (collision.tag == "Platform")
+        //{
+        //    transform.parent = collision.transform;
+        //}
         if (collision.tag == "Enemy")
         {
             animator.SetBool("Fight", true);
