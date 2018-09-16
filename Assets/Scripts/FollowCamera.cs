@@ -32,11 +32,16 @@ public class FollowCamera : MonoBehaviour
         if (target)
         {
             Vector3 point = camera.WorldToViewportPoint(target.position);
-            Vector3 delta = target.position - camera.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, point.z)); //(new Vector3(0.5, 0.5, point.z));
+            Vector3 delta = target.position - camera.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, point.z));
             Vector3 destination = transform.position + delta;
-            //if (destination.x > LeftBarier.position.x-target.position.x && destination.x < RightBarier.position.x-target.position.x || destination.y < UpBarier.position.y - target.position.y)
-            //if (camera.transform.position.x > (LeftBarier.position.x+2.04) || camera.transform.position.x < (RightBarier.position.x - 2.04))
-                transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
+            transform.position = Vector3.SmoothDamp(
+                                        new Vector3(
+                                            Mathf.Clamp(transform.position.x, LeftBarier.position.x + 2f, RightBarier.position.x - 2f),
+                                            transform.position.y,
+                                            transform.position.z),
+                                            destination,
+                                            ref velocity,
+                                            dampTime);
         }
     }
 }
