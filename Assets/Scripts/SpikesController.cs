@@ -20,7 +20,8 @@ public class SpikesController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
+            if (!collision.gameObject.GetComponent<Player>().isShielded)
+                collision.gameObject.GetComponent<Player>().TakeDamage(damage);
         }
 
         if(collision.gameObject.tag == "Enemy")

@@ -136,6 +136,7 @@ public class PlayerController : MonoBehaviour
             {
                 player.curStamina -= 10;
                 audio.clip = Resources.Load("Sword1") as AudioClip;
+                audio.volume = 0.6f;
                 audio.PlayOneShot(audio.clip);
 
             }
@@ -146,6 +147,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
                 rigidbody2d.velocity = forward * speed * Time.deltaTime;
                 audio.clip = Resources.Load("Sword2") as AudioClip;
+                audio.volume = 0.6f;
                 audio.PlayOneShot(audio.clip);
             }
             if (clicks == 3)
@@ -153,9 +155,9 @@ public class PlayerController : MonoBehaviour
                 player.curStamina -= 10;
                 animator.SetTrigger("thirdAttack");
                 audio.clip = Resources.Load("Sword1") as AudioClip;
+                audio.volume = 0.6f;
                 audio.PlayOneShot(audio.clip);
                 clicks = 0;
-                //animator.ResetTrigger("Clicked");
             }
         }
     }
