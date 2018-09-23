@@ -16,8 +16,11 @@ public class EnemyController : MonoBehaviour {
 
     public Image healthBar;
 
+    [HideInInspector]
+    public int Experience = 15;
+
     [SerializeField]
-    private PlayerController player;
+    public PlayerController player;
 
     [SerializeField]
     private Canvas canvas;

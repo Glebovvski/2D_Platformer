@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [HideInInspector]
+    public PlayerLevel PlayerLevel { get; set; }
     private float speed = 150.0f;
     private Vector2 jumpSpeed = new Vector2(0, 4.0f);
     private Rigidbody2D rigidbody2d;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        PlayerLevel = GetComponent<PlayerLevel>();
         audio = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -42,8 +44,9 @@ public class PlayerController : MonoBehaviour
         isJumping = !isGrounded();
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
-        //if (!isFighting)
-            rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
+        //audio.clip = Resources.Load("running") as AudioClip;
+        //audio.Play();
+        rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
         if (move > 0 && !facingRight)
             Flip();
         else if (move < 0 && facingRight)
