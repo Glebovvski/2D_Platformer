@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            if (player.curStamina > 10)
+            if (player.curStamina > 10 && !player.inventoryDisplayed)
             {
                 animator.SetTrigger("Clicked");
                 animator.SetBool("Fight", true);
