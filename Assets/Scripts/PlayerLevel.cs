@@ -16,6 +16,8 @@ public class PlayerLevel : MonoBehaviour {
     private Text XpText;
     [SerializeField]
     private Image LevelUpImage;
+    [SerializeField]
+    private Text LevelUpText;
 
     // Use this for initialization
     void Start () {
@@ -41,6 +43,7 @@ public class PlayerLevel : MonoBehaviour {
             XP -= RequiredXP;
             Level++;
             SkillPoints++;
+            LevelUpText.text = SkillPoints + " skill points available";
             StartCoroutine(LevelUp());
         }
         XpImage.fillAmount = (float)XP / (float)RequiredXP;
@@ -62,5 +65,6 @@ public class PlayerLevel : MonoBehaviour {
             LevelUpImage.fillAmount -= 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
+        LevelUpText.text = string.Empty;
     }
 }
