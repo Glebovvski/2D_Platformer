@@ -14,9 +14,12 @@ public class PlayerLevel : MonoBehaviour {
     private Image XpImage;
     [SerializeField]
     private Text XpText;
+    [SerializeField]
+    private Image LevelUpImage;
 
     // Use this for initialization
     void Start () {
+        LevelUpImage.fillAmount = 0;
         Level = 1;
         XP = 0;
         XpImage.fillAmount = XP / RequiredXP;
@@ -38,8 +41,26 @@ public class PlayerLevel : MonoBehaviour {
             XP -= RequiredXP;
             Level++;
             SkillPoints++;
+            StartCoroutine(LevelUp());
         }
         XpImage.fillAmount = (float)XP / (float)RequiredXP;
         XpText.text = XP.ToString() + "/" + RequiredXP.ToString();
+    }
+
+    IEnumerator LevelUp()
+    {
+        while (LevelUpImage.fillAmount != 1)
+        {
+            LevelUpImage.fillOrigin = (int)Image.OriginVertical.Bottom;
+            LevelUpImage.fillAmount += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(1);
+        while (LevelUpImage.fillAmount != 0)
+        {
+            LevelUpImage.fillOrigin = (int)Image.OriginVertical.Top;
+            LevelUpImage.fillAmount -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
