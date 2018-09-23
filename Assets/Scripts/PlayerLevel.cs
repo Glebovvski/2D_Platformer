@@ -7,10 +7,11 @@ public class PlayerLevel : MonoBehaviour {
     public int Level { get; set; }
     public int XP { get; set; }
     public int RequiredXP { get { return (Level * 25); } }
-
+    public int SkillPoints { get; set; }
     // Use this for initialization
     void Start () {
         Level = 1;
+        SkillPoints = 0;
 	}
 	
 	// Update is called once per frame
@@ -25,6 +26,7 @@ public class PlayerLevel : MonoBehaviour {
         {
             XP -= RequiredXP;
             Level++;
+            SkillPoints++;
         }
     }
 }
