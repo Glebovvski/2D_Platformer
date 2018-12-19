@@ -10,6 +10,12 @@ TagManager:
   - Barier
   - HealthPotion
   - Platform
+  - MinusButton
+  - PlusButton
+  - Health
+  - Strength
+  - Stamina
+  - Dexterity
   layers:
   - Default
   - TransparentFX

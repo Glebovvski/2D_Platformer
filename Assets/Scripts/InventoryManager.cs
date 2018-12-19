@@ -99,6 +99,9 @@ public class InventoryManager : MonoBehaviour
             case InventoryType.StrengthPotion:
                 InventoryDescription.text = "Increases attack power of the Player for 10 seconds";
                 break;
+            case InventoryType.Key:
+                InventoryDescription.text = "This is a key. If you find all three keys it opens the door. U know... 'Gameplay'";
+                break;
             default:
                 break;
         }
@@ -106,8 +109,6 @@ public class InventoryManager : MonoBehaviour
 
     void ManageItem(InventoryItem item)
     {
-        //player.inventoryDisplayed = !player.inventoryDisplayed;
-        //player.Inventory.SetActive(player.inventoryDisplayed);
         player.inventoryList[item.itemType]--;
         item.itemCount.text = player.inventoryList[item.itemType].ToString();
         if (player.inventoryList[item.itemType] == 0)

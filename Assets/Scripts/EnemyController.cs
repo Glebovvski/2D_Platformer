@@ -45,10 +45,17 @@ public class EnemyController : MonoBehaviour {
 
         if (animator.GetBool("PlayerSpotted"))
         {
-            transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-            transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-            if (Vector2.Distance(player.transform.position, transform.position) > 0.2)
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+
+            if ((int)player.transform.position.x != (int)transform.position.x)
+            {
+                transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+                transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+            }
+            if ((int)player.transform.position.y == (int)transform.position.y)
+            {
+                if (Mathf.Abs(player.transform.position.x - transform.position.x) >0.2/*Vector2.Distance(player.transform.position, transform.position) > 0.2*/)
+                    transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+            }
         }
     }
 

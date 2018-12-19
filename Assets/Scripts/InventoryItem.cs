@@ -53,5 +53,6 @@ public enum InventoryType
 {
     HealthPotion=0,
     Shield,
-    StrengthPotion
+    StrengthPotion,
+    Key
 }

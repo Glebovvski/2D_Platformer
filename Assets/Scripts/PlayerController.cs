@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public PlayerLevel PlayerLevel { get; set; }
     private float speed = 150.0f;
-    private Vector2 jumpSpeed = new Vector2(0, 4.0f);
+    private Vector2 jumpSpeedVector = new Vector2(0, 4.0f);
     private Rigidbody2D rigidbody2d;
     bool facingRight = true;
     [HideInInspector]
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded())
         {
             animator.SetBool("Jump", true);
-            rigidbody2d.AddForce(jumpSpeed, ForceMode2D.Impulse);
+            rigidbody2d.AddForce(jumpSpeedVector, ForceMode2D.Impulse);
         }
     }
 

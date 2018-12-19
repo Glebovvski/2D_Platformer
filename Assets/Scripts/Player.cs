@@ -7,31 +7,37 @@ public class Player : MonoBehaviour {
 
     [SerializeField]
     private Slider healthSlider;
-    private int health;
     [HideInInspector]
-    public int curHealth;
+    public float health { get; set; }
+    [HideInInspector]
+    public float curHealth;
 
     public bool isShielded;
 
     [SerializeField]
     private Slider staminaSlider;
     [HideInInspector]
-    public int stamina;
+    public float stamina;
     [HideInInspector]
-    public int curStamina;
+    public float curStamina;
 
-    public float damage = 1;
+    [HideInInspector]
+    public float damage { get; set; }
+
+    [HideInInspector]
+    public float dexterity { get; set; }
 
     [HideInInspector]
     public Dictionary<InventoryType, int> inventoryList;
 
     [SerializeField]
     public GameObject Inventory;
-
+    [SerializeField]
+    private GameObject Skills;
     
     public InventoryManager InventoryManager;
     public bool inventoryDisplayed;
-    
+    public bool skillsDisplayed;
 
     public ParticleSystem Shield;
 
@@ -41,8 +47,12 @@ public class Player : MonoBehaviour {
         inventoryList = new Dictionary<InventoryType, int>();
         inventoryDisplayed = false;
         Inventory.SetActive(inventoryDisplayed);
+        skillsDisplayed = false;
+        Skills.SetActive(skillsDisplayed);
         health = 100;
         stamina = 100;
+        damage = 15;
+        dexterity = 0.5f;
         curHealth = health;
         curStamina = stamina;
         healthSlider.maxValue = health;
@@ -62,7 +72,14 @@ public class Player : MonoBehaviour {
                 Time.timeScale = 0;
             Inventory.SetActive(inventoryDisplayed);
         }
-        if (!inventoryDisplayed)
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            skillsDisplayed = !skillsDisplayed;
+            if (skillsDisplayed)
+                Time.timeScale = 0;
+            Skills.SetActive(skillsDisplayed);
+        }
+        if (!inventoryDisplayed && !skillsDisplayed)
             Time.timeScale = 1;
     }
 
