@@ -36,6 +36,7 @@ public class ShootingTrap : MonoBehaviour, IEnemy
             Destroy(item.gameObject, 1f);
             StartCoroutine(ShootObject(shootInterval));
         }
+        else itemToShootPrefab = null;
     }
 
     public void Stop()
