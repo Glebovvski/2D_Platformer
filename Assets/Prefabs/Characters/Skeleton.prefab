@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 224048992002222062}
   - component: {fileID: 222230207510505846}
   - component: {fileID: 114717175456707904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4037975851982532}
   - component: {fileID: 58743337342895406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: watchRadius
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 224071136735467680}
   - component: {fileID: 222250040470162046}
   - component: {fileID: 114361951145567260}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealthBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 223859457747269482}
   - component: {fileID: 114990025438024834}
   - component: {fileID: 114755728019426972}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 50243774697113000}
   - component: {fileID: 95606498949677010}
   - component: {fileID: 114349149323858880}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
