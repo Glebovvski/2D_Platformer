@@ -5,6 +5,7 @@ TextureImporter:
     21300000: Skeleton React_0
     21300002: Skeleton React_1
     21300004: Skeleton React_2
+    21300006: Skeleton React_3
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -48,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -145,7 +146,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1da9dddee59274c4c96c03a4437ae862
+      spriteID: 178dd3b8ec4535546b06df2f6729b33c
       vertices: []
       indices: 
       edges: []
@@ -156,7 +157,7 @@ TextureImporter:
         serializedVersion: 2
         x: 22
         y: 0
-        width: 44
+        width: 22
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -165,13 +166,33 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fea331b4f51229d429fb14f9c199a5ac
+      spriteID: 36217f3fe0dd680488a7b343e4bd6f16
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
       name: Skeleton React_2
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c82999d7c6a0dd4eba85a0562a888ca
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skeleton React_3
       rect:
         serializedVersion: 2
         x: 66
@@ -185,7 +206,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f93a926b8b136a24a86ccdc2dd391b74
+      spriteID: 63ce5d405f6a783458bf218b8f8f6019
       vertices: []
       indices: 
       edges: []
