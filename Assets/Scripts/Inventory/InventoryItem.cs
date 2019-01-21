@@ -14,32 +14,26 @@ public class InventoryItem : MonoBehaviour {
     [SerializeField]
     public Text itemCount;
 
-    private Player player;
-
     float currCountdownValue;
 
     // Use this for initialization
     void Start() {
-        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     public void OnMouseDown()
     {
-        var inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        inventory.UseItem(this);
+        InventoryManager.Instance.UseItem(this);
     }
 
     public void OnMouseEnter()
     {
-        var inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        inventory.ItemDescription(this);
+        InventoryManager.Instance.ItemDescription(this);
     }
 
 
     public void OnMouseExit()
     {
-        var inventory = GameObject.Find("InventoryManager").GetComponent<InventoryManager>();
-        inventory.InventoryDescription.text = string.Empty;
+        InventoryManager.Instance.InventoryDescription.text = string.Empty;
     }
     // Update is called once per frame
     void Update () {

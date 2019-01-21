@@ -44,8 +44,13 @@ public class Player : MonoBehaviour {
 
     public ParticleSystem Shield;
 
-	// Use this for initialization
-	void Start () {
+    public bool HUDIsOpen;
+
+    // Use this for initialization
+    void Start ()
+    {
+        HUDIsOpen = false;
+
         isShielded = false;
         inventoryList = new Dictionary<InventoryType, int>();
         inventoryDisplayed = false;
@@ -74,9 +79,8 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.I))
         {
             inventoryDisplayed = !Inventory.activeInHierarchy;
-            if (skillsDisplayed || inventoryDisplayed)
-                navDisplayed = true;
-            else navDisplayed = false;
+            CheckHUD();
+            
             NavigationPanel.SetActive(navDisplayed);
             if (skillsDisplayed)
             {
@@ -91,9 +95,7 @@ public class Player : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.K))
         {
             skillsDisplayed = !Skills.activeInHierarchy;
-            if (skillsDisplayed || inventoryDisplayed)
-                navDisplayed = true;
-            else navDisplayed = false;
+            CheckHUD();
             NavigationPanel.SetActive(navDisplayed);
             if (inventoryDisplayed)
             {
@@ -106,10 +108,22 @@ public class Player : MonoBehaviour {
             Inventory.SetActive(inventoryDisplayed);
         }
         if (!inventoryDisplayed && !skillsDisplayed)
+        {
             Time.timeScale = 1;
+            HUDIsOpen = false;
+        }
+
     }
 
-    
+    public void CheckHUD()
+    {
+        if (skillsDisplayed || inventoryDisplayed)
+        {
+            navDisplayed = true;
+            HUDIsOpen = true;
+        }
+        else navDisplayed = false;
+    }
 
     public void TakeDamage(int amount)
     {

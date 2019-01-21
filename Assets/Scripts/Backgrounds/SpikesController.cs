@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.Scripts.Enemies;
 
 public class SpikesController : MonoBehaviour {
 
@@ -26,7 +27,7 @@ public class SpikesController : MonoBehaviour {
 
         if(collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
+            collision.gameObject.GetComponent<IEnemy>().Damage(damage);
         }
     }
 }

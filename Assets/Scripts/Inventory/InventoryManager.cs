@@ -6,6 +6,22 @@ using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
+    private static InventoryManager _instance;
+    public static InventoryManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("No Inventory Managet Instance");
+
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     [SerializeField]
     private Player player;
@@ -23,11 +39,23 @@ public class InventoryManager : MonoBehaviour
     [SerializeField]
     private GameObject ShieldDisplay;
 
+    [SerializeField]
+    private GameObject Inventory;
+
+    [SerializeField]
+    private GameObject NavigationManager;
+
+    [SerializeField]
+    private GameObject SkillsManager;
+
+    private bool inventoryOpened;
+
     float damage;
 
     // Use this for initialization
     void Start()
     {
+        inventoryOpened = false;
         damage = player.damage;
         StrengthDisplay.SetActive(false);
         ShieldDisplay.SetActive(false);
@@ -37,6 +65,19 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void OpenInventory()
+    {
+        inventoryOpened = !inventoryOpened;
+        player.inventoryDisplayed = inventoryOpened;
+        player.HUDIsOpen = inventoryOpened;
+        if (inventoryOpened)
+            Time.timeScale = 0;
+        else Time.timeScale = 1;
+        Inventory.SetActive(inventoryOpened);
+        NavigationManager.SetActive(inventoryOpened);
+        SkillsManager.SetActive(false);
     }
 
     public void AddItem(InventoryType item)

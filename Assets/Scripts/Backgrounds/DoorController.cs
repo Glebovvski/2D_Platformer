@@ -13,8 +13,6 @@ public class DoorController : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera Camera;
 
-    private float speed = 3.0f;
-
     private int counts=0;
 
     // Start is called before the first frame update

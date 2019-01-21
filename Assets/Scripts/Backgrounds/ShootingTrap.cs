@@ -16,9 +16,6 @@ public class ShootingTrap : MonoBehaviour, IEnemy
     [SerializeField]
     private float shootInterval = 2f;
 
-    [SerializeField]
-    private float destroyItemDelay = 0.5f;
-
     // Use this for initialization
     void Start()
     {
@@ -42,5 +39,10 @@ public class ShootingTrap : MonoBehaviour, IEnemy
     public void Stop()
     {
         isStopped = !isStopped;
+    }
+
+    public void Damage(float damageAmount)
+    {
+        
     }
 }

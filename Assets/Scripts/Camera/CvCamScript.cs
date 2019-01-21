@@ -5,7 +5,7 @@ using UnityEngine;
 public class CvCamScript : MonoBehaviour {
 
     [SerializeField]
-    Cinemachine.CinemachineVirtualCamera camera;
+    Cinemachine.CinemachineVirtualCamera downCamera;
     
     [SerializeField]
     private Transform player;
@@ -13,20 +13,19 @@ public class CvCamScript : MonoBehaviour {
     private float speed = 3.0f;
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKey(KeyCode.S))
         {
-            camera.Priority = 11;
+            downCamera.Priority = 11;
             transform.Translate(new Vector3(0, -speed * Time.deltaTime, 0));
         }
         else
         {
-            var dist = camera.transform.position;
-            camera.Priority = 9;
+            var dist = downCamera.transform.position;
+            downCamera.Priority = 9;
         }
     }
 }

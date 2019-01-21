@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour, IEnemy {
 
     private Animator animator;
 
+    private SpriteRenderer _renderer;
+
     [HideInInspector]
     public bool IsStopped = false;
 
@@ -23,15 +25,21 @@ public class EnemyController : MonoBehaviour, IEnemy {
     [HideInInspector]
     public int Experience = 15;
 
-    [SerializeField]
+    [HideInInspector]
     public PlayerController player;
 
     [SerializeField]
     private Canvas canvas;
 
-	// Use this for initialization
-	void Start () {
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+
+    // Use this for initialization
+    void Start () {
         animator = GetComponent<Animator>();
+        _renderer = GetComponent<SpriteRenderer>();
         curHealth = maxHealth;
 	}
 
@@ -46,32 +54,23 @@ public class EnemyController : MonoBehaviour, IEnemy {
 
         if (!IsStopped)
         {
-            if (Vector2.Distance(player.transform.position, transform.position) > 0.4 && player.transform.position.y > transform.position.y && player.transform.position.y < transform.position.y)
-                animator.SetBool("PlayerSpotted", false);
-
             if (animator.GetBool("PlayerSpotted"))
             {
+                if (player.transform.position.x > transform.position.x)
+                    _renderer.flipX = false;
+                else _renderer.flipX = true;
 
-                if ((int)player.transform.position.x != (int)transform.position.x)
-                {
-                    transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-                    transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-                }
-                if ((int)player.transform.position.y == (int)transform.position.y)
-                {
-                    if (Mathf.Abs(player.transform.position.x - transform.position.x) > 0.2)
-                        transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
-                }
+                if (Vector2.Distance(transform.position, player.transform.position) > 0.5f)
+                    transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
             }
         }
         else
         {
-            Debug.Log(IsStopped);
             animator.SetBool("PlayerSpotted", false);
         }
     }
 
-    public void TakeDamage(float amount)
+    public void Damage(float amount)
     {
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;
@@ -82,11 +81,9 @@ public class EnemyController : MonoBehaviour, IEnemy {
     {
         if (!IsStopped)
         {
-            if (Vector2.Distance(player.transform.position, transform.position) < 0.2)
+            if (Vector2.Distance(player.transform.position, transform.position) < 0.6f) //0.2
             {
-                if (player.player.isShielded)
-                    player.player.TakeDamage(0);
-                else
+                if (!player.player.isShielded)
                     player.player.TakeDamage(damage);
             }
         }
@@ -96,7 +93,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
     {
         if (!IsStopped)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.name == "Player")
             {
                 animator.SetBool("PlayerSpotted", true);
                 float distance = Vector2.Distance(collision.transform.position, transform.position);
@@ -109,9 +106,8 @@ public class EnemyController : MonoBehaviour, IEnemy {
     {
         if (!IsStopped)
         {
-            if (collision.CompareTag("Player"))
+            if (collision.name == "Player")
             {
-                animator.SetBool("PlayerSpotted", true);
                 float distance = Vector2.Distance(collision.transform.position, transform.position);
                 animator.SetFloat("Distance", distance);
             }
@@ -120,7 +116,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.name == "Player")
         {
             animator.SetBool("PlayerSpotted", false);
             player.enemies.Remove(this.gameObject);

@@ -15,18 +15,18 @@ public class SkillsManager : MonoBehaviour {
     private const float baseStamina = 100;
 
     [SerializeField]
-    private TextMeshProUGUI HealthStats;
+    private Text HealthStats;
     [SerializeField]
-    private TextMeshProUGUI StrengthStats;
+    private Text StrengthStats;
     [SerializeField]
-    private TextMeshProUGUI StaminaStats;
+    private Text StaminaStats;
     [SerializeField]
-    private TextMeshProUGUI DexStats;
+    private Text DexStats;
 
     [SerializeField]
-    private TextMeshProUGUI Level;
+    private Text Level;
     [SerializeField]
-    private TextMeshProUGUI SkillPoints;
+    private Text SkillPoints;
 
     [SerializeField]
     private Text DescriptionText;
@@ -90,12 +90,6 @@ public class SkillsManager : MonoBehaviour {
     bool InteractableMinBtn(int index)
     {
         return MinButtons[index].interactable;
-        //foreach (var btn in MinButtons)
-        //{
-        //    if (!btn.interactable)
-        //        return false;
-        //}
-        //return true;
     }
 
     bool InteractableMaxBtns()
@@ -114,7 +108,6 @@ public class SkillsManager : MonoBehaviour {
         {
             InteractMaxButtons(false);
             InteractMinButtons(true, index);
-            //InteractMinButtons(true); check what stats EXACTLY are to increase
         }
         else
         {

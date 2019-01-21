@@ -28,10 +28,5 @@ public class MovingSpikesController : MonoBehaviour {
                 Destroy(this.gameObject);
             }
         }
-
-        //if(collision.gameObject.tag == "Enemy")
-        //{
-        //    collision.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
-        //}
     }
 }

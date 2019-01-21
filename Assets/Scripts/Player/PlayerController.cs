@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Enemies;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,32 +7,34 @@ public class PlayerController : MonoBehaviour
 {
     [HideInInspector]
     public PlayerLevel PlayerLevel { get; set; }
-    private float speed = 100.0f;
-    private Vector2 jumpSpeedVector = new Vector2(0, 4.0f);
+    private float speed = 200.0f;
+    private Vector2 jumpSpeedVector = new Vector2(0, 7.0f); //4
     private Rigidbody2D rigidbody2d;
     bool facingRight = true;
     [HideInInspector]
     public Animator animator;
     bool isJumping = false;
 
-    private AudioSource audio;
+    private AudioSource audioSource;
 
     public List<GameObject> enemies;
-
-    [SerializeField]
+    
     public Player player;
 
     public bool isFighting = false;
-    private bool isInRange = false;
     bool grounded;
+
     public int clicks = 0;
+
     public LayerMask groundLayer;
+
 
     // Use this for initialization
     void Start()
     {
+        player = GetComponent<Player>();
         PlayerLevel = GetComponent<PlayerLevel>();
-        audio = player.GetComponent<AudioSource>();
+        audioSource = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
@@ -44,8 +47,6 @@ public class PlayerController : MonoBehaviour
         isJumping = !isGrounded();
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
-        //audio.clip = Resources.Load("running") as AudioClip;
-        //audio.Play();
         rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
         if (move > 0 && !facingRight)
             Flip();
@@ -54,13 +55,15 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("MyJump") && !isJumping)
         {
+            clicks = 0;
             Jump();
         }
-        
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (player.curStamina > 10 && !player.inventoryDisplayed)
+            if (player.curStamina > 10 && !player.HUDIsOpen)
             {
+                Debug.Log("HUD is Open: " + player.HUDIsOpen);
                 animator.SetTrigger("Clicked");
                 animator.SetBool("Fight", true);
                 Hit();
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
         if (!animator.GetBool("Fight"))
         {
+            clicks = 0;
             if (player.curStamina < player.stamina)
                 player.curStamina += 1;
         }
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour
         if (isGrounded())
         {
             animator.SetBool("Jump", true);
+            animator.SetBool("Fight", false);
             rigidbody2d.AddForce(jumpSpeedVector, ForceMode2D.Impulse);
         }
     }
@@ -87,7 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 position = transform.position;
         Vector2 direction = Vector2.down;
-        float distance = 0.3f;
+        float distance = 0.5f;
 
         RaycastHit2D hit = Physics2D.Raycast(position, direction, distance, groundLayer);
         if (hit.collider != null)
@@ -111,37 +116,18 @@ public class PlayerController : MonoBehaviour
         GetComponent<BoxCollider2D>().transform.localScale = theScale;
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            enemies.Remove(collision.gameObject);
-        }
-        animator.SetBool("Fight", false);
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Enemy")
-        {
-            animator.SetBool("Fight", true);
-            if (!enemies.Contains(collision.GetComponent<EnemyController>().gameObject))
-                enemies.Add(collision.GetComponent<EnemyController>().gameObject);
-        }
-    }
-
     private void Hit()
     {
-        if (!player.inventoryDisplayed)
+        if (Time.timeScale == 1)
         {
             clicks++;
             if (clicks == 1)
             {
                 player.curStamina -= 10;
-                audio.clip = Resources.Load("Sword1") as AudioClip;
-                audio.volume = 0.6f;
-                audio.PlayOneShot(audio.clip);
-
+                audioSource.clip = Resources.Load("Sword1") as AudioClip;
+                audioSource.volume = 0.6f;
+                audioSource.PlayOneShot(audioSource.clip);
+                return;
             }
             if (clicks == 2)
             {
@@ -149,28 +135,21 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("secondAttack");
                 Vector2 forward = facingRight ? new Vector2(0.5f, 0) : new Vector2(-1, 0);
                 rigidbody2d.velocity = forward * speed * Time.deltaTime;
-                audio.clip = Resources.Load("Sword2") as AudioClip;
-                audio.volume = 0.6f;
-                audio.PlayOneShot(audio.clip);
+                audioSource.clip = Resources.Load("Sword2") as AudioClip;
+                audioSource.volume = 0.6f;
+                audioSource.PlayOneShot(audioSource.clip);
+                return;
             }
             if (clicks == 3)
             {
                 player.curStamina -= 10;
                 animator.SetTrigger("thirdAttack");
-                audio.clip = Resources.Load("Sword1") as AudioClip;
-                audio.volume = 0.6f;
-                audio.PlayOneShot(audio.clip);
+                audioSource.clip = Resources.Load("Sword1") as AudioClip;
+                audioSource.volume = 0.6f;
+                audioSource.PlayOneShot(audioSource.clip);
                 clicks = 0;
+                return;
             }
-        }
-    }
-
-    public void Attack()
-    {
-        foreach (var enemy in enemies)
-        {
-            enemy.GetComponent<EnemyController>().TakeDamage(player.damage);
-            Debug.Log("Damage!");
         }
     }
 }

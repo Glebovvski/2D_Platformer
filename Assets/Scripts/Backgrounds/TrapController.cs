@@ -11,12 +11,12 @@ public class TrapController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        int n = this.gameObject.transform.childCount;
-        traps = new GameObject[n];
-        for (int i = 0; i < n; i++)
+        if (traps != null)
         {
-            traps[i] = this.transform.GetChild(i).gameObject;
-            traps[i].SetActive(false);
+            foreach (var trap in traps)
+            {
+                trap.SetActive(false);
+            }
         }
     }
 

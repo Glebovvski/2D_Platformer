@@ -83,7 +83,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4037975851982532}
-  - component: {fileID: 58743337342895406}
+  - component: {fileID: 1833622537}
   m_Layer: 10
   m_Name: watchRadius
   m_TagString: Untagged
@@ -100,13 +100,13 @@ Transform:
   m_GameObject: {fileID: 1250657136802348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.675, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4208256962602690}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &58743337342895406
-CircleCollider2D:
+--- !u!61 &1833622537
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,9 +118,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.024523586, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 1.07
+  m_Size: {x: 1.9154153, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1545628725915924
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +234,7 @@ RectTransform:
   m_GameObject: {fileID: 1635138124210422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0}
+  m_LocalScale: {x: 0.064124994, y: 0.06336, z: 0}
   m_Children:
   - {fileID: 224071136735467680}
   m_Father: {fileID: 4208256962602690}
@@ -232,7 +242,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.0176, y: 0.182}
+  m_AnchoredPosition: {x: -0.046, y: 0.496}
   m_SizeDelta: {x: 11.6758, y: 1.043}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &223859457747269482
@@ -308,8 +318,8 @@ GameObject:
   - component: {fileID: 61496403928947790}
   - component: {fileID: 50243774697113000}
   - component: {fileID: 95606498949677010}
-  - component: {fileID: 114349149323858880}
-  m_Layer: 10
+  - component: {fileID: 354315882}
+  m_Layer: 11
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -393,18 +403,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.031875324, y: -0.075764015}
+  m_Offset: {x: -0.024892807, y: 0.018464386}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.22, y: 0.32}
+    oldSize: {x: 0.6875, y: 1}
     newSize: {x: 0.22, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.09035847, y: 0.16847196}
+  m_Size: {x: 0.6908951, y: 0.98512065}
   m_EdgeRadius: 0
 --- !u!50 &50243774697113000
 Rigidbody2D:
@@ -446,7 +456,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114349149323858880
+--- !u!114 &354315882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -455,7 +465,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903557169055830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8bbe5985ca7727943958fde69c687f8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 5dcfb2e6a11150446b6babbc321cd846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsStopped: 0

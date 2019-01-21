@@ -8,5 +8,6 @@ namespace Assets.Scripts.Enemies
     interface IEnemy
     {
         void Stop();
+        void Damage(float damageAmount);
     }
 }
