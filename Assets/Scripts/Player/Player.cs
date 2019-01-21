@@ -89,7 +89,8 @@ public class Player : MonoBehaviour {
             }
             if (inventoryDisplayed)
                 Time.timeScale = 0;
-            Inventory.SetActive(inventoryDisplayed);
+            InventoryManager.Instance.OpenInventory();
+            //Inventory.SetActive(inventoryDisplayed);
             Skills.SetActive(skillsDisplayed);
         }
         else if (Input.GetKeyDown(KeyCode.K))
