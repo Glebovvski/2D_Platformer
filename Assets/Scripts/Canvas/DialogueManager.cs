@@ -68,9 +68,9 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             currentTalker.bubbleText.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(0.05f);
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         DisplayNextSentence();
     }
 
