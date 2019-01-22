@@ -34,6 +34,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        dialogue.isDoneOnce = true;
         sentences.Clear();
 
         foreach (DialogueElements sentence in dialogue.sentences)
@@ -76,6 +77,6 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         currentTalker.bubbleCanvas.SetActive(false);
-        Debug.Log("END");
+        
     }
 }

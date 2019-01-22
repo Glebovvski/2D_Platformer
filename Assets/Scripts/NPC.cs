@@ -15,9 +15,7 @@ public class NPC : Talker
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
-        //bubbleText = GetComponentInChildren<Text>();
         npcSprite = GetComponentInChildren<SpriteRenderer>();
-        //bubbleCanvas = GetComponentInChildren<Canvas>();
         dialogue = GetComponent<DialogueTrigger>();
     }
 
@@ -38,7 +36,14 @@ public class NPC : Talker
     {
         if (other.tag == "Player")
         {
-            DialogueManager.Instance.StartDialogue(dialogue.dialogue);
+            if (!dialogue.dialogue.isDoneOnce)
+                dialogue.TriggetDialogue();
         }
+    }
+
+    public void StartDialogueButton()
+    {
+        if (dialogue.dialogue.isDoneOnce)
+            dialogue.TriggetDialogue();
     }
 }

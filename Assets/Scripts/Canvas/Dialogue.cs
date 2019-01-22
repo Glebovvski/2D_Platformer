@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
+    public bool isDoneOnce;
     public DialogueElements[] sentences;
 }
 [System.Serializable]
