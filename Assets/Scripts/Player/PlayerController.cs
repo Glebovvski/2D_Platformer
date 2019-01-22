@@ -68,7 +68,6 @@ public class PlayerController : Talker
         {
             if (player.curStamina > 10 && !player.HUDIsOpen)
             {
-                Debug.Log("HUD is Open: " + player.HUDIsOpen);
                 animator.SetTrigger("Clicked");
                 animator.SetBool("Fight", true);
                 Hit();

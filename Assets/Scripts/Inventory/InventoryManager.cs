@@ -122,6 +122,7 @@ public class InventoryManager : MonoBehaviour
                 ManageItem(item);
                 break;
             case InventoryType.StrengthPotion:
+                damage = player.damage;
                 StrengthDisplay.SetActive(true);
                 player.damage *= 1.5f;
                 StartCoroutine(StartCountdown(item, item.duration));
