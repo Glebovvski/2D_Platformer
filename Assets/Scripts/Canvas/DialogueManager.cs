@@ -29,6 +29,9 @@ public class DialogueManager : MonoBehaviour
 
     private bool paused;
 
+    [SerializeField]
+    private AudioSource typeSound;
+
     private void Start()
     {
         paused = false;
@@ -74,6 +77,7 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             currentTalker.bubbleText.text += letter;
+            typeSound.Play();
             yield return new WaitForSeconds(0.05f);
         }
         yield return new WaitForSeconds(2);
