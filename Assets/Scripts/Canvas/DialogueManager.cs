@@ -27,8 +27,11 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject Speaker;
 
+    private bool paused;
+
     private void Start()
     {
+        paused = false;
         sentences = new Queue<DialogueElements>();
     }
 
@@ -41,7 +44,6 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-        Debug.Log(sentences.Count);
         DisplayNextSentence();
     }
 
@@ -52,14 +54,18 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-        
-        DialogueElements currentDialogue = sentences.Dequeue();
-        string sentence = currentDialogue.sentence;
-        if (currentTalker != null)
+        if (!paused)
+        {
+            DialogueElements currentDialogue = sentences.Dequeue();
+            string sentence = currentDialogue.sentence;
+            if (currentTalker != null)
+                currentTalker.bubbleCanvas.SetActive(false);
+            currentTalker = currentDialogue.Talker;
+            currentTalker.bubbleCanvas.SetActive(true);
+            StartCoroutine(TypeSentence(sentence));
+        }
+        if (paused)
             currentTalker.bubbleCanvas.SetActive(false);
-        currentTalker = currentDialogue.Talker;
-        currentTalker.bubbleCanvas.SetActive(true);
-        StartCoroutine(TypeSentence(sentence));
     }
 
     IEnumerator TypeSentence(string sentence)
@@ -77,6 +83,17 @@ public class DialogueManager : MonoBehaviour
     private void EndDialogue()
     {
         currentTalker.bubbleCanvas.SetActive(false);
-        
+    }
+
+    public void PauseDialogue()
+    {
+        paused = true;
+    }
+
+    public void ResumeDialogue()
+    {
+        paused = false;
+        currentTalker.bubbleCanvas.SetActive(true);
+        DisplayNextSentence();
     }
 }

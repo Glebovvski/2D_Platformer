@@ -11,9 +11,12 @@ public class NPC : Talker
     
     private DialogueTrigger dialogue;
 
+    private bool dialoguePaused;
+
     // Start is called before the first frame update
     void Start()
     {
+        dialoguePaused = false;
         player = FindObjectOfType<PlayerController>();
         npcSprite = GetComponentInChildren<SpriteRenderer>();
         dialogue = GetComponent<DialogueTrigger>();
@@ -36,8 +39,22 @@ public class NPC : Talker
     {
         if (other.tag == "Player")
         {
-            if (!dialogue.dialogue.isDoneOnce)
+            if (!dialogue.dialogue.isDoneOnce || !dialoguePaused)
                 dialogue.TriggetDialogue();
+            if (dialoguePaused)
+            {
+                dialoguePaused = false;
+                dialogue.ResumeDialogue();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Player")
+        {
+            dialoguePaused = true;
+            dialogue.PauseDialogue();
         }
     }
 

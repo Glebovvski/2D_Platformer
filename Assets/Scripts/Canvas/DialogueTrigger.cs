@@ -10,4 +10,14 @@ public class DialogueTrigger : MonoBehaviour
     {
         DialogueManager.Instance.StartDialogue(dialogue);
     }
+
+    public void PauseDialogue()
+    {
+        DialogueManager.Instance.PauseDialogue();
+    }
+
+    public void ResumeDialogue()
+    {
+        DialogueManager.Instance.ResumeDialogue();
+    }
 }
