@@ -15,10 +15,12 @@ public class DoorController : MonoBehaviour
 
     private int counts=0;
 
+    public bool isDoorOpened;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        isDoorOpened = false;
     }
 
     // Update is called once per frame
@@ -27,6 +29,7 @@ public class DoorController : MonoBehaviour
         var keys = Player.GetComponent<Player>().inventoryList.Any(x => x.Key == InventoryType.Key && x.Value == 3);
         if (keys)
         {
+            isDoorOpened = true;
             if (counts == 0)
             {
                 counts++;
@@ -34,6 +37,24 @@ public class DoorController : MonoBehaviour
 
                 StartCoroutine(Wait());
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (isDoorOpened)
+        {
+            if (other.tag == "Player")
+                ToTheNextLevelManager.Instance.OpenPanel();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (isDoorOpened)
+        {
+            if (other.tag == "Player")
+                ToTheNextLevelManager.Instance.ClosePanel();
         }
     }
 
