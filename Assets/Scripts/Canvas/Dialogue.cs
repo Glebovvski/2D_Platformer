@@ -5,8 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    public string name;
+    public DialogueElements[] sentences;
+}
+[System.Serializable]
+public class DialogueElements
+{
+    public Talker Talker;
 
-    [TextArea(3,10)]
-    public string[] sentences;
+    [TextArea(3, 10)]
+    public string sentence;
 }

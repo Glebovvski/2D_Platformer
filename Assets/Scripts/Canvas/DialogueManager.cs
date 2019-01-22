@@ -22,25 +22,25 @@ public class DialogueManager : MonoBehaviour
         _instance = this;
     }
 
-    private Queue<string> sentences;
+    private Queue<DialogueElements> sentences;
+    private Talker currentTalker;
 
-    [SerializeField]
-    private Text sentenceText;
+    private GameObject Speaker;
 
     private void Start()
     {
-        sentences = new Queue<string>();
+        sentences = new Queue<DialogueElements>();
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
         sentences.Clear();
 
-        foreach (string sentence in dialogue.sentences)
+        foreach (DialogueElements sentence in dialogue.sentences)
         {
             sentences.Enqueue(sentence);
         }
-
+        Debug.Log(sentences.Count);
         DisplayNextSentence();
     }
 
@@ -51,24 +51,31 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
-        string sentence = sentences.Dequeue();
-        StopAllCoroutines();    
+        
+        DialogueElements currentDialogue = sentences.Dequeue();
+        string sentence = currentDialogue.sentence;
+        if (currentTalker != null)
+            currentTalker.bubbleCanvas.SetActive(false);
+        currentTalker = currentDialogue.Talker;
+        currentTalker.bubbleCanvas.SetActive(true);
         StartCoroutine(TypeSentence(sentence));
     }
 
     IEnumerator TypeSentence(string sentence)
     {
-        sentenceText.text = "";
+        currentTalker.bubbleText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            sentenceText.text += letter;
+            currentTalker.bubbleText.text += letter;
             yield return null;
         }
+        yield return new WaitForSeconds(1);
+        DisplayNextSentence();
     }
 
     private void EndDialogue()
     {
-
+        currentTalker.bubbleCanvas.SetActive(false);
+        Debug.Log("END");
     }
 }

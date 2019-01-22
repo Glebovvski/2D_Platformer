@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Talker
 {
     [HideInInspector]
     public PlayerLevel PlayerLevel { get; set; }
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     bool isJumping = false;
+
+    //[SerializeField]
+    //public Text bubbleText;
 
     private AudioSource audioSource;
 
@@ -27,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public int clicks = 0;
 
     public LayerMask groundLayer;
-
+    
 
     // Use this for initialization
     void Start()
@@ -39,6 +43,7 @@ public class PlayerController : MonoBehaviour
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
+        //bubbleCanvas = GetComponentInChildren<Image>();
     }
 
     // Update is called once per frame
@@ -114,6 +119,10 @@ public class PlayerController : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
         GetComponent<BoxCollider2D>().transform.localScale = theScale;
+        if (!facingRight)
+            bubbleText.transform.rotation = new Quaternion(0, 180, 0, 0);
+        if(facingRight)
+            bubbleText.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     private void Hit()
