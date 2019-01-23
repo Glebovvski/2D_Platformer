@@ -148,5 +148,6 @@ public class Player : MonoBehaviour {
     public void AddCoin(int value)
     {
         coins += value;
+        //Debug.Log("Player has " + coins + " coins");
     }
 }
