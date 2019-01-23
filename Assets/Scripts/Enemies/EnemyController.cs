@@ -30,7 +30,9 @@ public class EnemyController : MonoBehaviour, IEnemy {
 
     [SerializeField]
     private Canvas canvas;
-
+    
+    public CoinController coin;
+    
     private void Awake()
     {
         player = FindObjectOfType<PlayerController>();
@@ -49,6 +51,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
         {
             animator.SetBool("PlayerSpotted", false);
             animator.SetBool("Dead", true);
+
         }
         healthBar.fillAmount = curHealth / maxHealth;
 

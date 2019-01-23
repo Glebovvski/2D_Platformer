@@ -475,6 +475,7 @@ MonoBehaviour:
   Experience: 15
   player: {fileID: 0}
   canvas: {fileID: 223859457747269482}
+  coin: {fileID: 6503392866789567718, guid: d8482abd80c02564a8b4aa2ef3f5aaa8, type: 3}
 --- !u!1 &3451554517721267719
 GameObject:
   m_ObjectHideFlags: 0

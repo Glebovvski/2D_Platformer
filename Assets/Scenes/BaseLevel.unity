@@ -1152,11 +1152,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 964023228}
-    - target: {fileID: 61496403928947790, guid: 544bf3d8cb4db13448970d35574d1c89,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.9375
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 544bf3d8cb4db13448970d35574d1c89, type: 3}
 --- !u!1 &136908743
@@ -4112,7 +4107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.706459, y: -4.8536205, z: -10.310547}
+  m_LocalPosition: {x: -8.962536, y: -4.8536205, z: -10.310547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515078207}
@@ -9356,7 +9351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599417496}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.022964, y: -5.8659945, z: -10.310547}
+  m_LocalPosition: {x: 11.952751, y: -5.8659945, z: -10.310547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 451282351}
@@ -16313,7 +16308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00001682675, y: 0.000012788186}
+  m_AnchoredPosition: {x: 0.00004952591, y: 0.0000049770383}
   m_SizeDelta: {x: 0, y: 498.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1517460379
@@ -16613,7 +16608,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 77735112}
   m_HandleRect: {fileID: 77735111}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -24446,7 +24441,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097783354}
-  m_LocalRotation: {x: -0.014052962, y: 0.5839496, z: 0.010111096, w: 0.81160533}
+  m_LocalRotation: {x: -0.014213162, y: 0.583948, z: 0.010226369, w: 0.81160223}
   m_LocalPosition: {x: -12.3652935, y: -5.406743, z: -10.328376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

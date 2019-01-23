@@ -46,6 +46,8 @@ public class Player : MonoBehaviour {
 
     public bool HUDIsOpen;
 
+    private int coins = 0;
+
     // Use this for initialization
     void Start ()
     {
@@ -141,5 +143,10 @@ public class Player : MonoBehaviour {
             }
         }
 
+    }
+
+    public void AddCoin(int value)
+    {
+        coins += value;
     }
 }
