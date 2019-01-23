@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class NPC : Talker
 {
@@ -13,9 +14,13 @@ public class NPC : Talker
 
     private bool dialoguePaused;
 
+    [SerializeField]
+    private CinemachineVirtualCamera groupCamera;
+
     // Start is called before the first frame update
     void Start()
     {
+        groupCamera.Priority = 9;
         dialoguePaused = false;
         player = FindObjectOfType<PlayerController>();
         npcSprite = GetComponentInChildren<SpriteRenderer>();
@@ -39,6 +44,8 @@ public class NPC : Talker
     {
         if (other.tag == "Player")
         {
+            groupCamera.Priority = 11;
+
             if (!dialogue.dialogue.isDoneOnce || !dialoguePaused)
                 dialogue.TriggetDialogue();
             if (dialoguePaused)
@@ -53,6 +60,8 @@ public class NPC : Talker
     {
         if (other.tag == "Player")
         {
+            groupCamera.Priority = 9;
+
             dialoguePaused = true;
             dialogue.PauseDialogue();
         }
