@@ -24,7 +24,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Player player;
+    public Player player;
 
     [SerializeField]
     private Transform content;

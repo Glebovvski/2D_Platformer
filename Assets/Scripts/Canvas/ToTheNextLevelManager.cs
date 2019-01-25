@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ToTheNextLevelManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class ToTheNextLevelManager : MonoBehaviour
 
     public void OpenPanel()
     {
+        InventoryManager.Instance.player.HUDIsOpen = true;
         panel.SetActive(true);
     }
 
@@ -42,5 +44,6 @@ public class ToTheNextLevelManager : MonoBehaviour
     public void LeaveBtn()
     {
         //LoadScene stuff
+        SceneManager.LoadScene("LevelPick");
     }
 }
