@@ -34,8 +34,12 @@ public class ScrollRectSnap : MonoBehaviour
 
         for (int j = 0; j < buttons.Length; j++)
         {
+            buttons[j].enabled = false;
             if (minDistance == distance[j])
+            {
                 minBtnNum = j;
+                buttons[j].enabled = true;
+            }
         }
 
         if (!dragging)

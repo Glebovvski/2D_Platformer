@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SkillsManager : MonoBehaviour {
 
-    [SerializeField]
+    
     private PlayerController player;
 
     private const float baseHealth = 100;
@@ -46,6 +46,7 @@ public class SkillsManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        player = FindObjectOfType<PlayerController>();
         InteractMinButtons(false);
         InteractMaxButtons(false);
         ConfirmBtn.interactable = false;

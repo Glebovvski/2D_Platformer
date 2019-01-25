@@ -45,5 +45,6 @@ public class ToTheNextLevelManager : MonoBehaviour
     {
         //LoadScene stuff
         SceneManager.LoadScene("LevelPick");
+        panel.SetActive(false);
     }
 }
