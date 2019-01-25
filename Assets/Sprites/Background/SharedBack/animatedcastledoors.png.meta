@@ -38,7 +38,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -52,7 +52,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 96
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,15 +119,15 @@ TextureImporter:
         x: 0
         y: 0
         width: 64
-        height: 82
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4e0a60c6368f324b96749bfce39a90f
+      spriteID: 5e39f3a4608193741986c740253efd08
       vertices: []
       indices: 
       edges: []
@@ -136,18 +136,18 @@ TextureImporter:
       name: animatedcastledoors_1
       rect:
         serializedVersion: 2
-        x: 67
+        x: 64
         y: 0
-        width: 57
-        height: 70
+        width: 64
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4741cd1c688afb41aaa4e390dec248a
+      spriteID: 144ba9ad0e77800418a6f0f64ce04034
       vertices: []
       indices: 
       edges: []
@@ -156,18 +156,38 @@ TextureImporter:
       name: animatedcastledoors_2
       rect:
         serializedVersion: 2
-        x: 131
+        x: 128
         y: 0
-        width: 57
-        height: 65
+        width: 64
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a6b08c585abb2246a4803bc2fe207ea
+      spriteID: ea88e887ef0813d488762f536e439c80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: animatedcastledoors_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc2012aedc84af43b8bde460264a1c4
       vertices: []
       indices: 
       edges: []
@@ -176,38 +196,38 @@ TextureImporter:
       name: animatedcastledoors_4
       rect:
         serializedVersion: 2
-        x: 195
+        x: 256
         y: 0
-        width: 58
-        height: 62
+        width: 64
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 290889493a5239a4bbe61b31704fedb3
+      spriteID: 6f5f4c7ba4c984940a5ece810263ca90
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: animatedcastledoors_6
+      name: animatedcastledoors_5
       rect:
         serializedVersion: 2
-        x: 323
+        x: 320
         y: 0
-        width: 57
-        height: 70
+        width: 64
+        height: 96
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 528a271affa78f343a19c612eb5e2fa9
+      spriteID: e59d695d296e6294b9ef2f7ec00f9407
       vertices: []
       indices: 
       edges: []
