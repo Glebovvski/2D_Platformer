@@ -12,7 +12,7 @@ public class InventoryManager : Manager
         get
         {
             if (_instance == null)
-                Debug.Log("No Inventory Managet Instance");
+                Debug.Log("No Inventory Manager Instance");
 
             return _instance;
         }
@@ -28,71 +28,33 @@ public class InventoryManager : Manager
 
     public Text InventoryDescription;
 
-    private float currCountdownValueForShield;
-    private float currCountdownValueForStrength;
-
-    [SerializeField]
-    private GameObject StrengthDisplay;
-    [SerializeField]
-    private GameObject ShieldDisplay;
-
-    //[SerializeField]
-    //private GameObject Inventory;
-
-    private bool inventoryOpened;
-
-    float damage;
-
     // Use this for initialization
     void Start()
     {
-        //player = FindObjectOfType<Player>();
-        inventoryOpened = false;
-        damage = UICanvas.Instance.player.Damage; //player.damage;
-        StrengthDisplay.SetActive(false);
-        ShieldDisplay.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OpenInventory()
     {
-
-    }
-
-    public override void SetActive(bool active)
-    {
-        base.SetActive(active);
-        UICanvas.Instance.player.HUDIsOpen = active;
-        if (active)
+        if (UICanvas.Instance.inventoryOpened || UICanvas.Instance.skillsOpened)
         {
-            Time.timeScale = 0;
-            NavigationManager.Instance.SetActive(active);
-            SkillsManager.Instance.SetActive(!active);
-        }
-        else
-        {
+            UICanvas.Instance.inventoryOpened = false;
+            UICanvas.Instance.skillsOpened = false;
+            SetActive(UICanvas.Instance.inventoryOpened);
+            SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
+            NavigationManager.Instance.SetActive(false);
             Time.timeScale = 1;
-            NavigationManager.Instance.SetActive(active);
+            UICanvas.Instance.player.HUDIsOpen = false;
+        }
+        else if (!UICanvas.Instance.inventoryOpened)
+        {
+            UICanvas.Instance.inventoryOpened = true;
+            UICanvas.Instance.skillsOpened = false;
+            SetActive(UICanvas.Instance.inventoryOpened);
+            SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
+            NavigationManager.Instance.SetActive(true);
+            Time.timeScale = 0;
         }
     }
-
-    //public void OpenInventory()
-    //{
-    //    inventoryOpened = !inventoryOpened;
-    //    UICanvas.Instance.player.inventoryDisplayed = inventoryOpened;
-    //    UICanvas.Instance.player.HUDIsOpen = inventoryOpened;
-    //    if (inventoryOpened)
-    //    {
-    //        Time.timeScale = 0;
-    //    }
-    //    else
-    //    {
-    //        Time.timeScale = 1;
-    //    }
-    //    Inventory.SetActive(inventoryOpened);
-    //    NavigationManager.Instance.SetActive(inventoryOpened);
-    //    SkillsManager.Instance.SetActive(false);
-    //}
 
     public void AddItem(InventoryType item)
     {
@@ -115,33 +77,6 @@ public class InventoryManager : Manager
         }
     }
 
-    public void UseItem(InventoryItem item)
-    {
-        switch (item.itemType)
-        {
-            case InventoryType.HealthPotion:
-                UICanvas.Instance.player.curHealth += 30;
-                ManageItem(item);
-                break;
-            case InventoryType.Shield:
-                ShieldDisplay.SetActive(true);
-                UICanvas.Instance.player.isShielded = true;
-                UICanvas.Instance.player.Shield.Play();
-                StartCoroutine(StartCountdown(item, item.duration));
-                ManageItem(item);
-                break;
-            case InventoryType.StrengthPotion:
-                damage = UICanvas.Instance.player.Damage;
-                StrengthDisplay.SetActive(true);
-                UICanvas.Instance.player.Damage *= 1.5f;
-                StartCoroutine(StartCountdown(item, item.duration));
-                ManageItem(item);
-                break;
-            default:
-                break;
-        }
-    }
-
     public void ItemDescription(InventoryItem item)
     {
         switch (item.itemType)
@@ -161,60 +96,5 @@ public class InventoryManager : Manager
             default:
                 break;
         }
-    }
-
-    void ManageItem(InventoryItem item)
-    {
-        UICanvas.Instance.player.inventoryList[item.itemType]--;
-        item.itemCount.text = UICanvas.Instance.player.inventoryList[item.itemType].ToString();
-        if (UICanvas.Instance.player.inventoryList[item.itemType] == 0)
-        {
-            UICanvas.Instance.player.inventoryList.Remove(item.itemType);
-            Destroy(item.gameObject);
-        }
-    }
-
-    public IEnumerator StartCountdown(InventoryItem item, float countdownValue = 10)
-    {
-        Image durStrenght = StrengthDisplay.transform.Find("Duration").GetComponent<Image>();
-        Image durShield = ShieldDisplay.transform.Find("Duration").GetComponent<Image>();
-        if (item.itemType == InventoryType.Shield)
-        {
-            currCountdownValueForShield = countdownValue;
-            while (currCountdownValueForShield >= 0)
-            {
-                if (item.itemType == InventoryType.Shield)
-                    durShield.fillAmount = currCountdownValueForShield / countdownValue;
-                yield return new WaitForSeconds(1.0f);
-                currCountdownValueForShield--;
-
-                if (currCountdownValueForShield == 0)
-                {
-                    UICanvas.Instance.player.Shield.Stop();
-                    UICanvas.Instance.player.isShielded = false;
-                    ShieldDisplay.SetActive(false);
-                }
-            }
-        }
-
-        if (item.itemType == InventoryType.StrengthPotion)
-        {
-            currCountdownValueForStrength = countdownValue;
-            while (currCountdownValueForStrength >= 0)
-            {
-                if (item.itemType == InventoryType.StrengthPotion)
-                    durStrenght.fillAmount = currCountdownValueForStrength / countdownValue;
-                yield return new WaitForSeconds(1.0f);
-                currCountdownValueForStrength--;
-
-                if (currCountdownValueForStrength == 0)
-                {
-                    UICanvas.Instance.player.Damage = damage;
-                    StrengthDisplay.SetActive(false);
-                }
-            }
-        }
-
-
-    }
+    } 
 }

@@ -82,23 +82,7 @@ public class SkillsManager : Manager {
         Level.text = PlayerLevelManager.Instance.Level.ToString();
         SkillPoints.text = PlayerLevelManager.Instance.SkillPoints.ToString();
 	}
-
-    public override void SetActive(bool active)
-    {
-        base.SetActive(active);
-        UICanvas.Instance.player.HUDIsOpen = active;
-        if (active)
-        {
-            Time.timeScale = 0;
-            NavigationManager.Instance.SetActive(active);
-            InventoryManager.Instance.SetActive(!active);
-        }
-        else
-        {
-            Time.timeScale = 1;
-            NavigationManager.Instance.SetActive(active);
-        }
-    }
+    
 
     private void InteractMinButtons(bool interact)
     {

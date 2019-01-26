@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : Talker
 {
-    [HideInInspector]
-    public PlayerLevel PlayerLevel { get; set; }
+    //[HideInInspector]
+    //public PlayerLevel PlayerLevel { get; set; }
     private float speed = 200.0f;
     private Vector2 jumpSpeedVector = new Vector2(0, 7.0f); //4
     private Rigidbody2D rigidbody2d;
@@ -37,19 +37,20 @@ public class PlayerController : Talker
     void Start()
     {
         player = GetComponent<Player>();
-        PlayerLevel = GetComponent<PlayerLevel>();
+        //PlayerLevel = GetComponent<PlayerLevel>();
         audioSource = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
-        //bubbleCanvas = GetComponentInChildren<Image>();
+        bubbleCanvas = GetComponentInChildren<GameObject>();
+        bubbleText = GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        isJumping = !isGrounded();
+        isJumping = !IsGrounded();
         float move = Input.GetAxis("Horizontal");
         animator.SetFloat("Speed", Mathf.Abs(move));
         rigidbody2d.velocity = new Vector2(move * speed * Time.deltaTime, rigidbody2d.velocity.y);
@@ -84,7 +85,7 @@ public class PlayerController : Talker
 
     private void Jump()
     {
-        if (isGrounded())
+        if (IsGrounded())
         {
             animator.SetBool("Jump", true);
             animator.SetBool("Fight", false);
@@ -92,7 +93,7 @@ public class PlayerController : Talker
         }
     }
 
-    private bool isGrounded()
+    private bool IsGrounded()
     {
         Vector2 position = transform.position;
         Vector2 direction = Vector2.down;

@@ -27,8 +27,8 @@ public class ToTheNextLevelManager : Manager
         SetActive(false);
     }
 
-    [SerializeField]
-    private GameObject panel;
+    //[SerializeField]
+    //private GameObject panel;
 
     public void OpenPanel()
     {

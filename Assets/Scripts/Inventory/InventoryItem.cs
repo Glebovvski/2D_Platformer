@@ -22,7 +22,7 @@ public class InventoryItem : MonoBehaviour {
 
     public void OnMouseDown()
     {
-        InventoryManager.Instance.UseItem(this);
+        UICanvas.Instance.UseItem(this);
     }
 
     public void OnMouseEnter()

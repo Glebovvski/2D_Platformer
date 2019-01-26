@@ -8,16 +8,4 @@ public class Manager : MonoBehaviour
     {
         this.gameObject.SetActive(active);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            InventoryManager.Instance.SetActive(!InventoryManager.Instance.gameObject.activeInHierarchy);
-        }
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            SkillsManager.Instance.SetActive(!SkillsManager.Instance.gameObject.activeInHierarchy);
-        }
-    }
 }

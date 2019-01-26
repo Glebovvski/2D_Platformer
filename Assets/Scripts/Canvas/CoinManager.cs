@@ -21,9 +21,13 @@ public class CoinManager : Manager
     {
         _instance = this;
     }
-
-    [SerializeField]
+    
     private Text coinAmountText;
+
+    private void Start()
+    {
+        coinAmountText = GetComponentInChildren<Text>();
+    }
 
     public void UpdateCoinsAmount(int value)
     {
