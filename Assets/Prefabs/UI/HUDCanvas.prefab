@@ -3440,8 +3440,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1513944083}
-        m_MethodName: OpenInventory
+      - m_Target: {fileID: 4702538072981642296}
+        m_MethodName: InventoryOperate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4849,7 +4849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366ad7150dca8a443928ad4d9d6c0f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  XpImage: {fileID: 4702538072705986015}
+  XpImage: {fileID: 4702538073496045465}
   XpText: {fileID: 4702538073616131376}
   LevelUpImage: {fileID: 4702538072871784316}
   LevelUpText: {fileID: 4702538072158991967}
@@ -6064,7 +6064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000024540721, y: 0.000021884625}
+  m_AnchoredPosition: {x: -0.000026785923, y: 0.000012858468}
   m_SizeDelta: {x: 0, y: 498.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4702538073085468464

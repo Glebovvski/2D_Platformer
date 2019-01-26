@@ -37,13 +37,15 @@ public class InventoryManager : Manager
     {
         if (UICanvas.Instance.inventoryOpened || UICanvas.Instance.skillsOpened)
         {
-            UICanvas.Instance.inventoryOpened = false;
-            UICanvas.Instance.skillsOpened = false;
-            SetActive(UICanvas.Instance.inventoryOpened);
-            SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
-            NavigationManager.Instance.SetActive(false);
-            Time.timeScale = 1;
-            UICanvas.Instance.player.HUDIsOpen = false;
+            UICanvas.Instance.InventoryOperate();
+            //PlayerStatsManager.Instance.SetActive(false);
+            //UICanvas.Instance.inventoryOpened = false;
+            //UICanvas.Instance.skillsOpened = false;
+            //SetActive(UICanvas.Instance.inventoryOpened);
+            //SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
+            //NavigationManager.Instance.SetActive(false);
+            //Time.timeScale = 1;
+            //UICanvas.Instance.player.HUDIsOpen = false;
         }
         else if (!UICanvas.Instance.inventoryOpened)
         {
@@ -53,6 +55,7 @@ public class InventoryManager : Manager
             SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
             NavigationManager.Instance.SetActive(true);
             Time.timeScale = 0;
+            PlayerStatsManager.Instance.SetActive(true);
         }
     }
 

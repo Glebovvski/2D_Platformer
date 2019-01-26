@@ -63,21 +63,11 @@ public class UICanvas : Manager {
     void Update () {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            inventoryOpened = !inventoryOpened;
-            skillsOpened = false;
-            InventoryManager.Instance.SetActive(inventoryOpened);
-            NavigationManager.Instance.SetActive(inventoryOpened);
-            SkillsManager.Instance.SetActive(skillsOpened);
-            Opened();
+            InventoryOperate();
         }
         else if (Input.GetKeyDown(KeyCode.K))
         {
-            skillsOpened = !skillsOpened;
-            inventoryOpened = false;
-            SkillsManager.Instance.SetActive(skillsOpened);
-            NavigationManager.Instance.SetActive(skillsOpened);
-            InventoryManager.Instance.SetActive(inventoryOpened);
-            Opened();
+            SkillsOperate();
         }
     }
 
@@ -86,13 +76,35 @@ public class UICanvas : Manager {
         if (inventoryOpened || skillsOpened)
         {
             player.HUDIsOpen = true;
+            PlayerStatsManager.Instance.SetActive(false);
             Time.timeScale = 0;
         }
         else if(!inventoryOpened && !skillsOpened)
         {
             player.HUDIsOpen = false;
+            PlayerStatsManager.Instance.SetActive(true);
             Time.timeScale = 1;
         }
+    }
+
+    public void InventoryOperate()
+    {
+        inventoryOpened = !inventoryOpened;
+        skillsOpened = false;
+        InventoryManager.Instance.SetActive(inventoryOpened);
+        NavigationManager.Instance.SetActive(inventoryOpened);
+        SkillsManager.Instance.SetActive(skillsOpened);
+        Opened();
+    }
+
+    public void SkillsOperate()
+    {
+        skillsOpened = !skillsOpened;
+        inventoryOpened = false;
+        SkillsManager.Instance.SetActive(skillsOpened);
+        NavigationManager.Instance.SetActive(skillsOpened);
+        InventoryManager.Instance.SetActive(inventoryOpened);
+        Opened();
     }
 
     void ManageItem(InventoryItem item)
@@ -146,9 +158,7 @@ public class UICanvas : Manager {
                     durShield.fillAmount = currCountdownValueForShield / countdownValue;
 
                 yield return new WaitForSeconds(1.0f);
-                Debug.Log("Curr countdown value for shield: " + currCountdownValueForShield);
                 currCountdownValueForShield--;
-                Debug.Log("Curr countdown value for shield: " + currCountdownValueForShield);
                 if (currCountdownValueForShield == 0)
                 {
                     UICanvas.Instance.player.Shield.Stop();

@@ -43,8 +43,8 @@ public class PlayerController : Talker
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
-        bubbleCanvas = GetComponentInChildren<GameObject>();
-        bubbleText = GetComponentInChildren<Text>();
+        //bubbleCanvas = GetComponentInChildren<GameObject>();
+        //bubbleText = GetComponentInChildren<Text>();
     }
 
     // Update is called once per frame
