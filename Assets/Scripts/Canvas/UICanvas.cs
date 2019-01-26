@@ -2,19 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UICanvas : MonoBehaviour {
+public class UICanvas : Manager {
 
-    UICanvas Instance;
+    private static UICanvas _instance;
 
-	// Use this for initialization
-	void Start () {
-        if (Instance == null)
-            Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    public static UICanvas Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("UICanvas instance is null");
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    [HideInInspector]
+    public Player player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

@@ -14,7 +14,7 @@ public class DeathBehaviour : StateMachineBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         var enemy = animator.GetComponent<EnemyController>();
-        enemy.player.PlayerLevel.GainXP(enemy.Experience);
+        PlayerLevelManager.Instance.GainXP(enemy.Experience);
         Destroy(enemy.gameObject);
         int amountOfCoins = Random.Range(2, 4);
         for (int i = 0; i < amountOfCoins; i++)

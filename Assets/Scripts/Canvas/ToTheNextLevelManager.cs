@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ToTheNextLevelManager : MonoBehaviour
+public class ToTheNextLevelManager : Manager
 {
     private static ToTheNextLevelManager _instance;
 
@@ -24,7 +24,7 @@ public class ToTheNextLevelManager : MonoBehaviour
 
     private void Start()
     {
-        ClosePanel();
+        SetActive(false);
     }
 
     [SerializeField]
@@ -32,19 +32,20 @@ public class ToTheNextLevelManager : MonoBehaviour
 
     public void OpenPanel()
     {
-        InventoryManager.Instance.player.HUDIsOpen = true;
-        panel.SetActive(true);
+        //InventoryManager.Instance.player.HUDIsOpen = true;
+        UICanvas.Instance.player.HUDIsOpen = true;
+        SetActive(true);
     }
 
     public void ClosePanel()
     {
-        panel.SetActive(false);
+        SetActive(false);
     }
 
     public void LeaveBtn()
     {
         //LoadScene stuff
         SceneManager.LoadScene("LevelPick");
-        panel.SetActive(false);
+        SetActive(false);
     }
 }

@@ -24,7 +24,7 @@ public class Attack : MonoBehaviour
             if (canDamage)
             {
                 //animator.SetBool("Fight", true);
-                enemy.Damage(player.damage);
+                enemy.Damage(player.Damage);
                 canDamage = false;
                 StartCoroutine(Cooldown());
             }

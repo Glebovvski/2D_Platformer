@@ -3,7 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerLevel : MonoBehaviour {
+public class PlayerLevelManager : Manager
+{
+    private static PlayerLevelManager _instance;
+
+    public static PlayerLevelManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("PlayerLevel Manager instance is null");
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     public int Level { get; set; }
     public int XP { get; set; }
@@ -36,7 +53,6 @@ public class PlayerLevel : MonoBehaviour {
 
     public void GainXP(int amount)
     {
-        
         XP += amount;
         while (XP >= RequiredXP)
         {

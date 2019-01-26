@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinManager : MonoBehaviour
+public class CoinManager : Manager
 {
     private static CoinManager _instance;
 

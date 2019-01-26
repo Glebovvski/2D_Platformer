@@ -4,9 +4,25 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillsManager : MonoBehaviour {
+public class SkillsManager : Manager {
 
-    
+    private static SkillsManager _instance;
+
+    public static SkillsManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("Skill Manager instance is null");
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
     private PlayerController player;
 
     private const float baseHealth = 100;
@@ -46,7 +62,7 @@ public class SkillsManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        player = FindObjectOfType<PlayerController>();
+        player = UICanvas.Instance.player.GetComponent<PlayerController>();//FindObjectOfType<PlayerController>();
         InteractMinButtons(false);
         InteractMaxButtons(false);
         ConfirmBtn.interactable = false;
@@ -54,18 +70,35 @@ public class SkillsManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
             InteractMaxButtons(true);
         }
 
-        HealthStats.text = player.player.health.ToString();
-        StrengthStats.text = player.player.damage.ToString();
-        StaminaStats.text = player.player.stamina.ToString();
-        DexStats.text = player.player.dexterity.ToString();
-        Level.text = player.PlayerLevel.Level.ToString();
-        SkillPoints.text = player.PlayerLevel.SkillPoints.ToString();
+        HealthStats.text = UICanvas.Instance.player.Health.ToString();
+        StrengthStats.text = UICanvas.Instance.player.Damage.ToString();
+        StaminaStats.text = UICanvas.Instance.player.stamina.ToString();
+        DexStats.text = UICanvas.Instance.player.Dexterity.ToString();
+        Level.text = PlayerLevelManager.Instance.Level.ToString();
+        SkillPoints.text = PlayerLevelManager.Instance.SkillPoints.ToString();
 	}
+
+    public override void SetActive(bool active)
+    {
+        base.SetActive(active);
+        UICanvas.Instance.player.HUDIsOpen = active;
+        if (active)
+        {
+            Time.timeScale = 0;
+            NavigationManager.Instance.SetActive(active);
+            InventoryManager.Instance.SetActive(!active);
+        }
+        else
+        {
+            Time.timeScale = 1;
+            NavigationManager.Instance.SetActive(active);
+        }
+    }
 
     private void InteractMinButtons(bool interact)
     {
@@ -105,7 +138,7 @@ public class SkillsManager : MonoBehaviour {
 
     void CheckSPLeft(int index)
     {
-        if (player.PlayerLevel.SkillPoints == 0)
+        if (PlayerLevelManager.Instance.SkillPoints == 0)
         {
             InteractMaxButtons(false);
             InteractMinButtons(true, index);
@@ -119,10 +152,10 @@ public class SkillsManager : MonoBehaviour {
 
     public void IncreaseHealth()
     {
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
-            player.player.health *= healthIncreaser;
-            player.PlayerLevel.SkillPoints--;
+            UICanvas.Instance.player.Health *= healthIncreaser;
+            PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(0); //check which stat was increased
             ConfirmBtn.interactable = true;
         }
@@ -132,9 +165,9 @@ public class SkillsManager : MonoBehaviour {
     {
         if (InteractableMinBtn(0))
         {
-            player.player.health /= healthIncreaser;
-            player.PlayerLevel.SkillPoints++;
-            if (player.player.health != baseHealth)
+            UICanvas.Instance.player.Health /= healthIncreaser;
+            PlayerLevelManager.Instance.SkillPoints++;
+            if (UICanvas.Instance.player.Health != baseHealth)
                 CheckSPLeft(0);
             else InteractMinButtons(false, 0);
             ConfirmBtn.interactable = true;
@@ -143,10 +176,10 @@ public class SkillsManager : MonoBehaviour {
 
     public void IncreaseStamina()
     {
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
-            player.player.stamina *= staminaIncreaser;
-            player.PlayerLevel.SkillPoints--;
+            UICanvas.Instance.player.stamina *= staminaIncreaser;
+            PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(2);
             ConfirmBtn.interactable = true;
         }
@@ -156,9 +189,9 @@ public class SkillsManager : MonoBehaviour {
     {
         if (InteractableMinBtn(2))
         {
-            player.player.stamina /= staminaIncreaser;
-            player.PlayerLevel.SkillPoints++;
-            if (player.player.stamina != baseStamina)
+            UICanvas.Instance.player.stamina /= staminaIncreaser;
+            PlayerLevelManager.Instance.SkillPoints++;
+            if (UICanvas.Instance.player.stamina != baseStamina)
                 CheckSPLeft(2);
             else InteractMinButtons(false, 2);
             ConfirmBtn.interactable = true;
@@ -167,10 +200,10 @@ public class SkillsManager : MonoBehaviour {
 
     public void IncreaseStrength()
     {
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
-            player.player.damage *= strengthIncreaser;
-            player.PlayerLevel.SkillPoints--;
+            UICanvas.Instance.player.Damage *= strengthIncreaser;
+            PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(1);
             ConfirmBtn.interactable = true;
         }
@@ -180,9 +213,9 @@ public class SkillsManager : MonoBehaviour {
     {
         if (InteractableMinBtn(1))
         {
-            player.player.damage /= strengthIncreaser;
-            player.PlayerLevel.SkillPoints++;
-            if (player.player.damage != baseStrength)
+            UICanvas.Instance.player.Damage /= strengthIncreaser;
+            PlayerLevelManager.Instance.SkillPoints++;
+            if (UICanvas.Instance.player.Damage != baseStrength)
                 CheckSPLeft(1);
             else InteractMinButtons(false, 1);
             ConfirmBtn.interactable = true;
@@ -191,10 +224,10 @@ public class SkillsManager : MonoBehaviour {
 
     public void IncreaseDexterity()
     {
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
-            player.player.dexterity *= dexterityIncreaser;
-            player.PlayerLevel.SkillPoints--;
+            UICanvas.Instance.player.Dexterity *= dexterityIncreaser;
+            PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(3);
             ConfirmBtn.interactable = true;
         }
@@ -204,9 +237,9 @@ public class SkillsManager : MonoBehaviour {
     {
         if (InteractableMinBtn(3))
         {
-            player.player.dexterity /= dexterityIncreaser;
-            player.PlayerLevel.SkillPoints++;
-            if (player.player.dexterity != baseDext)
+            UICanvas.Instance.player.Dexterity /= dexterityIncreaser;
+            PlayerLevelManager.Instance.SkillPoints++;
+            if (UICanvas.Instance.player.Dexterity != baseDext)
                 CheckSPLeft(3);
             else InteractMinButtons(false, 3);
             ConfirmBtn.interactable = true;
@@ -215,14 +248,14 @@ public class SkillsManager : MonoBehaviour {
 
     public void Confirm()
     {
-        PlayerPrefs.SetInt("SkillPoints", player.PlayerLevel.SkillPoints);
-        PlayerPrefs.SetFloat("Health", player.player.health);
-        PlayerPrefs.SetFloat("Stamina", player.player.stamina);
-        PlayerPrefs.SetFloat("Strength", player.player.damage);
-        PlayerPrefs.SetFloat("Dexterity", player.player.dexterity);
+        PlayerPrefs.SetInt("SkillPoints", PlayerLevelManager.Instance.SkillPoints);
+        PlayerPrefs.SetFloat("Health", UICanvas.Instance.player.Health);
+        PlayerPrefs.SetFloat("Stamina", UICanvas.Instance.player.stamina);
+        PlayerPrefs.SetFloat("Strength", UICanvas.Instance.player.Damage);
+        PlayerPrefs.SetFloat("Dexterity", UICanvas.Instance.player.Dexterity);
 
         ConfirmBtn.interactable = false;
-        if (player.PlayerLevel.SkillPoints > 0)
+        if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
             InteractMaxButtons(true);
         }

@@ -4,8 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class NavigationManager : MonoBehaviour
+public class NavigationManager : Manager
 {
+    private static NavigationManager _instance;
+
+    public static NavigationManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                Debug.Log("Navigation Manager instance is null");
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
     [SerializeField]
     private List<GameObject> panels;
     [SerializeField]
