@@ -39,15 +39,6 @@ public class Player : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         isShielded = false;
-        //inventoryList = new Dictionary<InventoryType, int>();
-
-        //Health = 100;
-        //stamina = 100;
-        //Damage = 15;
-        //Dexterity = 0.5f;
-        //curHealth = Health;
-        //curStamina = stamina;
-        
     }
 
     // Use this for initialization
@@ -64,12 +55,21 @@ public class Player : MonoBehaviour
         Damage = GlobalControl.Instance.savedPlayerData.Strength;
         coins = GlobalControl.Instance.savedPlayerData.coins;
         CoinManager.Instance.UpdateCoinsAmount(coins);
+        FillInInventory();
     }
 	
 	// Update is called once per frame
 	void Update () {
         
 
+    }
+
+    public void FillInInventory()
+    {
+        foreach (var item in inventoryList)
+        {
+            InventoryManager.Instance.UpdateInventory(item.Key);
+        }
     }
 
     public void TakeDamage(int amount)

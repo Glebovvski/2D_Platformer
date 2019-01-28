@@ -33,32 +33,6 @@ public class InventoryManager : Manager
     {
     }
 
-    public void OpenInventory()
-    {
-        if (UICanvas.Instance.inventoryOpened || UICanvas.Instance.skillsOpened)
-        {
-            UICanvas.Instance.InventoryOperate();
-            //PlayerStatsManager.Instance.SetActive(false);
-            //UICanvas.Instance.inventoryOpened = false;
-            //UICanvas.Instance.skillsOpened = false;
-            //SetActive(UICanvas.Instance.inventoryOpened);
-            //SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
-            //NavigationManager.Instance.SetActive(false);
-            //Time.timeScale = 1;
-            //UICanvas.Instance.player.HUDIsOpen = false;
-        }
-        else if (!UICanvas.Instance.inventoryOpened)
-        {
-            UICanvas.Instance.inventoryOpened = true;
-            UICanvas.Instance.skillsOpened = false;
-            SetActive(UICanvas.Instance.inventoryOpened);
-            SkillsManager.Instance.SetActive(UICanvas.Instance.skillsOpened);
-            NavigationManager.Instance.SetActive(true);
-            Time.timeScale = 0;
-            PlayerStatsManager.Instance.SetActive(true);
-        }
-    }
-
     public void AddItem(InventoryType item)
     {
         GameObject invItem;
@@ -80,13 +54,32 @@ public class InventoryManager : Manager
         }
     }
 
+    public void UpdateInventory(InventoryType item)
+    {
+        GameObject invItem;
+
+        InventoryItem checkItem = content.GetComponentsInChildren<InventoryItem>().Where(x => x.itemType == item).FirstOrDefault();
+        if (checkItem != null)
+        {
+            Debug.Log("Adding " + item);
+            InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>().Where(x => x.itemType == item).First();
+            inventoryItem.itemCount.text = UICanvas.Instance.player.inventoryList[item].ToString();
+        }
+        else
+        {
+            invItem = (GameObject)Instantiate(Resources.Load(item.ToString()));
+            invItem.GetComponent<InventoryItem>().itemCount.text = UICanvas.Instance.player.inventoryList[item].ToString();
+            invItem.GetComponent<Transform>().SetParent(content);
+        }
+    }
+
     public void RemoveFromInventory(InventoryType item)
     {
         UICanvas.Instance.player.inventoryList[item]--;
         if (UICanvas.Instance.player.inventoryList[item] == 0)
         {
             UICanvas.Instance.player.inventoryList.Remove(item);
-            InventoryItem itemToRemove =content.GetComponentsInChildren<InventoryItem>().Where(x => x.itemType == item).FirstOrDefault();
+            InventoryItem itemToRemove = content.GetComponentsInChildren<InventoryItem>().Where(x => x.itemType == item).FirstOrDefault();
             Destroy(itemToRemove.gameObject);
         }
     }
@@ -110,5 +103,5 @@ public class InventoryManager : Manager
             default:
                 break;
         }
-    } 
+    }
 }
