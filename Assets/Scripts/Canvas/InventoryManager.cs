@@ -80,6 +80,17 @@ public class InventoryManager : Manager
         }
     }
 
+    public void RemoveFromInventory(InventoryType item)
+    {
+        UICanvas.Instance.player.inventoryList[item]--;
+        if (UICanvas.Instance.player.inventoryList[item] == 0)
+        {
+            UICanvas.Instance.player.inventoryList.Remove(item);
+            InventoryItem itemToRemove =content.GetComponentsInChildren<InventoryItem>().Where(x => x.itemType == item).FirstOrDefault();
+            Destroy(itemToRemove.gameObject);
+        }
+    }
+
     public void ItemDescription(InventoryItem item)
     {
         switch (item.itemType)

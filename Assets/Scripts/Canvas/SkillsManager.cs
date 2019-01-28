@@ -66,6 +66,8 @@ public class SkillsManager : Manager {
         InteractMinButtons(false);
         InteractMaxButtons(false);
         ConfirmBtn.interactable = false;
+        Level.text = PlayerLevelManager.Instance.Level.ToString();
+        SkillPoints.text = PlayerLevelManager.Instance.SkillPoints.ToString();
     }
 	
 	// Update is called once per frame

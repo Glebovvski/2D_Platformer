@@ -45,7 +45,7 @@ public class ToTheNextLevelManager : Manager
     public void LeaveBtn()
     {
         //LoadScene stuff
-        SceneManager.LoadScene("LevelPick");
+        SceneManagament.Instance.LoadLevel(1);
         SetActive(false);
     }
 }

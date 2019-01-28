@@ -40,6 +40,7 @@ public class SceneManagament : Manager
 
     public void LoadLevel(int level)
     {
+        UICanvas.Instance.player.SavePlayer();
         SceneManager.LoadScene(level);
     }
 }

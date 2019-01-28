@@ -7,8 +7,8 @@ using Assets.Scripts.Enemies;
 
 public class DoorController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject Player;
+    //[SerializeField]
+    //private GameObject Player;
 
     [SerializeField]
     private CinemachineVirtualCamera Camera;
@@ -17,6 +17,8 @@ public class DoorController : MonoBehaviour
 
     public bool isDoorOpened;
 
+    List<int> keysAmount;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +28,10 @@ public class DoorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var keys = Player.GetComponent<Player>().inventoryList.Any(x => x.Key == InventoryType.Key && x.Value == 3);
+        var keys = UICanvas.Instance.player.inventoryList.Any(x => x.Key == InventoryType.Key && x.Value == 3);
         if (keys)
         {
+            keysAmount = UICanvas.Instance.player.inventoryList.Where(x => x.Key == InventoryType.Key).Select(x => x.Value).ToList();
             isDoorOpened = true;
             if (counts == 0)
             {
@@ -73,6 +76,10 @@ public class DoorController : MonoBehaviour
         yield return new WaitForSeconds(2);
         Camera.Priority = 9;
         
+        for (int i = 0; i < keysAmount[0]; i++)
+        {
+            InventoryManager.Instance.RemoveFromInventory(InventoryType.Key);
+        }
     }
 
     private void FreezeAll()

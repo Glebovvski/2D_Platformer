@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class UICanvas : Manager {
 
@@ -75,6 +76,7 @@ public class UICanvas : Manager {
     {
         if (inventoryOpened || skillsOpened)
         {
+            ToTheNextLevelManager.Instance.SetActive(false);
             player.HUDIsOpen = true;
             PlayerStatsManager.Instance.SetActive(false);
             Time.timeScale = 0;
@@ -119,7 +121,7 @@ public class UICanvas : Manager {
         Opened();
     }
 
-    void ManageItem(InventoryItem item)
+    public void ManageItem(InventoryItem item)
     {
         UICanvas.Instance.player.inventoryList[item.itemType]--;
         item.itemCount.text = UICanvas.Instance.player.inventoryList[item.itemType].ToString();
@@ -129,7 +131,7 @@ public class UICanvas : Manager {
             Destroy(item.gameObject);
         }
     }
-
+    
     public void UseItem(InventoryItem item)
     {
         switch (item.itemType)
