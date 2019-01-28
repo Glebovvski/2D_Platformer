@@ -7,7 +7,7 @@ public class MovingObject : MonoBehaviour {
 
     public bool horizontal;
 
-    private float moveTime = 0.5f;
+    private float moveTime = 1.5f; //1.5
    
     private float direction = 1;
     
@@ -26,9 +26,9 @@ public class MovingObject : MonoBehaviour {
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
-    { 
+    {
         if (collision.gameObject.tag == "Player")
-            collision.gameObject.transform.parent = transform;
+            collision.gameObject.transform.SetParent(transform);//.parent = transform;
         if (collision.gameObject.layer == LayerMask.NameToLayer("Foreground"))
             direction *= -1;
     }
@@ -36,7 +36,7 @@ public class MovingObject : MonoBehaviour {
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
-            collision.gameObject.transform.parent = null;
+            collision.gameObject.transform.SetParent(null);//.parent = null;
     }
 
 }

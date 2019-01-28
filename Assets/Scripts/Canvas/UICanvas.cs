@@ -89,12 +89,24 @@ public class UICanvas : Manager {
 
     public void InventoryOperate()
     {
-        inventoryOpened = !inventoryOpened;
-        skillsOpened = false;
-        InventoryManager.Instance.SetActive(inventoryOpened);
-        NavigationManager.Instance.SetActive(inventoryOpened);
-        SkillsManager.Instance.SetActive(skillsOpened);
-        Opened();
+        if (inventoryOpened || skillsOpened)
+        {
+            inventoryOpened = false;
+            skillsOpened = false;
+            InventoryManager.Instance.SetActive(inventoryOpened);
+            SkillsManager.Instance.SetActive(skillsOpened);
+            NavigationManager.Instance.SetActive(inventoryOpened);
+            Opened();
+        }
+        else
+        {
+            inventoryOpened = !inventoryOpened;
+            skillsOpened = false;
+            InventoryManager.Instance.SetActive(inventoryOpened);
+            NavigationManager.Instance.SetActive(inventoryOpened);
+            SkillsManager.Instance.SetActive(skillsOpened);
+            Opened();
+        }
     }
 
     public void SkillsOperate()
