@@ -16,6 +16,8 @@ public class ShootingTrap : MonoBehaviour, IEnemy
     [SerializeField]
     private float shootInterval = 2f;
 
+    public float destroyAfter;
+
     // Use this for initialization
     void Start()
     {
@@ -30,7 +32,7 @@ public class ShootingTrap : MonoBehaviour, IEnemy
             shootStartDelay = 0f;
 
             var item = (GameObject)Instantiate(itemToShootPrefab, transform.position, transform.rotation);
-            Destroy(item.gameObject, 1f);
+            Destroy(item.gameObject, destroyAfter);
             StartCoroutine(ShootObject(shootInterval));
         }
         else itemToShootPrefab = null;
