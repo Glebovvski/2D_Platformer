@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Enemies;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,20 +32,26 @@ public class PlayerController : Talker
     public int clicks = 0;
 
     public LayerMask groundLayer;
-    
+
+    private void Awake()
+    {
+        //if (bubbleCanvas == null)
+        //    bubbleCanvas = GameObject.Find("BubbleCanvas");
+        //if (bubbleText == null)
+        //    bubbleText = GetComponentInChildren<TextMeshProUGUI>(); 
+    }
 
     // Use this for initialization
     void Start()
     {
         player = GetComponent<Player>();
-        //PlayerLevel = GetComponent<PlayerLevel>();
         audioSource = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
-        //bubbleCanvas = GetComponentInChildren<GameObject>();
-        //bubbleText = GetComponentInChildren<Text>();
+
+        
     }
 
     // Update is called once per frame
@@ -118,7 +125,7 @@ public class PlayerController : Talker
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
-        GetComponent<BoxCollider2D>().transform.localScale = theScale;
+        //GetComponent<BoxCollider2D>().transform.localScale = theScale;
         if (!facingRight)
             bubbleText.transform.rotation = new Quaternion(0, 180, 0, 0);
         if(facingRight)

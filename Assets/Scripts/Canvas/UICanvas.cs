@@ -83,9 +83,9 @@ public class UICanvas : Manager {
         }
         else if(!inventoryOpened && !skillsOpened)
         {
-            player.HUDIsOpen = false;
             PlayerStatsManager.Instance.SetActive(true);
             Time.timeScale = 1;
+            player.HUDIsOpen = false;
         }
     }
 
@@ -138,6 +138,7 @@ public class UICanvas : Manager {
         {
             case InventoryType.HealthPotion:
                 UICanvas.Instance.player.curHealth += 30;
+                PlayerStatsManager.Instance.UpdateHealth();
                 ManageItem(item);
                 break;
             case InventoryType.Shield:
