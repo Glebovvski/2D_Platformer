@@ -5,6 +5,6 @@ using UnityEngine.UI;
 
 public class Talker : MonoBehaviour
 {
-    public Text bubbleText;
+    public TMPro.TextMeshProUGUI bubbleText;
     public GameObject bubbleCanvas;
 }

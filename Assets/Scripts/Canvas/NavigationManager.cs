@@ -26,7 +26,7 @@ public class NavigationManager : Manager
     [SerializeField]
     private List<GameObject> panels;
     [SerializeField]
-    private Text currentPanelLabel;
+    private TMPro.TextMeshProUGUI currentPanelLabel;
 
     // Start is called before the first frame update
     void Start()

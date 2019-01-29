@@ -22,11 +22,11 @@ public class CoinManager : Manager
         _instance = this;
     }
     
-    private Text coinAmountText;
+    public TMPro.TextMeshProUGUI coinAmountText;
 
     private void Start()
     {
-        coinAmountText = GetComponentInChildren<Text>();
+        //coinAmountText = GetComponentInChildren<Text>();
     }
 
     public void UpdateCoinsAmount(int value)

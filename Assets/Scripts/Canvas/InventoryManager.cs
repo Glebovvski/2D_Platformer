@@ -26,7 +26,7 @@ public class InventoryManager : Manager
     [SerializeField]
     private Transform content;
 
-    public Text InventoryDescription;
+    public TMPro.TextMeshProUGUI InventoryDescription;
 
     // Use this for initialization
     void Start()

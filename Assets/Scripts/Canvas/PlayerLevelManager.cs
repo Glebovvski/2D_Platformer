@@ -30,11 +30,11 @@ public class PlayerLevelManager : Manager
     [SerializeField]
     private Image XpImage;
     [SerializeField]
-    private Text XpText;
+    private TMPro.TextMeshProUGUI XpText;
     [SerializeField]
     private Image LevelUpImage;
     [SerializeField]
-    private Text LevelUpText;
+    private TMPro.TextMeshProUGUI LevelUpText;
 
     // Use this for initialization
     void Start () {

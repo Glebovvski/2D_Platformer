@@ -12,7 +12,7 @@ public class InventoryItem : MonoBehaviour {
     
     public float duration;
     [SerializeField]
-    public Text itemCount;
+    public TMPro.TextMeshProUGUI itemCount;
 
     float currCountdownValue;
 

@@ -31,21 +31,21 @@ public class SkillsManager : Manager {
     private const float baseStamina = 100;
 
     [SerializeField]
-    private Text HealthStats;
+    private TMPro.TextMeshProUGUI HealthStats;
     [SerializeField]
-    private Text StrengthStats;
+    private TMPro.TextMeshProUGUI StrengthStats;
     [SerializeField]
-    private Text StaminaStats;
+    private TMPro.TextMeshProUGUI StaminaStats;
     [SerializeField]
-    private Text DexStats;
+    private TMPro.TextMeshProUGUI DexStats;
 
     [SerializeField]
-    private Text Level;
+    private TMPro.TextMeshProUGUI Level;
     [SerializeField]
-    private Text SkillPoints;
+    private TMPro.TextMeshProUGUI SkillPoints;
 
     [SerializeField]
-    private Text DescriptionText;
+    private TMPro.TextMeshProUGUI DescriptionText;
 
     [SerializeField]
     private Button[] MinButtons;
