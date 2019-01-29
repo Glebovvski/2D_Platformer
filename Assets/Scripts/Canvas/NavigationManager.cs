@@ -37,18 +37,22 @@ public class NavigationManager : Manager
     // Update is called once per frame
     void Update()
     {
-        if (panels[0].activeInHierarchy)
-            currentPanelLabel.text = "Inventory [I]";
-        if (panels[1].activeInHierarchy)
-            currentPanelLabel.text = "Skills [K]";
-
         if(panels.Any(x=>x.activeInHierarchy))
         {
+            CheckActivePanel();
             if (Input.GetKeyDown(KeyCode.E))
                 NextPanel();
             if (Input.GetKeyDown(KeyCode.Q))
                 PrevPanel();
         }
+    }
+
+    public void CheckActivePanel()
+    {
+        if (panels[0].activeInHierarchy)
+            currentPanelLabel.text = "Inventory [I]";
+        if (panels[1].activeInHierarchy)
+            currentPanelLabel.text = "Skills [K]";
     }
 
     public void NextPanel()

@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
     {
         animator.SetBool("GotHit", true);
         curHealth -= amount;
-        PlayerStatsManager.Instance.healthSlider.value = curHealth;
+        PlayerStatsManager.Instance.UpdateHealth();
         if (curHealth <= 0)
         {
             GetComponent<Animator>().SetBool("Dead", true);

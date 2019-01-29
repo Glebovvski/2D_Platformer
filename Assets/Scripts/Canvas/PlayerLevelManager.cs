@@ -39,11 +39,7 @@ public class PlayerLevelManager : Manager
     // Use this for initialization
     void Start () {
         LevelUpImage.fillAmount = 0;
-        //Level = 1;
-        //XP = 0;
-        XpImage.fillAmount = XP / RequiredXP;
-        XpText.text = XP.ToString() + "/" + RequiredXP.ToString();
-        //SkillPoints = 0;
+        UpdateXP();
 	}
 	
 	// Update is called once per frame
@@ -59,9 +55,16 @@ public class PlayerLevelManager : Manager
             XP -= RequiredXP;
             Level++;
             SkillPoints++;
+            SkillsManager.Instance.UpdateStats();
+            SkillsManager.Instance.UpdateSkillPoints();
             LevelUpText.text = SkillPoints + " skill points available";
             StartCoroutine(LevelUp());
         }
+        UpdateXP();
+    }
+
+    public void UpdateXP()
+    {
         XpImage.fillAmount = (float)XP / (float)RequiredXP;
         XpText.text = XP.ToString() + "/" + RequiredXP.ToString();
     }

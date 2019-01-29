@@ -62,29 +62,34 @@ public class SkillsManager : Manager {
 
     // Use this for initialization
     void Start () {
-        player = UICanvas.Instance.player.GetComponent<PlayerController>();//FindObjectOfType<PlayerController>();
+        //player = UICanvas.Instance.player.GetComponent<PlayerController>();//FindObjectOfType<PlayerController>();
         InteractMinButtons(false);
         InteractMaxButtons(false);
         ConfirmBtn.interactable = false;
-        Level.text = PlayerLevelManager.Instance.Level.ToString();
-        SkillPoints.text = PlayerLevelManager.Instance.SkillPoints.ToString();
+        UpdateStats();
     }
 	
 	// Update is called once per frame
 	void Update () {
+	}
+    
+    public void UpdateSkillPoints()
+    {
         if (PlayerLevelManager.Instance.SkillPoints > 0)
         {
             InteractMaxButtons(true);
         }
+    }
 
+    public void UpdateStats()
+    {
         HealthStats.text = UICanvas.Instance.player.Health.ToString();
         StrengthStats.text = UICanvas.Instance.player.Damage.ToString();
         StaminaStats.text = UICanvas.Instance.player.stamina.ToString();
         DexStats.text = UICanvas.Instance.player.Dexterity.ToString();
         Level.text = PlayerLevelManager.Instance.Level.ToString();
         SkillPoints.text = PlayerLevelManager.Instance.SkillPoints.ToString();
-	}
-    
+    }
 
     private void InteractMinButtons(bool interact)
     {
@@ -144,6 +149,7 @@ public class SkillsManager : Manager {
             PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(0); //check which stat was increased
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -157,6 +163,7 @@ public class SkillsManager : Manager {
                 CheckSPLeft(0);
             else InteractMinButtons(false, 0);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -168,6 +175,7 @@ public class SkillsManager : Manager {
             PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(2);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -181,6 +189,7 @@ public class SkillsManager : Manager {
                 CheckSPLeft(2);
             else InteractMinButtons(false, 2);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -192,6 +201,7 @@ public class SkillsManager : Manager {
             PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(1);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -205,6 +215,7 @@ public class SkillsManager : Manager {
                 CheckSPLeft(1);
             else InteractMinButtons(false, 1);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -216,6 +227,7 @@ public class SkillsManager : Manager {
             PlayerLevelManager.Instance.SkillPoints--;
             CheckSPLeft(3);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 
@@ -229,6 +241,7 @@ public class SkillsManager : Manager {
                 CheckSPLeft(3);
             else InteractMinButtons(false, 3);
             ConfirmBtn.interactable = true;
+            UpdateStats();
         }
     }
 

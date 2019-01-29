@@ -10,7 +10,7 @@ public class PlayerStatistics
     public float Dexterity = 0.5f;
 
     public float currentHealth = 100;
-    public int currentXP = 1;
+    public int currentXP = 0;
 
     public Dictionary<InventoryType, int> inventoryList = new Dictionary<InventoryType, int>();
 

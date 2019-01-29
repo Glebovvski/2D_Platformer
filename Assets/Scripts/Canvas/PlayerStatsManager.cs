@@ -37,6 +37,10 @@ public class PlayerStatsManager : Manager
     private void Update()
     {
         staminaSlider.value = UICanvas.Instance.player.curStamina;
+    }
+
+    public void UpdateHealth()
+    {
         healthSlider.value = UICanvas.Instance.player.curHealth;
     }
 }
