@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
 
     public bool HUDIsOpen;
 
-    private int coins;
+    [HideInInspector]
+    public int coins;
 
     private Animator animator;
 
@@ -74,9 +75,13 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        animator.SetBool("GotHit", true);
-        curHealth -= amount;
-        PlayerStatsManager.Instance.UpdateHealth();
+        if (!Missed())
+        {
+            animator.SetBool("GotHit", true);
+            curHealth -= amount;
+            PlayerStatsManager.Instance.UpdateHealth();
+        }
+        else Debug.Log("Missed");
         if (curHealth <= 0)
         {
             GetComponent<Animator>().SetBool("Dead", true);
@@ -86,7 +91,11 @@ public class Player : MonoBehaviour
                 enemy.GetComponent<Animator>().SetBool("PlayerSpotted", false);
             }
         }
+    }
 
+    private bool Missed()
+    {
+        return (Random.Range(-10, 10) * Dexterity) > Random.Range(0, 10);
     }
 
     public void AddCoin(int value)

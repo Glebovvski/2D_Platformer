@@ -50,6 +50,7 @@ public class UICanvas : Manager {
 
     private void Start()
     {
+        ShopManager.Instance.SetActive(false);
         InventoryManager.Instance.SetActive(false);
         SkillsManager.Instance.SetActive(false);
         NavigationManager.Instance.SetActive(false);
