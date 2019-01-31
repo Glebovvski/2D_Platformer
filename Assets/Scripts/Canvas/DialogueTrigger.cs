@@ -6,7 +6,7 @@ public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
 
-    public void TriggetDialogue()
+    public void TriggerDialogue()
     {
         DialogueManager.Instance.StartDialogue(dialogue);
     }

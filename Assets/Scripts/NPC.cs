@@ -17,6 +17,8 @@ public class NPC : Talker
     [SerializeField]
     private CinemachineVirtualCamera groupCamera;
 
+    public bool dialogueEnded = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,13 +46,15 @@ public class NPC : Talker
     {
         if (other.tag == "Player")
         {
-            groupCamera.Priority = 11;
-
             if (!dialogue.dialogue.isDoneOnce || !dialoguePaused)
-                dialogue.TriggetDialogue();
+            {
+                dialogue.TriggerDialogue();
+                groupCamera.Priority = 11;
+            }
             if (dialoguePaused)
             {
                 dialoguePaused = false;
+                groupCamera.Priority = 11;
                 dialogue.ResumeDialogue();
             }
         }
@@ -70,6 +74,9 @@ public class NPC : Talker
     public void StartDialogueButton()
     {
         if (dialogue.dialogue.isDoneOnce)
-            dialogue.TriggetDialogue();
+        {
+            groupCamera.Priority = 11;
+            dialogue.TriggerDialogue();
+        }
     }
 }
