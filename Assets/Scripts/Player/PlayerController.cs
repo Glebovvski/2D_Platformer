@@ -23,7 +23,7 @@ public class PlayerController : Talker
     private AudioSource audioSource;
 
     public List<GameObject> enemies;
-    
+
     public Player player;
 
     public bool isFighting = false;
@@ -32,6 +32,15 @@ public class PlayerController : Talker
     public int clicks = 0;
 
     public LayerMask groundLayer;
+
+    private float restore;
+
+    private bool isRestoringActive;
+
+    private bool isCoroutineStarted;
+
+    [HideInInspector]
+    public bool inCombat;
 
     private void Awake()
     {
@@ -44,14 +53,14 @@ public class PlayerController : Talker
     // Use this for initialization
     void Start()
     {
+        isCoroutineStarted = false;
         player = GetComponent<Player>();
         audioSource = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
         rigidbody2d = GetComponent<Rigidbody2D>();
         rigidbody2d.freezeRotation = true;
         animator = GetComponent<Animator>();
-
-        
+        StartCoroutine(RestoreHealth());
     }
 
     // Update is called once per frame
@@ -87,7 +96,24 @@ public class PlayerController : Talker
             clicks = 0;
             if (player.curStamina < player.stamina)
                 player.curStamina += 1;
+            
         }
+
+        //if (inCombat)
+        //{
+        //    StopCoroutine(RestoreHealth());
+        //    Debug.Log("Coroutine stopped");
+        //    isCoroutineStarted = false;
+        //}
+        //else if (!inCombat)
+        //{
+        //    if (player.curHealth < player.Health && restore > 0 && isRestoringActive && !isCoroutineStarted)
+        //    {
+        //        StartCoroutine(RestoreHealth());
+        //        Debug.Log("Coroutine started");
+        //    }
+        //}
+        
     }
 
     private void Jump()
@@ -128,7 +154,7 @@ public class PlayerController : Talker
         //GetComponent<BoxCollider2D>().transform.localScale = theScale;
         if (!facingRight)
             bubbleText.transform.rotation = new Quaternion(0, 180, 0, 0);
-        if(facingRight)
+        if (facingRight)
             bubbleText.transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
@@ -167,5 +193,31 @@ public class PlayerController : Talker
                 return;
             }
         }
+    }
+
+    public void ActivateRestoreHealth(float restoreNumber)
+    {
+        isRestoringActive = true;
+        restore = restoreNumber;
+    }
+
+    IEnumerator RestoreHealth()
+    {
+        isCoroutineStarted = true;
+        while (true)
+        {
+            if (player.curHealth < player.Health)
+            {
+                if (!inCombat)
+                {
+                    player.curHealth += restore;
+                    //Debug.Log("Current Health: " + player.curHealth);
+                    PlayerStatsManager.Instance.UpdateHealth();
+                    yield return new WaitForSeconds(1);
+                }
+            }
+            yield return null;
+        }
+        
     }
 }

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     public bool HUDIsOpen;
 
-    [HideInInspector]
+    //[HideInInspector] TESTING. SHOULD BE PRIVATE
     public int coins;
 
     private Animator animator;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         curHealth = GlobalControl.Instance.savedPlayerData.currentHealth;
-        PlayerLevelManager.Instance.Level = GlobalControl.Instance.savedPlayerData.currentLevel;
+        PlayerLevelManager.Instance.Level = 5;// GlobalControl.Instance.savedPlayerData.currentLevel;
         PlayerLevelManager.Instance.SkillPoints = GlobalControl.Instance.savedPlayerData.currentSkillPoints;
         PlayerLevelManager.Instance.XP = GlobalControl.Instance.savedPlayerData.currentXP;
         Dexterity = GlobalControl.Instance.savedPlayerData.Dexterity;
@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
         if (!Missed())
         {
             animator.SetBool("GotHit", true);
+            animator.SetBool("Fight", true);
             curHealth -= amount;
             PlayerStatsManager.Instance.UpdateHealth();
         }

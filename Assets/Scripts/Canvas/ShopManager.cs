@@ -56,6 +56,11 @@ public class ShopManager : Manager
     [SerializeField]
     private ShopItem[] dexterityPus = new ShopItem[5];
 
+    private ShopItem selectedItem;
+
+    [SerializeField]
+    private PlayerController player;
+
     public void OpenPowerUpContent()
     {
         powerUpsContent.SetActive(true);
@@ -91,6 +96,7 @@ public class ShopManager : Manager
 
     public void SelectItem(ShopItem item)
     {
+        selectedItem = item;
         description.text = item.description;
         selectedImage.sprite = item.itemImage.sprite;
         selectedImage.color = new Color(1, 1, 1, 1);
@@ -107,5 +113,34 @@ public class ShopManager : Manager
         if (item.isBlocked)
             buyBtn.enabled = false;
         else buyBtn.enabled = true;
+    }
+
+    public void Buy()
+    {
+        if (selectedItem != null)
+        {
+            switch (selectedItem.ItemType)
+            {
+                case ItemType.HealthPU:
+                    UICanvas.Instance.player.Health += selectedItem.power;
+                    player.ActivateRestoreHealth(selectedItem.restore);
+                    break;
+                case ItemType.StrengthPU:
+
+                    break;
+                case ItemType.StaminaPU:
+                    break;
+                case ItemType.DexterityPU:
+                    break;
+                case ItemType.HealthPotion:
+                    break;
+                case ItemType.ShieldPotion:
+                    break;
+                case ItemType.StrengthPotion:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
