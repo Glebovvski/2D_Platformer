@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         curHealth = GlobalControl.Instance.savedPlayerData.currentHealth;
-        PlayerLevelManager.Instance.Level = 5;// GlobalControl.Instance.savedPlayerData.currentLevel;
+        PlayerLevelManager.Instance.Level = 15;// GlobalControl.Instance.savedPlayerData.currentLevel;
         PlayerLevelManager.Instance.SkillPoints = GlobalControl.Instance.savedPlayerData.currentSkillPoints;
         PlayerLevelManager.Instance.XP = GlobalControl.Instance.savedPlayerData.currentXP;
         Dexterity = GlobalControl.Instance.savedPlayerData.Dexterity;

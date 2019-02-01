@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -87,7 +88,7 @@ public class ShopManager : Manager
         {
             if (i > 0)
             {
-                if (!array[i - 1].isBlocked && array[i].levelRequired <= PlayerLevelManager.Instance.Level)
+                if (!array[i - 1].isBlocked && array[i - 1].isBought && array[i].levelRequired <= PlayerLevelManager.Instance.Level)
                     array[i].UpdateItem(false);
                 else array[i].UpdateItem(true);
             }
@@ -110,23 +111,34 @@ public class ShopManager : Manager
             priceText.color = Color.red;
         else priceText.color = Color.black;
 
-        if (item.isBlocked)
+        if (item.isBlocked || item.isBought)
             buyBtn.enabled = false;
         else buyBtn.enabled = true;
     }
 
     public void Buy()
     {
-        if (selectedItem != null)
+        int index = 0;
+        if (selectedItem != null && !selectedItem.isBought)
         {
             switch (selectedItem.ItemType)
             {
                 case ItemType.HealthPU:
+                    index = Array.FindIndex(healthPus, x => x == selectedItem);
+                    if (index == 3)
+                        UICanvas.Instance.player.Health -= 10;
                     UICanvas.Instance.player.Health += selectedItem.power;
                     player.ActivateRestoreHealth(selectedItem.restore);
+                    ManageMoney();
                     break;
                 case ItemType.StrengthPU:
-
+                    index = Array.FindIndex(strengthPus, x => x == selectedItem);
+                    if (index > 0)
+                    {
+                        UICanvas.Instance.player.Damage -= strengthPus[index - 1].power;
+                    }
+                    UICanvas.Instance.player.Damage += selectedItem.power;
+                    ManageMoney();
                     break;
                 case ItemType.StaminaPU:
                     break;
@@ -142,5 +154,14 @@ public class ShopManager : Manager
                     break;
             }
         }
+        UpdateShop();
+    }
+
+    void ManageMoney()
+    {
+        selectedItem.isBought = true;
+        UICanvas.Instance.player.coins -= selectedItem.price;
+        CoinManager.Instance.UpdateCoinsAmount(UICanvas.Instance.player.coins);
+        SkillsManager.Instance.UpdateStats();
     }
 }

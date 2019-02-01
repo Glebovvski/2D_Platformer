@@ -8882,18 +8882,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1742823817}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1750814864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6854120578620492557, guid: 3e3857af3752e4742a747ab74946acfe,
-    type: 3}
-  m_PrefabInstance: {fileID: 4702538071649862827}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a0b79f3c9185094da8a1ae199bff7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1767766763
 GameObject:
   m_ObjectHideFlags: 0
@@ -14728,12 +14716,12 @@ PrefabInstance:
     - target: {fileID: 4702538073085468465, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000023157472
+      value: -0.0000073076662
       objectReference: {fileID: 0}
     - target: {fileID: 4702538073085468465, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000009971742
+      value: 0.00005730141
       objectReference: {fileID: 0}
     - target: {fileID: 4702538071589183596, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
@@ -15529,30 +15517,6 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1750814864}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Buy
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236463559, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e3857af3752e4742a747ab74946acfe, type: 3}
 --- !u!1001 &5721990601896774372
@@ -15907,7 +15871,7 @@ PrefabInstance:
     - target: {fileID: 8293877879113765000, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.17992
+      value: -10.176853
       objectReference: {fileID: 0}
     - target: {fileID: 8293877879113765000, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
@@ -15927,7 +15891,7 @@ PrefabInstance:
     - target: {fileID: 8293877878228257425, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.258717
+      value: 12.258226
       objectReference: {fileID: 0}
     - target: {fileID: 8293877878228257425, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
@@ -15937,12 +15901,12 @@ PrefabInstance:
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.014449375
+      value: -0.014448298
       objectReference: {fileID: 0}
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.010433035
+      value: 0.010432258
       objectReference: {fileID: 0}
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
