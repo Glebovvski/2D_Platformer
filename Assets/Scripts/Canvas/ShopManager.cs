@@ -62,6 +62,12 @@ public class ShopManager : Manager
     [SerializeField]
     private PlayerController player;
 
+    [SerializeField]
+    private GameObject errorPanel;
+
+    [SerializeField]
+    private TextMeshProUGUI errorText;
+
     public void OpenPowerUpContent()
     {
         powerUpsContent.SetActive(true);
@@ -111,16 +117,32 @@ public class ShopManager : Manager
             priceText.color = Color.red;
         else priceText.color = Color.black;
 
-        if (item.isBlocked || item.isBought)
-            buyBtn.enabled = false;
-        else buyBtn.enabled = true;
+        //if (item.isBlocked || item.isBought)
+        //    buyBtn.enabled = false;
+        //else buyBtn.enabled = true;
     }
 
     public void Buy()
     {
-        int index = 0;
-        if (selectedItem != null && !selectedItem.isBought)
+        if (selectedItem.isBought)
         {
+            errorText.text = "You have already acquired this item";
+            errorPanel.SetActive(true);
+        }
+        else if (selectedItem.price > UICanvas.Instance.player.coins)
+        {
+            errorText.text = "You don't have enough gold to purchase this item";
+            errorPanel.SetActive(true);
+        }
+        else if (selectedItem.levelRequired > PlayerLevelManager.Instance.Level)
+        {
+            errorText.text = "Your level is less than required";
+            errorPanel.SetActive(true);
+        }
+        
+        else if (selectedItem != null && !selectedItem.isBought)
+        {
+            int index = 0;
             switch (selectedItem.ItemType)
             {
                 case ItemType.HealthPU:
@@ -141,8 +163,22 @@ public class ShopManager : Manager
                     ManageMoney();
                     break;
                 case ItemType.StaminaPU:
+                    index = Array.FindIndex(staminaPus, x => x == selectedItem);
+                    if (index > 0)
+                    {
+                        UICanvas.Instance.player.stamina -= staminaPus[index - 1].power;
+                    }
+                    UICanvas.Instance.player.stamina += selectedItem.power;
+                    ManageMoney();
                     break;
                 case ItemType.DexterityPU:
+                    index = Array.FindIndex(dexterityPus, x => x == selectedItem);
+                    if (index > 0)
+                    {
+                        UICanvas.Instance.player.Dexterity -= dexterityPus[index - 1].power;
+                    }
+                    UICanvas.Instance.player.Dexterity += selectedItem.power;
+                    ManageMoney();
                     break;
                 case ItemType.HealthPotion:
                     break;
@@ -163,5 +199,10 @@ public class ShopManager : Manager
         UICanvas.Instance.player.coins -= selectedItem.price;
         CoinManager.Instance.UpdateCoinsAmount(UICanvas.Instance.player.coins);
         SkillsManager.Instance.UpdateStats();
+    }
+
+    public void CloseErrorPanel()
+    {
+        errorPanel.SetActive(false);
     }
 }
