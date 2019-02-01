@@ -151,7 +151,7 @@ public class ShopManager : Manager
                         UICanvas.Instance.player.Health -= 10;
                     UICanvas.Instance.player.Health += selectedItem.power;
                     player.ActivateRestoreHealth(selectedItem.restore);
-                    ManageMoney();
+                    ManageMoneyPU();
                     break;
                 case ItemType.StrengthPU:
                     index = Array.FindIndex(strengthPus, x => x == selectedItem);
@@ -160,7 +160,7 @@ public class ShopManager : Manager
                         UICanvas.Instance.player.Damage -= strengthPus[index - 1].power;
                     }
                     UICanvas.Instance.player.Damage += selectedItem.power;
-                    ManageMoney();
+                    ManageMoneyPU();
                     break;
                 case ItemType.StaminaPU:
                     index = Array.FindIndex(staminaPus, x => x == selectedItem);
@@ -169,7 +169,7 @@ public class ShopManager : Manager
                         UICanvas.Instance.player.stamina -= staminaPus[index - 1].power;
                     }
                     UICanvas.Instance.player.stamina += selectedItem.power;
-                    ManageMoney();
+                    ManageMoneyPU();
                     break;
                 case ItemType.DexterityPU:
                     index = Array.FindIndex(dexterityPus, x => x == selectedItem);
@@ -178,13 +178,19 @@ public class ShopManager : Manager
                         UICanvas.Instance.player.Dexterity -= dexterityPus[index - 1].power;
                     }
                     UICanvas.Instance.player.Dexterity += selectedItem.power;
-                    ManageMoney();
+                    ManageMoneyPU();
                     break;
                 case ItemType.HealthPotion:
+                    InventoryManager.Instance.AddItem(InventoryType.HealthPotion);
+                    ManageMoney();
                     break;
                 case ItemType.ShieldPotion:
+                    InventoryManager.Instance.AddItem(InventoryType.Shield);
+                    ManageMoney();
                     break;
                 case ItemType.StrengthPotion:
+                    InventoryManager.Instance.AddItem(InventoryType.StrengthPotion);
+                    ManageMoney();
                     break;
                 default:
                     break;
@@ -193,12 +199,17 @@ public class ShopManager : Manager
         UpdateShop();
     }
 
-    void ManageMoney()
+    void ManageMoneyPU()
     {
         selectedItem.isBought = true;
+        ManageMoney();
+        SkillsManager.Instance.UpdateStats();
+    }
+
+    void ManageMoney()
+    {
         UICanvas.Instance.player.coins -= selectedItem.price;
         CoinManager.Instance.UpdateCoinsAmount(UICanvas.Instance.player.coins);
-        SkillsManager.Instance.UpdateStats();
     }
 
     public void CloseErrorPanel()
