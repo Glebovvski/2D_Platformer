@@ -296,10 +296,11 @@ public class ShopManager : Manager
 
     public void OpenShop()
     {
+        UICanvas.Instance.player.HUDIsOpen = true;
         SetActive(true);
     }
 
-    public void CloseShop()
+    void SavePlayerStatistics()
     {
         if (GlobalControl.Instance.savedPlayerData.healthPus == null)
             GlobalControl.Instance.savedPlayerData.healthPus = new ShopItem[healthPus.Length];
@@ -307,27 +308,33 @@ public class ShopManager : Manager
         {
             GlobalControl.Instance.savedPlayerData.healthPus[i] = healthPus[i];
         }
-        
+
         if (GlobalControl.Instance.savedPlayerData.strengthPus == null)
             GlobalControl.Instance.savedPlayerData.strengthPus = new ShopItem[strengthPus.Length];
         for (int i = 0; i < strengthPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.strengthPus[i] = strengthPus[i];
         }
-        
+
         if (GlobalControl.Instance.savedPlayerData.staminaPus == null)
             GlobalControl.Instance.savedPlayerData.staminaPus = new ShopItem[staminaPus.Length];
         for (int i = 0; i < staminaPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.staminaPus[i] = staminaPus[i];
         }
-        
+
         if (GlobalControl.Instance.savedPlayerData.dexterityPus == null)
             GlobalControl.Instance.savedPlayerData.dexterityPus = new ShopItem[dexterityPus.Length];
         for (int i = 0; i < dexterityPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.dexterityPus[i] = dexterityPus[i];
         }
+    }
+
+    public void CloseShop()
+    {
+        SavePlayerStatistics();
         SetActive(false);
+        UICanvas.Instance.player.HUDIsOpen = false;
     }
 }
