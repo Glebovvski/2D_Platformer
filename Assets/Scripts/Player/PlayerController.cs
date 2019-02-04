@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class PlayerController : Talker
 {
-    //[HideInInspector]
-    //public PlayerLevel PlayerLevel { get; set; }
     private float speed = 200.0f;
     private Vector2 jumpSpeedVector = new Vector2(0, 7.0f); //4
     private Rigidbody2D rigidbody2d;
@@ -16,10 +14,7 @@ public class PlayerController : Talker
     [HideInInspector]
     public Animator animator;
     bool isJumping = false;
-
-    //[SerializeField]
-    //public Text bubbleText;
-
+    
     private AudioSource audioSource;
 
     public List<GameObject> enemies;
@@ -35,21 +30,10 @@ public class PlayerController : Talker
 
     [HideInInspector]
     public float restore;
-
-    [HideInInspector]
-    public bool isRestoringActive;
-
-
+    
     [HideInInspector]
     public bool inCombat;
-
-    private void Awake()
-    {
-        //if (bubbleCanvas == null)
-        //    bubbleCanvas = GameObject.Find("BubbleCanvas");
-        //if (bubbleText == null)
-        //    bubbleText = GetComponentInChildren<TextMeshProUGUI>(); 
-    }
+    
 
     // Use this for initialization
     void Start()
@@ -98,22 +82,6 @@ public class PlayerController : Talker
                 player.curStamina += 1;
             
         }
-
-        //if (inCombat)
-        //{
-        //    StopCoroutine(RestoreHealth());
-        //    Debug.Log("Coroutine stopped");
-        //    isCoroutineStarted = false;
-        //}
-        //else if (!inCombat)
-        //{
-        //    if (player.curHealth < player.Health && restore > 0 && isRestoringActive && !isCoroutineStarted)
-        //    {
-        //        StartCoroutine(RestoreHealth());
-        //        Debug.Log("Coroutine started");
-        //    }
-        //}
-        
     }
 
     private void Jump()
@@ -195,9 +163,8 @@ public class PlayerController : Talker
         }
     }
 
-    public void ActivateRestoreHealth(float restoreNumber)
+    public void UpdateRestoreHealthNumber(float restoreNumber)
     {
-        isRestoringActive = true;
         restore = restoreNumber;
     }
 
@@ -210,7 +177,6 @@ public class PlayerController : Talker
                 if (!inCombat)
                 {
                     player.curHealth += restore;
-                    //Debug.Log("Current Health: " + player.curHealth);
                     PlayerStatsManager.Instance.UpdateHealth();
                     yield return new WaitForSeconds(1);
                 }

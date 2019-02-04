@@ -23,11 +23,11 @@ public class PlayerStatistics
     public bool isRestoringActive = false;
     public float restore = 0;
 
-    public ShopItem[] healthPus;// = GameObject.FindObjectsOfType<ShopItem>().Where(x => x.ItemType == ItemType.HealthPU).ToArray(); //ShopManager.Instance.healthPus;
+    public ShopItem[] healthPus;
 
-    public ShopItem[] strengthPus;// = GameObject.FindObjectsOfType<ShopItem>().Where(x => x.ItemType == ItemType.StrengthPU).ToArray(); //ShopManager.Instance.strengthPus;
+    public ShopItem[] strengthPus;
 
-    public ShopItem[] staminaPus;// = GameObject.FindObjectsOfType<ShopItem>().Where(x => x.ItemType == ItemType.StaminaPU).ToArray(); //ShopManager.Instance.staminaPus;
+    public ShopItem[] staminaPus;
 
-    public ShopItem[] dexterityPus;// = GameObject.FindObjectsOfType<ShopItem>().Where(x => x.ItemType == ItemType.dex).ToArray();//ShopManager.Instance.dexterityPus;
+    public ShopItem[] dexterityPus;
 }

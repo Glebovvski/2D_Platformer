@@ -84,10 +84,8 @@ public class ShopManager : Manager
         };
         if (GlobalControl.Instance.savedPlayerData.healthPus != null)
         {
-            //healthPus = GlobalControl.Instance.savedPlayerData.healthPus;
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.healthPus.Length; i++)
             {
-                //healthPus[i] = GlobalControl.Instance.savedPlayerData.healthPus[i];
                 healthPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.healthPus[i].isBlocked;
                 healthPus[i].isBought = GlobalControl.Instance.savedPlayerData.healthPus[i].isBought;
             }
@@ -103,10 +101,8 @@ public class ShopManager : Manager
         };
         if (GlobalControl.Instance.savedPlayerData.strengthPus != null)
         {
-            //strengthPus = GlobalControl.Instance.savedPlayerData.strengthPus;
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.strengthPus.Length; i++)
             {
-                //strengthPus[i] = GlobalControl.Instance.savedPlayerData.strengthPus[i];
                 strengthPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.strengthPus[i].isBlocked;
                 strengthPus[i].isBought = GlobalControl.Instance.savedPlayerData.strengthPus[i].isBought;
             }
@@ -123,10 +119,8 @@ public class ShopManager : Manager
         };
         if (GlobalControl.Instance.savedPlayerData.staminaPus != null)
         {
-            //staminaPus = GlobalControl.Instance.savedPlayerData.staminaPus;
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.staminaPus.Length; i++)
             {
-                //staminaPus[i] = GlobalControl.Instance.savedPlayerData.staminaPus[i];
                 staminaPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.staminaPus[i].isBlocked;
                 staminaPus[i].isBought = GlobalControl.Instance.savedPlayerData.staminaPus[i].isBought;
             }
@@ -143,10 +137,8 @@ public class ShopManager : Manager
         };
         if (GlobalControl.Instance.savedPlayerData.dexterityPus != null)
         {
-            //dexterityPus = GlobalControl.Instance.savedPlayerData.dexterityPus;
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.dexterityPus.Length; i++)
             {
-                //dexterityPus[i] = GlobalControl.Instance.savedPlayerData.dexterityPus[i];
                 dexterityPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.dexterityPus[i].isBlocked;
                 dexterityPus[i].isBought = GlobalControl.Instance.savedPlayerData.dexterityPus[i].isBought;
             }
@@ -202,10 +194,6 @@ public class ShopManager : Manager
         if (item.isBlocked || UICanvas.Instance.player.coins < item.price)
             priceText.color = Color.red;
         else priceText.color = Color.black;
-
-        //if (item.isBlocked || item.isBought)
-        //    buyBtn.enabled = false;
-        //else buyBtn.enabled = true;
     }
 
     public void Buy()
@@ -238,7 +226,8 @@ public class ShopManager : Manager
                     if (index == 3)
                         UICanvas.Instance.player.Health -= 10;
                     UICanvas.Instance.player.Health += selectedItem.power;
-                    player.ActivateRestoreHealth(selectedItem.restore);
+                    PlayerStatsManager.Instance.UpdateHealth();
+                    player.UpdateRestoreHealthNumber(selectedItem.restore);
                     ManageMoneyPU();
                     break;
                 case ItemType.StrengthPU:
@@ -312,41 +301,32 @@ public class ShopManager : Manager
 
     public void CloseShop()
     {
-        //GlobalControl.Instance.savedPlayerData.healthPus = healthPus;
         if (GlobalControl.Instance.savedPlayerData.healthPus == null)
             GlobalControl.Instance.savedPlayerData.healthPus = new ShopItem[healthPus.Length];
         for (int i = 0; i < healthPus.Length; i++)
         {
-            //ShopItem shopItem = healthPus[i];
-            GlobalControl.Instance.savedPlayerData.healthPus[i] = healthPus[i]; //shopItem;
-            //Debug.Log(GlobalControl.Instance.savedPlayerData.healthPus[i].description);
+            GlobalControl.Instance.savedPlayerData.healthPus[i] = healthPus[i];
         }
-
-        //GlobalControl.Instance.savedPlayerData.strengthPus = strengthPus;
+        
         if (GlobalControl.Instance.savedPlayerData.strengthPus == null)
             GlobalControl.Instance.savedPlayerData.strengthPus = new ShopItem[strengthPus.Length];
         for (int i = 0; i < strengthPus.Length; i++)
         {
-            //ShopItem shopItem = strengthPus[i];
-            GlobalControl.Instance.savedPlayerData.strengthPus[i] = strengthPus[i]; //shopItem;
+            GlobalControl.Instance.savedPlayerData.strengthPus[i] = strengthPus[i];
         }
-
-        //GlobalControl.Instance.savedPlayerData.staminaPus = staminaPus;
+        
         if (GlobalControl.Instance.savedPlayerData.staminaPus == null)
             GlobalControl.Instance.savedPlayerData.staminaPus = new ShopItem[staminaPus.Length];
         for (int i = 0; i < staminaPus.Length; i++)
         {
-            //ShopItem shopItem = staminaPus[i];
-            GlobalControl.Instance.savedPlayerData.staminaPus[i] = staminaPus[i]; //shopItem;
+            GlobalControl.Instance.savedPlayerData.staminaPus[i] = staminaPus[i];
         }
-
-        //GlobalControl.Instance.savedPlayerData.dexterityPus = dexterityPus;
+        
         if (GlobalControl.Instance.savedPlayerData.dexterityPus == null)
             GlobalControl.Instance.savedPlayerData.dexterityPus = new ShopItem[dexterityPus.Length];
         for (int i = 0; i < dexterityPus.Length; i++)
         {
-            //ShopItem shopItem = dexterityPus[i];
-            GlobalControl.Instance.savedPlayerData.dexterityPus[i] = dexterityPus[i]; //shopItem;
+            GlobalControl.Instance.savedPlayerData.dexterityPus[i] = dexterityPus[i];
         }
         SetActive(false);
     }

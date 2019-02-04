@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
         Damage = GlobalControl.Instance.savedPlayerData.Strength;
         coins = GlobalControl.Instance.savedPlayerData.coins;
         CoinManager.Instance.UpdateCoinsAmount(coins);
-        playerController.isRestoringActive = GlobalControl.Instance.savedPlayerData.isRestoringActive;
+        //playerController.isRestoringActive = GlobalControl.Instance.savedPlayerData.isRestoringActive;
         playerController.restore = GlobalControl.Instance.savedPlayerData.restore;
         FillInInventory();
         //ShopManager.Instance.UpdateShop();
@@ -123,7 +123,8 @@ public class Player : MonoBehaviour
         GlobalControl.Instance.savedPlayerData.Stamina = stamina;
         GlobalControl.Instance.savedPlayerData.Strength = Damage;
         GlobalControl.Instance.savedPlayerData.coins = coins;
-        GlobalControl.Instance.savedPlayerData.isRestoringActive = playerController.isRestoringActive;
+        //GlobalControl.Instance.savedPlayerData.isRestoringActive = playerController.isRestoringActive;
         GlobalControl.Instance.savedPlayerData.restore = playerController.restore;
+        Debug.Log("restore: " + playerController.restore);
     }
 }
