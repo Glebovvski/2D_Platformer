@@ -36,8 +36,11 @@ public class Player : MonoBehaviour
 
     private Animator animator;
 
+    private PlayerController playerController;
+
     private void Awake()
     {
+        playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         isShielded = false;
     }
@@ -46,7 +49,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         curHealth = GlobalControl.Instance.savedPlayerData.currentHealth;
-        PlayerLevelManager.Instance.Level = 15;// GlobalControl.Instance.savedPlayerData.currentLevel;
+        PlayerLevelManager.Instance.Level = GlobalControl.Instance.savedPlayerData.currentLevel;
         PlayerLevelManager.Instance.SkillPoints = GlobalControl.Instance.savedPlayerData.currentSkillPoints;
         PlayerLevelManager.Instance.XP = GlobalControl.Instance.savedPlayerData.currentXP;
         Dexterity = GlobalControl.Instance.savedPlayerData.Dexterity;
@@ -56,7 +59,10 @@ public class Player : MonoBehaviour
         Damage = GlobalControl.Instance.savedPlayerData.Strength;
         coins = GlobalControl.Instance.savedPlayerData.coins;
         CoinManager.Instance.UpdateCoinsAmount(coins);
+        playerController.isRestoringActive = GlobalControl.Instance.savedPlayerData.isRestoringActive;
+        playerController.restore = GlobalControl.Instance.savedPlayerData.restore;
         FillInInventory();
+        //ShopManager.Instance.UpdateShop();
     }
 	
 	// Update is called once per frame
@@ -117,5 +123,7 @@ public class Player : MonoBehaviour
         GlobalControl.Instance.savedPlayerData.Stamina = stamina;
         GlobalControl.Instance.savedPlayerData.Strength = Damage;
         GlobalControl.Instance.savedPlayerData.coins = coins;
+        GlobalControl.Instance.savedPlayerData.isRestoringActive = playerController.isRestoringActive;
+        GlobalControl.Instance.savedPlayerData.restore = playerController.restore;
     }
 }

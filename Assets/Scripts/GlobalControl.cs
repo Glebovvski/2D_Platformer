@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GlobalControl : MonoBehaviour
 {
@@ -19,5 +20,32 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
-    
+    public List<CollectibleItem> collected = new List<CollectibleItem>();
+    List<CollectibleItem> collectibles;
+
+    private void OnLevelWasLoaded(int level)
+    {
+        collectibles = new List<CollectibleItem>();
+        collectibles.AddRange(GameObject.FindObjectsOfType<CollectibleItem>());
+        Debug.Log("collectibles: " + collectibles.Count);
+        Debug.Log("collected: " + collected.Count);
+        
+    }
+
+    private void OnPreRender()
+    {
+        if(collectibles!=null && collectibles.Count > 0)
+        {
+            foreach (var item in collectibles)
+            {
+                if (collected.Contains(item))
+                    Destroy(item.gameObject);
+            }
+        }
+    }
+
+    public void CheckCollectibles()
+    {
+        
+    }
 }

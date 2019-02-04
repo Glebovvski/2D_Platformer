@@ -12,6 +12,7 @@ public class ShopItem : MonoBehaviour
 
     public ItemType ItemType;
 
+    [HideInInspector]
     public bool isBlocked;
 
     [TextArea(3,5)]
@@ -26,14 +27,13 @@ public class ShopItem : MonoBehaviour
 
     [HideInInspector]
     public bool isBought;
+    
+    public GameObject block;
 
-    [SerializeField]
-    private GameObject block;
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        //itemImage = transform.Find("ItemImage").GetComponent<Image>();
+        if (block != null)
+            UpdateItem(false);
     }
 
     // Update is called once per frame

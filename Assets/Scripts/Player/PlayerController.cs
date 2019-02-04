@@ -33,11 +33,12 @@ public class PlayerController : Talker
 
     public LayerMask groundLayer;
 
-    private float restore;
+    [HideInInspector]
+    public float restore;
 
-    private bool isRestoringActive;
+    [HideInInspector]
+    public bool isRestoringActive;
 
-    private bool isCoroutineStarted;
 
     [HideInInspector]
     public bool inCombat;
@@ -53,7 +54,6 @@ public class PlayerController : Talker
     // Use this for initialization
     void Start()
     {
-        isCoroutineStarted = false;
         player = GetComponent<Player>();
         audioSource = player.GetComponent<AudioSource>();
         enemies = new List<GameObject>();
@@ -203,7 +203,6 @@ public class PlayerController : Talker
 
     IEnumerator RestoreHealth()
     {
-        isCoroutineStarted = true;
         while (true)
         {
             if (player.curHealth < player.Health)

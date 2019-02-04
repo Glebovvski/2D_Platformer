@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,7 +19,6 @@ public class ShopManager : Manager
             return _instance;
         }
     }
-
     private void Awake()
     {
         _instance = this;
@@ -45,16 +45,16 @@ public class ShopManager : Manager
     [SerializeField]
     private Button buyBtn;
 
-    [SerializeField]
+    //[SerializeField]
     private ShopItem[] healthPus = new ShopItem[5];
 
-    [SerializeField]
+    //[SerializeField]
     private ShopItem[] strengthPus = new ShopItem[5];
 
-    [SerializeField]
-    private ShopItem[] staminaPus = new ShopItem[5];
+    //[SerializeField]
+    private ShopItem[] staminaPus= new ShopItem[5];
 
-    [SerializeField]
+    //[SerializeField]
     private ShopItem[] dexterityPus = new ShopItem[5];
 
     private ShopItem selectedItem;
@@ -68,6 +68,91 @@ public class ShopManager : Manager
     [SerializeField]
     private TextMeshProUGUI errorText;
 
+    [SerializeField]
+    private GameObject plusOnePrefab;
+
+    public Transform plusOnePos;
+
+    private void Start()
+    {
+        healthPus = new ShopItem[] {
+            GameObject.Find("Health1").GetComponent<ShopItem>(),
+            GameObject.Find("Health2").GetComponent<ShopItem>(),
+            GameObject.Find("Health3").GetComponent<ShopItem>(),
+            GameObject.Find("Health4").GetComponent<ShopItem>(),
+            GameObject.Find("Health5").GetComponent<ShopItem>()
+        };
+        if (GlobalControl.Instance.savedPlayerData.healthPus != null)
+        {
+            //healthPus = GlobalControl.Instance.savedPlayerData.healthPus;
+            for (int i = 0; i < GlobalControl.Instance.savedPlayerData.healthPus.Length; i++)
+            {
+                //healthPus[i] = GlobalControl.Instance.savedPlayerData.healthPus[i];
+                healthPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.healthPus[i].isBlocked;
+                healthPus[i].isBought = GlobalControl.Instance.savedPlayerData.healthPus[i].isBought;
+            }
+        }
+
+        strengthPus = new ShopItem[]
+        {
+            GameObject.Find("Strength1").GetComponent<ShopItem>(),
+            GameObject.Find("Strength2").GetComponent<ShopItem>(),
+            GameObject.Find("Strength3").GetComponent<ShopItem>(),
+            GameObject.Find("Strength4").GetComponent<ShopItem>(),
+            GameObject.Find("Strength5").GetComponent<ShopItem>()
+        };
+        if (GlobalControl.Instance.savedPlayerData.strengthPus != null)
+        {
+            //strengthPus = GlobalControl.Instance.savedPlayerData.strengthPus;
+            for (int i = 0; i < GlobalControl.Instance.savedPlayerData.strengthPus.Length; i++)
+            {
+                //strengthPus[i] = GlobalControl.Instance.savedPlayerData.strengthPus[i];
+                strengthPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.strengthPus[i].isBlocked;
+                strengthPus[i].isBought = GlobalControl.Instance.savedPlayerData.strengthPus[i].isBought;
+            }
+        }
+
+
+        staminaPus = new ShopItem[]
+        {
+            GameObject.Find("Stamina1").GetComponent<ShopItem>(),
+            GameObject.Find("Stamina2").GetComponent<ShopItem>(),
+            GameObject.Find("Stamina3").GetComponent<ShopItem>(),
+            GameObject.Find("Stamina4").GetComponent<ShopItem>(),
+            GameObject.Find("Stamina5").GetComponent<ShopItem>()
+        };
+        if (GlobalControl.Instance.savedPlayerData.staminaPus != null)
+        {
+            //staminaPus = GlobalControl.Instance.savedPlayerData.staminaPus;
+            for (int i = 0; i < GlobalControl.Instance.savedPlayerData.staminaPus.Length; i++)
+            {
+                //staminaPus[i] = GlobalControl.Instance.savedPlayerData.staminaPus[i];
+                staminaPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.staminaPus[i].isBlocked;
+                staminaPus[i].isBought = GlobalControl.Instance.savedPlayerData.staminaPus[i].isBought;
+            }
+        }
+
+
+        dexterityPus = new ShopItem[]
+        {
+            GameObject.Find("Dexterity1").GetComponent<ShopItem>(),
+            GameObject.Find("Dexterity2").GetComponent<ShopItem>(),
+            GameObject.Find("Dexterity3").GetComponent<ShopItem>(),
+            GameObject.Find("Dexterity4").GetComponent<ShopItem>(),
+            GameObject.Find("Dexterity5").GetComponent<ShopItem>()
+        };
+        if (GlobalControl.Instance.savedPlayerData.dexterityPus != null)
+        {
+            //dexterityPus = GlobalControl.Instance.savedPlayerData.dexterityPus;
+            for (int i = 0; i < GlobalControl.Instance.savedPlayerData.dexterityPus.Length; i++)
+            {
+                //dexterityPus[i] = GlobalControl.Instance.savedPlayerData.dexterityPus[i];
+                dexterityPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.dexterityPus[i].isBlocked;
+                dexterityPus[i].isBought = GlobalControl.Instance.savedPlayerData.dexterityPus[i].isBought;
+            }
+        }
+        UpdateShop();
+    }
     public void OpenPowerUpContent()
     {
         powerUpsContent.SetActive(true);
@@ -96,7 +181,8 @@ public class ShopManager : Manager
             {
                 if (!array[i - 1].isBlocked && array[i - 1].isBought && array[i].levelRequired <= PlayerLevelManager.Instance.Level)
                     array[i].UpdateItem(false);
-                else array[i].UpdateItem(true);
+                else
+                    array[i].UpdateItem(true);
             }
         }
     }
@@ -139,9 +225,11 @@ public class ShopManager : Manager
             errorText.text = "Your level is less than required";
             errorPanel.SetActive(true);
         }
-        
+
         else if (selectedItem != null && !selectedItem.isBought)
         {
+            GameObject plusOne = GameObject.Instantiate(plusOnePrefab, plusOnePos.position, Quaternion.identity);
+            plusOne.transform.SetParent(this.gameObject.transform);
             int index = 0;
             switch (selectedItem.ItemType)
             {
@@ -215,5 +303,51 @@ public class ShopManager : Manager
     public void CloseErrorPanel()
     {
         errorPanel.SetActive(false);
+    }
+
+    public void OpenShop()
+    {
+        SetActive(true);
+    }
+
+    public void CloseShop()
+    {
+        //GlobalControl.Instance.savedPlayerData.healthPus = healthPus;
+        if (GlobalControl.Instance.savedPlayerData.healthPus == null)
+            GlobalControl.Instance.savedPlayerData.healthPus = new ShopItem[healthPus.Length];
+        for (int i = 0; i < healthPus.Length; i++)
+        {
+            //ShopItem shopItem = healthPus[i];
+            GlobalControl.Instance.savedPlayerData.healthPus[i] = healthPus[i]; //shopItem;
+            //Debug.Log(GlobalControl.Instance.savedPlayerData.healthPus[i].description);
+        }
+
+        //GlobalControl.Instance.savedPlayerData.strengthPus = strengthPus;
+        if (GlobalControl.Instance.savedPlayerData.strengthPus == null)
+            GlobalControl.Instance.savedPlayerData.strengthPus = new ShopItem[strengthPus.Length];
+        for (int i = 0; i < strengthPus.Length; i++)
+        {
+            //ShopItem shopItem = strengthPus[i];
+            GlobalControl.Instance.savedPlayerData.strengthPus[i] = strengthPus[i]; //shopItem;
+        }
+
+        //GlobalControl.Instance.savedPlayerData.staminaPus = staminaPus;
+        if (GlobalControl.Instance.savedPlayerData.staminaPus == null)
+            GlobalControl.Instance.savedPlayerData.staminaPus = new ShopItem[staminaPus.Length];
+        for (int i = 0; i < staminaPus.Length; i++)
+        {
+            //ShopItem shopItem = staminaPus[i];
+            GlobalControl.Instance.savedPlayerData.staminaPus[i] = staminaPus[i]; //shopItem;
+        }
+
+        //GlobalControl.Instance.savedPlayerData.dexterityPus = dexterityPus;
+        if (GlobalControl.Instance.savedPlayerData.dexterityPus == null)
+            GlobalControl.Instance.savedPlayerData.dexterityPus = new ShopItem[dexterityPus.Length];
+        for (int i = 0; i < dexterityPus.Length; i++)
+        {
+            //ShopItem shopItem = dexterityPus[i];
+            GlobalControl.Instance.savedPlayerData.dexterityPus[i] = dexterityPus[i]; //shopItem;
+        }
+        SetActive(false);
     }
 }

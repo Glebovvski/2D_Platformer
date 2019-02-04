@@ -28,6 +28,7 @@ public class SceneManagament : Manager
     {
         //HUDcanvas = UICanvas.Instance.GetComponent<Canvas>();//GameObject.Find("HUDCanvas");
         SceneManager.activeSceneChanged += SceneChanged;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void SceneChanged(Scene prevScene, Scene curScene)
@@ -42,5 +43,15 @@ public class SceneManagament : Manager
     {
         UICanvas.Instance.player.SavePlayer();
         SceneManager.LoadScene(level);
+    }
+
+    //private void OnLevelWasLoaded(int level)
+    //{
+    //    GlobalControl.Instance.CheckCollectibles();
+    //}
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        
     }
 }
