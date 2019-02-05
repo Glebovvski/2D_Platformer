@@ -45,16 +45,16 @@ public class ShopManager : Manager
     [SerializeField]
     private Button buyBtn;
 
-    //[SerializeField]
+    [SerializeField]
     private ShopItem[] healthPus = new ShopItem[5];
 
-    //[SerializeField]
+    [SerializeField]
     private ShopItem[] strengthPus = new ShopItem[5];
 
-    //[SerializeField]
+    [SerializeField]
     private ShopItem[] staminaPus = new ShopItem[5];
 
-    //[SerializeField]
+    [SerializeField]
     private ShopItem[] dexterityPus = new ShopItem[5];
 
     private ShopItem selectedItem;
@@ -75,13 +75,6 @@ public class ShopManager : Manager
 
     private void Start()
     {
-        healthPus = new ShopItem[] {
-            GameObject.Find("Health1").GetComponent<ShopItem>(),
-            GameObject.Find("Health2").GetComponent<ShopItem>(),
-            GameObject.Find("Health3").GetComponent<ShopItem>(),
-            GameObject.Find("Health4").GetComponent<ShopItem>(),
-            GameObject.Find("Health5").GetComponent<ShopItem>()
-        };
         if (GlobalControl.Instance.savedPlayerData.healthPus.Length != 0)// != null)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.healthPus.Length; i++)
@@ -90,15 +83,7 @@ public class ShopManager : Manager
                 healthPus[i].isBought = GlobalControl.Instance.savedPlayerData.healthPus[i].isBought;
             }
         }
-
-        strengthPus = new ShopItem[]
-        {
-            GameObject.Find("Strength1").GetComponent<ShopItem>(),
-            GameObject.Find("Strength2").GetComponent<ShopItem>(),
-            GameObject.Find("Strength3").GetComponent<ShopItem>(),
-            GameObject.Find("Strength4").GetComponent<ShopItem>(),
-            GameObject.Find("Strength5").GetComponent<ShopItem>()
-        };
+        
         if (GlobalControl.Instance.savedPlayerData.strengthPus.Length != 0)// != null)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.strengthPus.Length; i++)
@@ -107,16 +92,7 @@ public class ShopManager : Manager
                 strengthPus[i].isBought = GlobalControl.Instance.savedPlayerData.strengthPus[i].isBought;
             }
         }
-
-
-        staminaPus = new ShopItem[]
-        {
-            GameObject.Find("Stamina1").GetComponent<ShopItem>(),
-            GameObject.Find("Stamina2").GetComponent<ShopItem>(),
-            GameObject.Find("Stamina3").GetComponent<ShopItem>(),
-            GameObject.Find("Stamina4").GetComponent<ShopItem>(),
-            GameObject.Find("Stamina5").GetComponent<ShopItem>()
-        };
+        
         if (GlobalControl.Instance.savedPlayerData.staminaPus.Length != 0)// != null)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.staminaPus.Length; i++)
@@ -125,16 +101,7 @@ public class ShopManager : Manager
                 staminaPus[i].isBought = GlobalControl.Instance.savedPlayerData.staminaPus[i].isBought;
             }
         }
-
-
-        dexterityPus = new ShopItem[]
-        {
-            GameObject.Find("Dexterity1").GetComponent<ShopItem>(),
-            GameObject.Find("Dexterity2").GetComponent<ShopItem>(),
-            GameObject.Find("Dexterity3").GetComponent<ShopItem>(),
-            GameObject.Find("Dexterity4").GetComponent<ShopItem>(),
-            GameObject.Find("Dexterity5").GetComponent<ShopItem>()
-        };
+        
         if (GlobalControl.Instance.savedPlayerData.dexterityPus != null && GlobalControl.Instance.savedPlayerData.dexterityPus.Length > 0)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.dexterityPus.Length; i++)
