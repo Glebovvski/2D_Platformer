@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
+[Serializable]
 public class PlayerStatistics
 {
     public float Health = 100;
@@ -19,10 +21,9 @@ public class PlayerStatistics
     public int currentSkillPoints = 0;
 
     public int coins = 0;
-
-    public bool isRestoringActive = false;
+    
     public float restore = 0;
-
+    
     public ShopItem[] healthPus;
 
     public ShopItem[] strengthPus;

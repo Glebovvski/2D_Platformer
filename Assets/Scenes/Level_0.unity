@@ -13714,7 +13714,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b9f413962a45264cbb94172a545a8c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savedPlayerData:
+    Health: 100
+    Strength: 15
+    Stamina: 100
+    Dexterity: 0.5
+    currentHealth: 100
+    currentXP: 0
+    currentLevel: 15
+    currentSkillPoints: 0
+    coins: 0
+    restore: 0
+    healthPus: []
+    strengthPus: []
+    staminaPus: []
+    dexterityPus: []
   collected: []
+  collectibles: []
 --- !u!1 &1852856216
 GameObject:
   m_ObjectHideFlags: 0
@@ -14717,12 +14733,12 @@ PrefabInstance:
     - target: {fileID: 4702538073085468465, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0000017212149
+      value: 0.00001276096
       objectReference: {fileID: 0}
     - target: {fileID: 4702538073085468465, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000009471368
+      value: 0.00015194937
       objectReference: {fileID: 0}
     - target: {fileID: 4702538071589183596, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
@@ -15902,7 +15918,7 @@ PrefabInstance:
     - target: {fileID: 8293877878228257425, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.258394
+      value: 12.258832
       objectReference: {fileID: 0}
     - target: {fileID: 8293877878228257425, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
@@ -15912,12 +15928,12 @@ PrefabInstance:
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.014449641
+      value: -0.014449655
       objectReference: {fileID: 0}
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.01043322
+      value: 0.010433201
       objectReference: {fileID: 0}
     - target: {fileID: 8293877877468285491, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}

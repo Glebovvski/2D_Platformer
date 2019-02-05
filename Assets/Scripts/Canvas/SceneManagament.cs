@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,6 +30,21 @@ public class SceneManagament : Manager
         //HUDcanvas = UICanvas.Instance.GetComponent<Canvas>();//GameObject.Find("HUDCanvas");
         SceneManager.activeSceneChanged += SceneChanged;
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        GlobalControl.Instance.CheckCollectibles();
+        if (GlobalControl.Instance.collectibles != null && GlobalControl.Instance.collectibles.Count > 0)
+        {
+            foreach (var item in GlobalControl.Instance.collectibles)
+            {
+                if (GlobalControl.Instance.collected.Contains(item))
+                    item.gameObject.SetActive(false);
+                //if (GlobalControl.Instance.collected.Where(x=>x.name == item.name).FirstOrDefault())
+                //{
+                //    Destroy(item.gameObject);
+                //    Debug.Log("Destroyed");
+                //}
+            }
+        }
     }
 
     private void SceneChanged(Scene prevScene, Scene curScene)
@@ -43,12 +59,13 @@ public class SceneManagament : Manager
     {
         UICanvas.Instance.player.SavePlayer();
         SceneManager.LoadScene(level);
+        //GlobalControl.Instance.Save();
     }
 
-    //private void OnLevelWasLoaded(int level)
-    //{
-    //    GlobalControl.Instance.CheckCollectibles();
-    //}
+    private void OnLevelWasLoaded(int level)
+    {
+        
+    }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {

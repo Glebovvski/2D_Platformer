@@ -52,7 +52,7 @@ public class ShopManager : Manager
     private ShopItem[] strengthPus = new ShopItem[5];
 
     //[SerializeField]
-    private ShopItem[] staminaPus= new ShopItem[5];
+    private ShopItem[] staminaPus = new ShopItem[5];
 
     //[SerializeField]
     private ShopItem[] dexterityPus = new ShopItem[5];
@@ -82,10 +82,11 @@ public class ShopManager : Manager
             GameObject.Find("Health4").GetComponent<ShopItem>(),
             GameObject.Find("Health5").GetComponent<ShopItem>()
         };
-        if (GlobalControl.Instance.savedPlayerData.healthPus != null)
+        if (GlobalControl.Instance.savedPlayerData.healthPus != null && GlobalControl.Instance.savedPlayerData.healthPus.Length > 0)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.healthPus.Length; i++)
             {
+                Debug.Log(GlobalControl.Instance.savedPlayerData.healthPus[i]);
                 healthPus[i].isBlocked = GlobalControl.Instance.savedPlayerData.healthPus[i].isBlocked;
                 healthPus[i].isBought = GlobalControl.Instance.savedPlayerData.healthPus[i].isBought;
             }
@@ -99,7 +100,7 @@ public class ShopManager : Manager
             GameObject.Find("Strength4").GetComponent<ShopItem>(),
             GameObject.Find("Strength5").GetComponent<ShopItem>()
         };
-        if (GlobalControl.Instance.savedPlayerData.strengthPus != null)
+        if (GlobalControl.Instance.savedPlayerData.strengthPus != null && GlobalControl.Instance.savedPlayerData.strengthPus.Length > 0)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.strengthPus.Length; i++)
             {
@@ -117,7 +118,7 @@ public class ShopManager : Manager
             GameObject.Find("Stamina4").GetComponent<ShopItem>(),
             GameObject.Find("Stamina5").GetComponent<ShopItem>()
         };
-        if (GlobalControl.Instance.savedPlayerData.staminaPus != null)
+        if (GlobalControl.Instance.savedPlayerData.staminaPus != null && GlobalControl.Instance.savedPlayerData.staminaPus.Length > 0)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.staminaPus.Length; i++)
             {
@@ -135,7 +136,7 @@ public class ShopManager : Manager
             GameObject.Find("Dexterity4").GetComponent<ShopItem>(),
             GameObject.Find("Dexterity5").GetComponent<ShopItem>()
         };
-        if (GlobalControl.Instance.savedPlayerData.dexterityPus != null)
+        if (GlobalControl.Instance.savedPlayerData.dexterityPus != null && GlobalControl.Instance.savedPlayerData.dexterityPus.Length > 0)
         {
             for (int i = 0; i < GlobalControl.Instance.savedPlayerData.dexterityPus.Length; i++)
             {
@@ -302,28 +303,30 @@ public class ShopManager : Manager
 
     void SavePlayerStatistics()
     {
-        if (GlobalControl.Instance.savedPlayerData.healthPus == null)
+        if (GlobalControl.Instance.savedPlayerData.healthPus == null || GlobalControl.Instance.savedPlayerData.healthPus.Length == 0)
             GlobalControl.Instance.savedPlayerData.healthPus = new ShopItem[healthPus.Length];
         for (int i = 0; i < healthPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.healthPus[i] = healthPus[i];
+            Debug.Log(GlobalControl.Instance.savedPlayerData.healthPus[i].name);
         }
+        //GlobalControl.Instance.savedPlayerData.healthPus = healthPus;
 
-        if (GlobalControl.Instance.savedPlayerData.strengthPus == null)
+        if (GlobalControl.Instance.savedPlayerData.strengthPus == null || GlobalControl.Instance.savedPlayerData.strengthPus.Length == 0)
             GlobalControl.Instance.savedPlayerData.strengthPus = new ShopItem[strengthPus.Length];
         for (int i = 0; i < strengthPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.strengthPus[i] = strengthPus[i];
         }
 
-        if (GlobalControl.Instance.savedPlayerData.staminaPus == null)
+        if (GlobalControl.Instance.savedPlayerData.staminaPus == null || GlobalControl.Instance.savedPlayerData.staminaPus.Length == 0)
             GlobalControl.Instance.savedPlayerData.staminaPus = new ShopItem[staminaPus.Length];
         for (int i = 0; i < staminaPus.Length; i++)
         {
             GlobalControl.Instance.savedPlayerData.staminaPus[i] = staminaPus[i];
         }
 
-        if (GlobalControl.Instance.savedPlayerData.dexterityPus == null)
+        if (GlobalControl.Instance.savedPlayerData.dexterityPus == null || GlobalControl.Instance.savedPlayerData.dexterityPus.Length == 0)
             GlobalControl.Instance.savedPlayerData.dexterityPus = new ShopItem[dexterityPus.Length];
         for (int i = 0; i < dexterityPus.Length; i++)
         {
