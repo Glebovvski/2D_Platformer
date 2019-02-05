@@ -18,7 +18,7 @@ public class GlobalControl : MonoBehaviour
         }
         else if (Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //gameObject
         }
     }
 

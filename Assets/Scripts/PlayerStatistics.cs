@@ -23,12 +23,21 @@ public class PlayerStatistics
     public int coins = 0;
     
     public float restore = 0;
-    
-    public ShopItem[] healthPus;
 
-    public ShopItem[] strengthPus;
+    [Serializable]
+    public class ShopItemBasic
+    {
+        public bool isBought;
+        public bool isBlocked;
+    }
 
-    public ShopItem[] staminaPus;
 
-    public ShopItem[] dexterityPus;
+    public ShopItemBasic[] healthPus = new ShopItemBasic[0];
+
+    public ShopItemBasic[] strengthPus = new ShopItemBasic[0];
+
+    public ShopItemBasic[] staminaPus = new ShopItemBasic[0];
+
+    public ShopItemBasic[] dexterityPus = new ShopItemBasic[0];
 }
+

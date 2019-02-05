@@ -14,8 +14,8 @@ public class CollectibleItem : MonoBehaviour {
         {
             InventoryManager.Instance.AddItem(item);
             GlobalControl.Instance.collected.Add(this);
-            this.gameObject.SetActive(false);
-            //Destroy(this.gameObject);
+            //this.gameObject.SetActive(false);
+            Destroy(this.gameObject);
         }
     }
 }
