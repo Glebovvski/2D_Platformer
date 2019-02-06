@@ -43,6 +43,8 @@ public class InventoryManager : Manager
                 UICanvas.Instance.player.inventoryList[item]++;
                 InventoryItem inventoryItem = Resources.FindObjectsOfTypeAll<InventoryItem>().Where(x => x.itemType == item).First();
                 inventoryItem.itemCount.text = UICanvas.Instance.player.inventoryList[item].ToString();
+                if (UICanvas.Instance.player.inventoryList[item] == 3)
+                    DoorController.Instance.OpenDoor();
             }
         }
         else

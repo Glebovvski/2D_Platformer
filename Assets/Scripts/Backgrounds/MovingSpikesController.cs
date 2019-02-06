@@ -30,6 +30,7 @@ public class MovingSpikesController : MonoBehaviour {
 
     void Destroy(float time)
     {
+        CancelInvoke();
         gameObject.SetActive(false);
     }
 
@@ -40,8 +41,8 @@ public class MovingSpikesController : MonoBehaviour {
             if (!collision.gameObject.GetComponent<Player>().isShielded)
             {
                 collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-                Destroy(0);
             }
         }
+        Destroy(0);
     }
 }

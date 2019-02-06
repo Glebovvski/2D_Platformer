@@ -24,6 +24,8 @@ public class PlayerStatistics
     
     public float restore = 0;
 
+    public int currentScene = 0;
+
     [Serializable]
     public class ShopItemBasic
     {
@@ -31,6 +33,7 @@ public class PlayerStatistics
         public bool isBlocked;
     }
 
+    public List<CollectibleItemBasic> collected = new List<CollectibleItemBasic>();
 
     public ShopItemBasic[] healthPus = new ShopItemBasic[0];
 
