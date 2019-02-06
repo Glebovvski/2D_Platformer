@@ -22,6 +22,8 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
+    public int SceneLevel = 0;
+
     public List<CollectibleItem> collected = new List<CollectibleItem>();
     public List<CollectibleItem> collectibles;
 

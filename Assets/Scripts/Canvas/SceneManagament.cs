@@ -57,9 +57,10 @@ public class SceneManagament : Manager
 
     public void LoadLevel(int level)
     {
+        GlobalControl.Instance.SceneLevel = SceneManager.GetActiveScene().buildIndex;
         UICanvas.Instance.player.SavePlayer();
         SceneManager.LoadScene(level);
-        //GlobalControl.Instance.Save();
+        GlobalControl.Instance.Save();
     }
 
     private void OnLevelWasLoaded(int level)

@@ -19,8 +19,14 @@ public class ScrollRectSnap : MonoBehaviour
     {
         int btnLength = buttons.Length;
         distance = new float[btnLength];
-
         btnDistance = (int)Mathf.Abs(buttons[1].GetComponent<RectTransform>().anchoredPosition.x - buttons[0].GetComponent<RectTransform>().anchoredPosition.x);
+        StartingBtn();
+    }
+
+    void StartingBtn()
+    {
+        int n = GlobalControl.Instance.SceneLevel - 1;
+        panel.anchoredPosition = new Vector2(-btnDistance * n, 0);
     }
 
     private void Update()

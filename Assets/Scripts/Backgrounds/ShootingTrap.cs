@@ -18,24 +18,31 @@ public class ShootingTrap : MonoBehaviour, IEnemy
 
     public float destroyAfter;
 
+    private GameObject spike;
     // Use this for initialization
     void Start()
     {
-        StartCoroutine(ShootObject(shootInterval));
+        spike = Instantiate(itemToShootPrefab);
+        spike.SetActive(false);
+        InvokeRepeating("ShootObject", shootStartDelay, shootInterval);
+        //StartCoroutine(ShootObject(shootInterval));
     }
 
-    private IEnumerator ShootObject(float delay)
+    private void ShootObject()
     {
-        if (!isStopped)
+        if (!itemToShootPrefab.activeInHierarchy)
         {
-            yield return new WaitForSeconds(delay + shootStartDelay);
-            shootStartDelay = 0f;
+            spike.transform.position = transform.position;
+            spike.SetActive(true);
 
-            var item = (GameObject)Instantiate(itemToShootPrefab, transform.position, transform.rotation);
-            Destroy(item.gameObject, destroyAfter);
-            StartCoroutine(ShootObject(shootInterval));
+            //yield return new WaitForSeconds(delay + shootStartDelay);
+            //shootStartDelay = 0f;
+            //
+            //var item = (GameObject)Instantiate(itemToShootPrefab, transform.position, transform.rotation);
+            //Destroy(item.gameObject, destroyAfter);
+            //StartCoroutine(ShootObject(shootInterval));
         }
-        else itemToShootPrefab = null;
+        //else itemToShootPrefab = null;
     }
 
     public void Stop()
