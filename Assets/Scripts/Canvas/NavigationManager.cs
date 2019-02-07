@@ -67,7 +67,7 @@ public class NavigationManager : Manager
             panels[1].SetActive(false);
             panels[0].SetActive(true);
         }
-        UICanvas.Instance.audioSource.PlayOneShot(UICanvas.Instance.navigationBtnClick);
+        UICanvas.Instance.PlayNavigationSound();
     }
 
     public void PrevPanel()
@@ -82,6 +82,6 @@ public class NavigationManager : Manager
             panels[1].SetActive(false);
             panels[0].SetActive(true);
         }
-        UICanvas.Instance.audioSource.PlayOneShot(UICanvas.Instance.navigationBtnClick);
+        UICanvas.Instance.PlayNavigationSound();
     }
 }

@@ -120,6 +120,37 @@ public class UICanvas : Manager {
             SkillsManager.Instance.SetActive(skillsOpened);
             Opened();
         }
+        PlayBtnClickSound();
+    }
+
+    public void PlayNavigationSound()
+    {
+        audioSource.PlayOneShot(navigationBtnClick);
+    }
+
+    public void PlayBtnClickSound()
+    {
+        audioSource.PlayOneShot(buttonClickClip);
+    }
+
+    public void PlayLevelUpSound()
+    {
+        audioSource.PlayOneShot(levelUpSound);
+    }
+
+    public void PlayGainXpSound()
+    {
+        audioSource.PlayOneShot(gainXpSound);
+    }
+
+    public void PlayInactiveBtnSound()
+    {
+        audioSource.PlayOneShot(inactiveBtnClick);
+    }
+
+    public void PlayUseItemSound()
+    {
+        audioSource.PlayOneShot(useItemClip);
     }
 
     public void SkillsOperate()
@@ -169,7 +200,7 @@ public class UICanvas : Manager {
             default:
                 break;
         }
-        audioSource.PlayOneShot(useItemClip);
+        PlayUseItemSound();
     }
 
     public IEnumerator StartCountdown(InventoryItem item, float countdownValue = 10)

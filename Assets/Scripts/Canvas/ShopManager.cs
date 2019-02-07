@@ -114,12 +114,14 @@ public class ShopManager : Manager
     }
     public void OpenPowerUpContent()
     {
+        UICanvas.Instance.PlayNavigationSound();
         powerUpsContent.SetActive(true);
         potionsContent.SetActive(false);
     }
 
     public void OpenPotionsContent()
     {
+        UICanvas.Instance.PlayNavigationSound();
         potionsContent.SetActive(true);
         powerUpsContent.SetActive(false);
     }
@@ -148,6 +150,7 @@ public class ShopManager : Manager
 
     public void SelectItem(ShopItem item)
     {
+        UICanvas.Instance.PlayBtnClickSound();
         selectedItem = item;
         description.text = item.description;
         selectedImage.sprite = item.itemImage.sprite;
@@ -169,16 +172,19 @@ public class ShopManager : Manager
         {
             errorText.text = "You have already acquired this item";
             errorPanel.SetActive(true);
+            UICanvas.Instance.PlayInactiveBtnSound();
         }
         else if (selectedItem.price > UICanvas.Instance.player.coins)
         {
             errorText.text = "You don't have enough gold to purchase this item";
             errorPanel.SetActive(true);
+            UICanvas.Instance.PlayInactiveBtnSound();
         }
         else if (selectedItem.levelRequired > PlayerLevelManager.Instance.Level)
         {
             errorText.text = "Your level is less than required";
             errorPanel.SetActive(true);
+            UICanvas.Instance.PlayInactiveBtnSound();
         }
 
         else if (selectedItem != null && !selectedItem.isBought)
@@ -239,6 +245,7 @@ public class ShopManager : Manager
                 default:
                     break;
             }
+            UICanvas.Instance.PlayBtnClickSound();
         }
         UpdateShop();
     }
@@ -259,12 +266,14 @@ public class ShopManager : Manager
     public void CloseErrorPanel()
     {
         errorPanel.SetActive(false);
+        UICanvas.Instance.PlayBtnClickSound();
     }
 
     public void OpenShop()
     {
         UICanvas.Instance.player.HUDIsOpen = true;
         SetActive(true);
+        UICanvas.Instance.PlayNavigationSound();
     }
 
     void SavePlayerStatistics()
@@ -321,5 +330,6 @@ public class ShopManager : Manager
         SavePlayerStatistics();
         SetActive(false);
         UICanvas.Instance.player.HUDIsOpen = false;
+        UICanvas.Instance.PlayNavigationSound();
     }
 }

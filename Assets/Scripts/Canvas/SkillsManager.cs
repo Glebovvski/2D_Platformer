@@ -150,7 +150,9 @@ public class SkillsManager : Manager {
             CheckSPLeft(0); //check which stat was increased
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void DecreaseHealth()
@@ -164,7 +166,9 @@ public class SkillsManager : Manager {
             else InteractMinButtons(false, 0);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void IncreaseStamina()
@@ -176,7 +180,9 @@ public class SkillsManager : Manager {
             CheckSPLeft(2);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void DecreaseStamina()
@@ -190,7 +196,9 @@ public class SkillsManager : Manager {
             else InteractMinButtons(false, 2);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void IncreaseStrength()
@@ -202,7 +210,9 @@ public class SkillsManager : Manager {
             CheckSPLeft(1);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void DecreaseStrength()
@@ -216,7 +226,9 @@ public class SkillsManager : Manager {
             else InteractMinButtons(false, 1);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void IncreaseDexterity()
@@ -228,7 +240,9 @@ public class SkillsManager : Manager {
             CheckSPLeft(3);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void DecreaseDexterity()
@@ -242,7 +256,9 @@ public class SkillsManager : Manager {
             else InteractMinButtons(false, 3);
             ConfirmBtn.interactable = true;
             UpdateStats();
+            UICanvas.Instance.PlayNavigationSound();
         }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     public void Confirm()
@@ -262,6 +278,8 @@ public class SkillsManager : Manager {
             InteractMaxButtons(false);
 
         InteractMinButtons(false);
+
+        UICanvas.Instance.PlayBtnClickSound();
     }
 
     public void DescriptionShow(GameObject stat)

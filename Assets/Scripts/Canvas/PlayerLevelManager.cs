@@ -49,7 +49,7 @@ public class PlayerLevelManager : Manager
 
     public void GainXP(int amount)
     {
-        UICanvas.Instance.audioSource.PlayOneShot(UICanvas.Instance.gainXpSound);
+        UICanvas.Instance.PlayGainXpSound();
         XP += amount;
         while (XP >= RequiredXP)
         {
@@ -72,7 +72,7 @@ public class PlayerLevelManager : Manager
 
     IEnumerator LevelUp()
     {
-        UICanvas.Instance.audioSource.PlayOneShot(UICanvas.Instance.levelUpSound);
+        UICanvas.Instance.PlayLevelUpSound();
         while (LevelUpImage.fillAmount != 1)
         {
             LevelUpImage.fillOrigin = (int)Image.OriginVertical.Bottom;
