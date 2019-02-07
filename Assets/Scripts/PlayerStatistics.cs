@@ -8,7 +8,7 @@ using System;
 public class PlayerStatistics
 {
     public float Health = 100;
-    public float Strength = 15;
+    public float Strength = 15; //15
     public float Stamina = 100;
     public float Dexterity = 0.5f;
 
@@ -17,7 +17,7 @@ public class PlayerStatistics
 
     public Dictionary<InventoryType, int> inventoryList = new Dictionary<InventoryType, int>();
 
-    public int currentLevel = 15;
+    public int currentLevel = 1;
     public int currentSkillPoints = 0;
 
     public int coins = 0;

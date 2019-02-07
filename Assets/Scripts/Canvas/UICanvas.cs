@@ -36,6 +36,8 @@ public class UICanvas : Manager {
     public AudioClip buttonClickClip;
     public AudioClip inactiveBtnClick;
     public AudioClip useItemClip;
+    public AudioClip gainXpSound;
+    public AudioClip levelUpSound;
     [HideInInspector]
     public AudioSource audioSource;
 

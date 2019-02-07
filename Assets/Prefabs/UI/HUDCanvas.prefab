@@ -22776,6 +22776,8 @@ MonoBehaviour:
   buttonClickClip: {fileID: 8300000, guid: fc97e0f8bbfda3842995aa82de311a0a, type: 3}
   inactiveBtnClick: {fileID: 8300000, guid: 8d74df991ad456b4fa9f1f7e3cadc355, type: 3}
   useItemClip: {fileID: 8300000, guid: 20960ccabf3722d4c9c38e33d7a70e3a, type: 3}
+  gainXpSound: {fileID: 8300000, guid: f2835dcadc39f4747b9f5979436c64c2, type: 3}
+  levelUpSound: {fileID: 8300000, guid: 3abf06dbaada86246ad1e358479352a9, type: 3}
   audioSource: {fileID: 0}
   StrengthDisplay: {fileID: 4702538073082716386}
   ShieldDisplay: {fileID: 4702538073655239608}
@@ -23317,7 +23319,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4702538071589183596}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -23464,7 +23466,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000009430729, y: 0.00003389139}
+  m_AnchoredPosition: {x: 0.000013754047, y: 0.00007085954}
   m_SizeDelta: {x: 0, y: 498.1}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &4702538073085468464
