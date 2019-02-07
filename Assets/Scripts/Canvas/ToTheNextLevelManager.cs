@@ -35,11 +35,13 @@ public class ToTheNextLevelManager : Manager
         //InventoryManager.Instance.player.HUDIsOpen = true;
         UICanvas.Instance.player.HUDIsOpen = true;
         SetActive(true);
+        UICanvas.Instance.PlayBtnClickSound();
     }
 
     public void ClosePanel()
     {
         SetActive(false);
+        UICanvas.Instance.PlayBtnClickSound();
     }
 
     public void LeaveBtn()
@@ -47,5 +49,6 @@ public class ToTheNextLevelManager : Manager
         //LoadScene stuff
         SceneManagament.Instance.LoadLevel(0);
         SetActive(false);
+        UICanvas.Instance.PlayBtnClickSound();
     }
 }

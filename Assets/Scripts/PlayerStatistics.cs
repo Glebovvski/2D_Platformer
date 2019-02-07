@@ -42,5 +42,7 @@ public class PlayerStatistics
     public ShopItemBasic[] staminaPus = new ShopItemBasic[0];
 
     public ShopItemBasic[] dexterityPus = new ShopItemBasic[0];
+
+    public int maxScene = 0;
 }
 

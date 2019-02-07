@@ -52,21 +52,33 @@ public class SceneManagament : Manager
 
     private void SceneChanged(Scene prevScene, Scene curScene)
     {
-        if (SceneManager.GetActiveScene().name == "LevelPick") //change comparison to list of names later
+        if (prevScene.buildIndex > GlobalControl.Instance.savedPlayerData.maxScene)
+            GlobalControl.Instance.savedPlayerData.maxScene = prevScene.buildIndex;
+        if (SceneManager.GetActiveScene().buildIndex == 0) //change comparison to list of names later
         {
             UICanvas.Instance.player.HUDIsOpen = true;
-            UICanvas.Instance.SetActive(false);
+            PlayerStatsManager.Instance.SetActive(false);
+            CoinManager.Instance.SetActive(false);
+            NavigationBtnManager.Instance.SetActive(false);
+            PlayerLevelManager.Instance.SetActive(false);
         }
     }
 
     public void LoadLevel(int level)
     {
-        GlobalControl.Instance.SceneLevel = SceneManager.GetActiveScene().buildIndex;
-        UICanvas.Instance.player.SavePlayer();
-        SceneManager.LoadScene(level);
-        GlobalControl.Instance.savedPlayerData.currentScene = level;
-        GlobalControl.Instance.savedPlayerData.collected = GlobalControl.Instance.collected;
-        GlobalControl.Instance.Save();
+        if (GlobalControl.Instance.savedPlayerData.maxScene >= level - 1)
+        {
+            if (GlobalControl.Instance.savedPlayerData.maxScene == level - 1)
+                GlobalControl.Instance.savedPlayerData.maxScene = level;
+            GlobalControl.Instance.SceneLevel = SceneManager.GetActiveScene().buildIndex;
+            UICanvas.Instance.player.SavePlayer();
+            SceneManager.LoadScene(level);
+            GlobalControl.Instance.savedPlayerData.currentScene = level;
+            GlobalControl.Instance.savedPlayerData.collected = GlobalControl.Instance.collected;
+            GlobalControl.Instance.Save();
+            UICanvas.Instance.PlayBtnClickSound();
+        }
+        else UICanvas.Instance.PlayInactiveBtnSound();
     }
 
     private void OnLevelWasLoaded(int level)
