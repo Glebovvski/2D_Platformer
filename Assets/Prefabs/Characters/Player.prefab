@@ -473,6 +473,7 @@ MonoBehaviour:
   stamina: 0
   curStamina: 0
   Shield: {fileID: 198865200547173966}
+  clip: {fileID: 8300000, guid: 12a99198723356a489a5d63d49ffef77, type: 3}
   HUDIsOpen: 0
   coins: 0
 --- !u!82 &1322120626

@@ -31,7 +31,14 @@ public class UICanvas : Manager {
     public bool inventoryOpened;
     [HideInInspector]
     public bool skillsOpened;
-    
+
+    public AudioClip navigationBtnClick;
+    public AudioClip buttonClickClip;
+    public AudioClip inactiveBtnClick;
+    public AudioClip useItemClip;
+    [HideInInspector]
+    public AudioSource audioSource;
+
     private float currCountdownValueForShield;
     private float currCountdownValueForStrength;
 
@@ -59,6 +66,7 @@ public class UICanvas : Manager {
         damage = player.Damage;
         StrengthDisplay.SetActive(false);
         ShieldDisplay.SetActive(false);
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -159,6 +167,7 @@ public class UICanvas : Manager {
             default:
                 break;
         }
+        audioSource.PlayOneShot(useItemClip);
     }
 
     public IEnumerator StartCountdown(InventoryItem item, float countdownValue = 10)

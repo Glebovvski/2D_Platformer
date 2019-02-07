@@ -29,6 +29,10 @@ public class Player : MonoBehaviour
 
     public ParticleSystem Shield;
 
+    public AudioClip clip;
+
+    private AudioSource audioSource;
+
     public bool HUDIsOpen;
 
     //[HideInInspector] TESTING. SHOULD BE PRIVATE
@@ -40,6 +44,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         playerController = GetComponent<PlayerController>();
         animator = GetComponent<Animator>();
         isShielded = false;
@@ -105,6 +110,7 @@ public class Player : MonoBehaviour
 
     public void AddCoin(int value)
     {
+        audioSource.PlayOneShot(clip);
         coins += value;
         CoinManager.Instance.UpdateCoinsAmount(coins);
     }
