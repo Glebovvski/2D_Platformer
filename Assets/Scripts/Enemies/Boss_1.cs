@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class Boss_1 : EnemyController
 {
+
+    public Transform scepterSprite;
+    private ParticleSystem glowScepter;
+    private Light light;
+
+    private bool isGlowingUp = false;
+    private bool isGlowingDown = false;
+    private bool isAttacking = false;
+
     public override void Start()
     {
         animator = GetComponentInChildren<Animator>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        glowScepter = GetComponentInChildren<ParticleSystem>();
+        light = GetComponentInChildren<Light>();
         maxHealth = 300;
         curHealth = maxHealth;
         speed = 1.5f;
@@ -20,16 +31,73 @@ public class Boss_1 : EnemyController
         if (animator.GetBool("PlayerSpotted"))
         {
             if (player.transform.position.x > transform.position.x)
+            {
                 _renderer.flipX = false;
-            else _renderer.flipX = true;
+                scepterSprite.localPosition = new Vector3(0.122f, scepterSprite.localPosition.y, scepterSprite.localPosition.z);
+            }
+            else
+            {
+                _renderer.flipX = true;
+                scepterSprite.localPosition = new Vector3(-0.128f, scepterSprite.localPosition.y, scepterSprite.localPosition.z);
+            }
 
-            if (Vector2.Distance(transform.position, player.transform.position) > 4)// 0.5f)
+            if (Vector2.Distance(transform.position, player.transform.position) > 4)
                 transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, player.transform.position) <= 4)
+            {
+                if (!isAttacking && !isGlowingDown && light.intensity != 10)
+                {
+                    if (!isGlowingUp)
+                    {
+                        isGlowingUp = true;
+                        StartCoroutine(GlowUp());
+                    }
+                }
+                if (!isAttacking && !isGlowingUp && light.intensity == 10)
+                {
+                    if (!isGlowingDown)
+                    {
+                        isGlowingDown = true;
+                        StartCoroutine(GlowDown());
+                    }
+                }
+                if (!isAttacking && light.intensity == 10)
+                {
+                    isAttacking = true;
+                    StartCoroutine(Attacking());
+                }
+            }
         }
     }
 
-    public override void Attack()
+    IEnumerator GlowUp()
     {
-        
+        while (light.intensity < 10)
+        {
+            light.intensity++;
+            yield return new WaitForSeconds(0.3f);
+        }
+        isGlowingUp = false;
+    }
+
+
+
+    IEnumerator GlowDown()
+    {
+        while (light.intensity > 0)
+        {
+            light.intensity--;
+            yield return new WaitForSeconds(0.3f);
+        }
+        isGlowingDown = false;
+    }
+
+    IEnumerator Attacking()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(1);
+        }
+        isAttacking = false;
     }
 }
