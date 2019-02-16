@@ -6,24 +6,30 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour, IEnemy {
 
-    private Animator animator;
+    [HideInInspector]
+    public Animator animator;
 
-    private SpriteRenderer _renderer;
+    [HideInInspector]
+    public SpriteRenderer _renderer;
 
     [HideInInspector]
     public bool IsStopped = false;
 
-    public float maxHealth = 100f;
-    private float curHealth;
+    [HideInInspector]
+    public float maxHealth;// = 100f;
+    [HideInInspector]
+    public float curHealth;
 
-    private float speed = 1;
+    [HideInInspector]
+    public float speed;// = 1;
 
-    private int damage = 5;
+    [HideInInspector]
+    public int damage;// = 5;
 
     public Image healthBar;
 
     [HideInInspector]
-    public int Experience = 15;
+    public int Experience;// = 15;
 
     [HideInInspector]
     public PlayerController player;
@@ -33,28 +39,21 @@ public class EnemyController : MonoBehaviour, IEnemy {
     
     public CoinController coin;
     
-    private void Awake()
+    public void Awake()
     {
         player = FindObjectOfType<PlayerController>();
     }
 
     // Use this for initialization
-    void Start () {
+    public virtual void Start () {
         animator = GetComponent<Animator>();
         _renderer = GetComponent<SpriteRenderer>();
         curHealth = maxHealth;
 	}
 
     // Update is called once per frame
-    void Update() {
-        if (curHealth <= 0)
-        {
-            animator.SetBool("PlayerSpotted", false);
-            animator.SetBool("Dead", true);
-
-        }
-        healthBar.fillAmount = curHealth / maxHealth;
-
+    public virtual void Update()
+    {
         if (!IsStopped)
         {
             if (animator.GetBool("PlayerSpotted"))
@@ -74,13 +73,19 @@ public class EnemyController : MonoBehaviour, IEnemy {
     }
 
     public void Damage(float amount)
-    {
+    {   
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;
         healthBar.fillAmount = curHealth / maxHealth;
+        if (curHealth <= 0)
+        {
+            animator.SetBool("PlayerSpotted", false);
+            animator.SetBool("Dead", true);
+
+        }
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         if (!IsStopped)
         {
@@ -92,7 +97,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!IsStopped)
         {
@@ -105,7 +110,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (!IsStopped)
         {
@@ -117,7 +122,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.name == "Player")
         {
