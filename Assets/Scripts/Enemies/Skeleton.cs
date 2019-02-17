@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton : EnemyController
 {
-    private void Start()
+    public override void Start()
     {
         base.Start();
         maxHealth = 100;

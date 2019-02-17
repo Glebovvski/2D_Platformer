@@ -66,6 +66,7 @@ public class SkillsManager : Manager {
         InteractMinButtons(false);
         InteractMaxButtons(false);
         ConfirmBtn.interactable = false;
+        UpdateSkillPoints();
         UpdateStats();
     }
 	

@@ -4,11 +4,11 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-//[Serializable]
+[Serializable]
 public class PlayerStatistics
 {
     public float Health = 100;
-    public float Strength = 1500; //15
+    public float Strength = 15; //15
     public float Stamina = 100;
     public float Dexterity = 0.5f;
 
@@ -24,7 +24,7 @@ public class PlayerStatistics
     
     public float restore = 0;
 
-    public int currentScene = 0;
+    public int currentScene = 1;
 
     [Serializable]
     public class ShopItemBasic
@@ -43,6 +43,6 @@ public class PlayerStatistics
 
     public ShopItemBasic[] dexterityPus = new ShopItemBasic[0];
 
-    public int maxScene = 0;
+    public int maxScene = 1;
 }
 
