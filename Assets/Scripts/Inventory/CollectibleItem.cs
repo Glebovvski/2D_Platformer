@@ -10,7 +10,17 @@ public class CollectibleItem : MonoBehaviour, ICloneable
 
     [SerializeField]
     public InventoryType item;
-    
+
+    public CollectibleItem()
+    {
+
+    }
+
+    public CollectibleItem(InventoryType type)
+    {
+        item = type;
+    }
+
     public object Clone()
     {
         return new CollectibleItemBasic() { name = this.gameObject.name, item = this.item, sceneIndex = SceneManager.GetActiveScene().buildIndex };

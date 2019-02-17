@@ -72,7 +72,7 @@ public class EnemyController : MonoBehaviour, IEnemy {
         }
     }
 
-    public void Damage(float amount)
+    public virtual void Damage(float amount)
     {   
         animator.SetBool("TakeDamage", true);
         curHealth -= amount;
@@ -81,7 +81,6 @@ public class EnemyController : MonoBehaviour, IEnemy {
         {
             animator.SetBool("PlayerSpotted", false);
             animator.SetBool("Dead", true);
-
         }
     }
 

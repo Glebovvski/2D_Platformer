@@ -49,19 +49,6 @@ public class DoorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //var keys = UICanvas.Instance.player.inventoryList.Any(x => x.Key == InventoryType.Key && x.Value == 3);
-        //if (keys)
-        //{
-        //    keysAmount = UICanvas.Instance.player.inventoryList.Where(x => x.Key == InventoryType.Key).Select(x => x.Value).ToList();
-        //    isDoorOpened = true;
-        //    if (counts == 0)
-        //    {
-        //        counts++;
-        //        Camera.Priority = 11;
-        //
-        //        StartCoroutine(Wait());
-        //    }
-        //}
     }
 
     public void OpenDoor()

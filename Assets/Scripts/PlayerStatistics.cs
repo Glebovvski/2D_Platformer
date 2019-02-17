@@ -8,7 +8,7 @@ using System;
 public class PlayerStatistics
 {
     public float Health = 100;
-    public float Strength = 150; //15
+    public float Strength = 1500; //15
     public float Stamina = 100;
     public float Dexterity = 0.5f;
 
