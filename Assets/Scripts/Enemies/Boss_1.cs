@@ -109,6 +109,7 @@ public class Boss_1 : EnemyController
         base.Damage(amount);
         if(curHealth <= 0)
         {
+            BlockingDoor.isBossDefeated = true;
             for (int i = 0; i < 3; i++)
             {
                 CollectibleItem item = Instantiate(keyPrefab, transform.position, Quaternion.identity);
