@@ -23,13 +23,13 @@ public class ProjectileController : MonoBehaviour
         if (player.transform.position.x > transform.position.x)
             renderer.flipX = false;
         else renderer.flipX = true;
-
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += direction * Time.deltaTime * speed;
+
         Destroy(this.gameObject, 10f);
     }
 

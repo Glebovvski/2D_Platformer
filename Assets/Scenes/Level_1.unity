@@ -14673,7 +14673,7 @@ PrefabInstance:
     - target: {fileID: 4702538073085468465, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0000331125
+      value: 0.00047368975
       objectReference: {fileID: 0}
     - target: {fileID: 4702538071589183596, guid: 3e3857af3752e4742a747ab74946acfe,
         type: 3}
@@ -15804,6 +15804,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cameras
       objectReference: {fileID: 0}
+    - target: {fileID: 8293877878228257428, guid: a54aefb977727f64e916683726ee76b4,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1118824474}
+    - target: {fileID: 8293877878228257428, guid: a54aefb977727f64e916683726ee76b4,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1118824474}
+    - target: {fileID: 8293877877468285492, guid: a54aefb977727f64e916683726ee76b4,
+        type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1338903735}
+    - target: {fileID: 8293877877468285492, guid: a54aefb977727f64e916683726ee76b4,
+        type: 3}
+      propertyPath: m_Follow
+      value: 
+      objectReference: {fileID: 1338903735}
     - target: {fileID: 8293877878117902903, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15954,31 +15974,11 @@ PrefabInstance:
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 174113585}
-    - target: {fileID: 8293877877468285492, guid: a54aefb977727f64e916683726ee76b4,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 1338903735}
-    - target: {fileID: 8293877877468285492, guid: a54aefb977727f64e916683726ee76b4,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1338903735}
     - target: {fileID: 8293877877468285493, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_BoundingShape2D
       value: 
       objectReference: {fileID: 174113585}
-    - target: {fileID: 8293877878228257428, guid: a54aefb977727f64e916683726ee76b4,
-        type: 3}
-      propertyPath: m_LookAt
-      value: 
-      objectReference: {fileID: 1118824474}
-    - target: {fileID: 8293877878228257428, guid: a54aefb977727f64e916683726ee76b4,
-        type: 3}
-      propertyPath: m_Follow
-      value: 
-      objectReference: {fileID: 1118824474}
     - target: {fileID: 8293877878228257427, guid: a54aefb977727f64e916683726ee76b4,
         type: 3}
       propertyPath: m_BoundingShape2D
